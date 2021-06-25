@@ -1,0 +1,5 @@
+name: ${project.name}
+author: SquaredHelix
+version: ${project.version}
+main: me.kristoffer.blaze.Blaze
+api-version: 1.17
