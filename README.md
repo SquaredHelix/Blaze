@@ -1,4 +1,4 @@
-<p align="center"><a href="#"><img src=https://raw.githubusercontent.com/SquaredHelix/Blaze/master/assets/logo.png width=380></a></p>
+<p align="center"><a href="#"><img src=https://raw.githubusercontent.com/SquaredHelix/Blaze/master/assets/logo.png width=460></a></p>
 
 [![](https://img.shields.io/static/v1?label=minecraft%20version&message=1.17&color=informational)](#)
 [![](https://img.shields.io/github/issues/SquaredHelix/Blaze)](https://github.com/SquaredHelix/VanillaPlus/issues)
