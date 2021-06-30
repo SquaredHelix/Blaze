@@ -1,31 +1,18 @@
 package me.kristoffer.blaze;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.IntStream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandMap;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.SimpleCommandMap;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.AnvilInventory;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.graalvm.polyglot.Context;
@@ -173,308 +160,123 @@ import me.kristoffer.blaze.backend.org.bukkit.scoreboard.Team;
 
 public class ModuleLoader {
 
-	private GlobalEventListener globalEventListener;
-	private Blaze plugin;
-	private Context currentContext;
+	private Plugin plugin;
+	private Module currentModule;
+	public ArrayList<Module> registeredModules = new ArrayList<Module>();
 
-	private Gson gson = new Gson();
-
-	private boolean finishedLoading = false;
-
-	public ModuleLoader(Blaze plugin) {
+	public ModuleLoader(Plugin plugin) {
 		this.plugin = plugin;
-		globalEventListener = new GlobalEventListener();
-		globalEventListener.doStuff(plugin);
-
-		try {
-			final WatchService createWatcher = FileSystems.getDefault().newWatchService();
-			final WatchService deleteWatcher = FileSystems.getDefault().newWatchService();
-			final WatchService modifyWatcher = FileSystems.getDefault().newWatchService();
-
-			WatchKey create = plugin.getDataFolder().toPath().register(createWatcher,
-					StandardWatchEventKinds.ENTRY_CREATE);
-			WatchKey delete = plugin.getDataFolder().toPath().register(deleteWatcher,
-					StandardWatchEventKinds.ENTRY_DELETE);
-			WatchKey modify = plugin.getDataFolder().toPath().register(modifyWatcher,
-					StandardWatchEventKinds.ENTRY_MODIFY);
-
-			new BukkitRunnable() {
-
-				@Override
-				public void run() {
-					create.pollEvents().forEach(event -> {
-						if (event.context().toString().endsWith(".js") || event.context().toString().endsWith(".mjs")
-								|| event.context().toString().endsWith(".config")) {
-							loadFile(event.context().toString(), false);
-						}
-					});
-					delete.pollEvents().forEach(event -> {
-						if (event.context().toString().endsWith(".js") || event.context().toString().endsWith(".mjs")
-								|| event.context().toString().endsWith(".config")) {
-							unloadFile(event.context().toString(), false);
-						}
-					});
-					modify.pollEvents().forEach(event -> {
-						if (event.context().toString().endsWith(".js") || event.context().toString().endsWith(".mjs")
-								|| event.context().toString().endsWith(".config")) {
-							reloadFile(event.context().toString(), false);
-						}
-					});
-				}
-
-			}.runTaskTimer(plugin, 4L, 20L);
-
-			Files.walk(Paths.get(plugin.getDataFolder().getAbsolutePath())).filter(Files::isRegularFile)
-					.forEach(path -> {
-						loadFile(path.toString(), false);
-					});
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
 	}
 
-	public HashMap<String, Context> contextMap = new HashMap<String, Context>();
-
-	public void loadFile(String path, boolean silent) {
-		finishedLoading = false;
-		String localPath = path.replace(plugin.getDataFolder().getAbsolutePath().toString() + "\\", "");
-		Context context = newContext(localPath);
-		if (context == null) {
-			return;
-		}
-		currentContext = context;
-
-		FileReader fileReader = null;
-		contextMap.put(localPath, context);
-		String fileName = path;
-
-		if (!(fileName.endsWith(".js") || fileName.endsWith(".mjs"))) {
-			return;
-		}
-		File file = new File(plugin.getDataFolder().getAbsolutePath() + "/" + localPath);
-		if (file.isDirectory())
-			return;
-		try {
-			fileReader = new FileReader(file.getAbsolutePath());
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-		ArrayList<String> script = new ArrayList<String>();
-		try {
-			while (bufferedReader.ready()) {
-				String line = bufferedReader.readLine();
-				if (!line.endsWith(";")) {
-					// line += ';'; --- probably not needed
-				}
-				script.add(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// String strScript = "";
-		// for (String line : script) {
-		// strScript += line + "\n";
-		// }
-		if (!silent) {
-			Bukkit.getConsoleSender()
-					.sendMessage("Loading " + org.bukkit.ChatColor.GREEN + context.getBindings("js").getMember("this"));
-		}
-		try {
-			context.eval(Source.newBuilder("js", file).build());
-			fileReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		finishedLoading = true;
-	}
-
-	public void unloadFile(String path, boolean silent) {
-		if (contextMap.containsKey(path)) {
-			Context context = contextMap.get(path);
-			if (!silent) {
-				Bukkit.getConsoleSender().sendMessage(
-						"Unloading " + org.bukkit.ChatColor.GREEN + context.getBindings("js").getMember("this"));
-			}
-			if (cmdMap.containsKey(context)) {
-				ArrayList<Command> command = cmdMap.get(context);
-				command.forEach(cmd -> {
-					removeCommand(context, cmd);
-				});
-
-			}
-			globalEventListener.unregisterFunctions(context);
-			contextMap.remove(path);
-		}
-	}
-
-	public void reloadFile(String path, boolean silent) {
-		if (path.endsWith(".config")) {
-			if (contextMap.containsKey(path.replace(".config", ".js"))) {
-				reloadFile(path.replace(".config", ".js"), silent);
-			}
-			if (contextMap.containsKey(path.replace(".config", ".mjs"))) {
-				reloadFile(path.replace(".config", ".mjs"), silent);
-			}
-			return;
-		}
-		Context context = contextMap.get(path);
-		if (!silent) {
-			Bukkit.getConsoleSender().sendMessage(
-					"Reloading " + org.bukkit.ChatColor.GREEN + context.getBindings("js").getMember("this"));
-		}
-		unloadFile(path, true);
-		loadFile(path, true);
-		/*
-		 * Sync 5 more times for good measure (avoid it breaking for people with open
-		 * chat)
-		 */
-		IntStream.range(0, 5).forEach(i -> {
-			syncCommands();
-		});
-	}
-
-	public HashMap<Context, ArrayList<Command>> cmdMap = new HashMap<Context, ArrayList<Command>>();
-
-	public void onCommand(String command, Value function) {
-		addCommand(command, function);
-	}
-
-	public void addCommand(String command, Value function) {
-		try {
-			Field bukkitCmdMap = Bukkit.getServer().getClass().getDeclaredField("commandMap");
-			bukkitCmdMap.setAccessible(true);
-			final CommandMap commandMap = (CommandMap) bukkitCmdMap.get(Bukkit.getServer());
-			Command cmd = new Command(command) {
-
-				@Override
-				public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-					Player player = (Player) sender;
-					function.executeVoid(player, args);
-					return true;
-				}
-
-			};
-			commandMap.register("vanillaplus", cmd);
-			if (cmdMap.containsKey(currentContext)) {
-				cmdMap.get(currentContext).add(cmd);
-			} else {
-				ArrayList<Command> cmdArray = new ArrayList<Command>();
-				cmdArray.add(cmd);
-				cmdMap.put(currentContext, cmdArray);
-			}
-			syncCommands();
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void removeCommand(Context context, Command command) {
-		try {
-			unregisterCommand(command);
-			cmdMap.remove(context);
-			syncCommands();
-		} catch (SecurityException | IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private boolean unregisterCommand(Command command) {
-		Field commandMap;
-		Field knownCommands;
-		try {
-			commandMap = Bukkit.getServer().getClass().getDeclaredField("commandMap");
-			commandMap.setAccessible(true);
-			knownCommands = SimpleCommandMap.class.getDeclaredField("knownCommands");
-			knownCommands.setAccessible(true);
-			((Map<String, Command>) knownCommands.get((SimpleCommandMap) commandMap.get(Bukkit.getServer())))
-					.remove(command.getName());
-			command.unregister((CommandMap) commandMap.get(Bukkit.getServer()));
-			return true;
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	public void syncCommands() {
-		Method m;
-		try {
-			m = Bukkit.getServer().getClass().getDeclaredMethod("syncCommands");
-			m.setAccessible(true);
-			m.invoke(Bukkit.getServer());
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void generateModule(String[] listeners) {
-		if (finishedLoading) {
-			System.err.println("!!! You cannot generate modules at runtime !!!");
-			return;
-		}
-		for (String listener : listeners) {
-			Context context = Context.getCurrent();
-			globalEventListener.registerFunction(context, listener, event -> {
-				Value bindings = context.getBindings("js");
-				bindings.putMember("event", event);
-				context.eval(Source.create("js", listener + "(event)"));
-				bindings.removeMember("event");
-			});
-		}
-	}
-
-	public void onEvent(String eventName, Value function) {
-		Context context = Context.getCurrent();
-		globalEventListener.registerFunction(context, eventName, event -> {
-			function.executeVoid(event);
-		});
-	}
-
-	public void exec(String exec) {
-		currentContext.eval(Source.create("js", exec));
-	}
-
-	public void exec(String exec, Map<String, Object> map) {
-		Value bindings = currentContext.getBindings("js");
-		for (String key : map.keySet()) {
-			bindings.putMember(key, map.get(key));
-		}
-		currentContext.eval(Source.create("js", exec));
-	}
-
-	public BukkitTask scheduleDelayed(int ticks, Value function) {
+	public BukkitTask runLater(int delay, java.lang.Runnable runnable) {
 		BukkitTask task = new BukkitRunnable() {
 
 			@Override
 			public void run() {
-				function.executeVoid();
+				runnable.run();
 			}
 
-		}.runTaskLater(plugin, ticks);
+		}.runTaskLater(plugin, delay);
 		return task;
 	}
 
-	public BukkitTask scheduleRepeating(int delay, int period, Value function) {
+	public BukkitTask runRepeating(int delay, int period, java.lang.Runnable runnable) {
 		BukkitTask task = new BukkitRunnable() {
 
 			@Override
 			public void run() {
-				function.executeVoid();
+				runnable.run();
 			}
 
 		}.runTaskTimer(plugin, delay, period);
 		return task;
 	}
 
-	public Blaze getPlugin() {
-		return plugin;
+	public BukkitTask runAsync(int ticks, java.lang.Runnable runnable) {
+		BukkitTask task = new BukkitRunnable() {
+
+			@Override
+			public void run() {
+				runnable.run();
+			}
+
+		}.runTaskAsynchronously(plugin);
+		return task;
+	}
+
+	public void onEvent(String eventName, Value function) {
+		currentModule.registerListener(eventName, event -> {
+			function.executeVoid(event);
+		});
+	}
+
+	public void onCommand(String command, Value function) {
+		currentModule.registerCommand(command, function);
+	}
+
+	public void removeListener(String eventName) {
+		currentModule.deregisterListener(eventName);
+	}
+
+	public void removeCommand(Command cmd) {
+		currentModule.deregisterCommand(cmd);
+	}
+
+	private Gson gson = new Gson();
+	private HashMap<String, Module> moduleMap = new HashMap<String, Module>();
+
+	public void loadFolder(String directory) {
+		try {
+			Files.walk(Paths.get(plugin.getDataFolder().getAbsolutePath().toString(), directory))
+					.filter(Files::isRegularFile).forEach(path -> {
+						loadFile(path.toString(), false);
+					});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void loadFile(String path, boolean silent) {
+		String localPath = path.replace(plugin.getDataFolder().getAbsolutePath().toString() + "\\", "");
+		Context context = createContext(localPath);
+		currentModule = new Module(context);
+		registeredModules.add(currentModule);
+		moduleMap.put(localPath, currentModule);
+		if (!silent) {
+			Bukkit.getConsoleSender()
+					.sendMessage("Loading " + org.bukkit.ChatColor.GREEN + context.getBindings("js").getMember("this"));
+		}
+
+		String fileName = path;
+		if (!(fileName.endsWith(".js") || fileName.endsWith(".mjs")))
+			return;
+		File file = new File(plugin.getDataFolder().getAbsolutePath() + "/" + localPath);
+		try {
+			context.eval(Source.newBuilder("js", file).build());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void disable(String path, boolean silent) {
+		if (!silent) {
+			Bukkit.getConsoleSender().sendMessage("Disabling " + org.bukkit.ChatColor.GREEN + path);
+		}
+		registeredModules.remove(moduleMap.get(path));
+		moduleMap.get(path).disable();
+		moduleMap.remove(path);
+	}
+
+	public void reload(String path, boolean silent) {
+		disable(path, true);
+		if (!silent) {
+			Bukkit.getConsoleSender().sendMessage("Reloading " + org.bukkit.ChatColor.GREEN + path);
+		}
+		loadFile(path, true);
 	}
 
 	@SuppressWarnings("unchecked")
-	public Context newContext(String localPath) {
+	public Context createContext(String localPath) {
 		Context polyglot = Context.newBuilder("js").allowHostClassLookup(s -> true).allowHostAccess(HostAccess.ALL)
 				.allowIO(true).build();
 
@@ -492,23 +294,25 @@ public class ModuleLoader {
 		if (configFile.exists()) {
 			try {
 				configMap = gson.fromJson(new FileReader(configFile), new HashMap<String, Object>().getClass());
-			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
-				// TODO Auto-generated catch block
+			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) { // TODO Auto-generated catch
+																						// block
 				e.printStackTrace();
 			}
 		}
 
 		Value bindings = polyglot.getBindings("js");
+
 		if (configFile.exists()) {
 			bindings.putMember("config", configMap);
 		}
+
 		bindings.putMember("this", localPath);
 		bindings.putMember("Bukkit", plugin.getServer());
 		bindings.putMember("Runnable", Runnable.class);
 		bindings.putMember("Math", Math.class);
 		bindings.putMember("Util", new Util());
 		bindings.putMember("AnvilInventory", AnvilInventory.class);
-		bindings.putMember("loader", this);
+		bindings.putMember("blaze", this);
 
 		// AUTOMATICALLY GENERATED BINDINGS
 		bindings.putMember("Art", new Art());
