@@ -8,9 +8,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -214,6 +217,12 @@ public class ModuleLoader {
 		currentModule.registerCommand(command, function);
 	}
 
+	public UI createUI(String title, int size) {
+		UI ui = new UI(currentModule, plugin, title, size);
+		currentModule.registerUI(ui);
+		return ui;
+	}
+
 	public void removeListener(String eventName) {
 		currentModule.deregisterListener(eventName);
 	}
@@ -262,17 +271,39 @@ public class ModuleLoader {
 		if (!silent) {
 			Bukkit.getConsoleSender().sendMessage("Disabling " + org.bukkit.ChatColor.GREEN + path);
 		}
-		registeredModules.remove(moduleMap.get(path));
-		moduleMap.get(path).disable();
+		Module module = moduleMap.get(path);
+		module.registeredUI.stream().collect(Collectors.toSet()).forEach(module.registeredUI::remove);
+		module.disable();
 		moduleMap.remove(path);
 	}
 
 	public void reload(String path, boolean silent) {
+		Module module = moduleMap.get(path);
+		Set<UI> uiDebugs = module.registeredUI.stream().filter(ui -> ui.debugKey != null).collect(Collectors.toSet());
 		disable(path, true);
 		if (!silent) {
 			Bukkit.getConsoleSender().sendMessage("Reloading " + org.bukkit.ChatColor.GREEN + path);
 		}
 		loadFile(path, true);
+		module = moduleMap.get(path);
+		module.registeredUI.stream().forEach(newUI -> {
+			ArrayList<Player> viewers = new ArrayList<Player>();
+			uiDebugs.stream().filter(oldUI -> newUI.debugKey.equals(oldUI.debugKey)).map(oldUI -> oldUI.viewers)
+					.findFirst().get().forEach(viewers::add);
+			new BukkitRunnable() {
+
+				@Override
+				public void run() {
+					viewers.forEach(newUI::open);
+				}
+
+			}.runTaskLater(plugin, 20L);
+		});
+	}
+
+	public void useExperimentalBindings() {
+		Value bindings = currentModule.context.getBindings("js");
+		bindings.putMember("Color", new Color());
 	}
 
 	@SuppressWarnings("unchecked")

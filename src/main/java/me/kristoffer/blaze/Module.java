@@ -67,6 +67,16 @@ public class Module {
 	protected void deregisterListeners() {
 		listenerMap.keySet().stream().collect(Collectors.toSet()).forEach(this::deregisterListener);
 	}
+	
+	public ArrayList<UI> registeredUI = new ArrayList<UI>();
+	
+	protected void registerUI(UI ui) {
+		registeredUI.add(ui);
+	}
+	
+	protected void deregisterUI(UI ui) {
+		registeredUI.remove(ui);
+	}
 
 	public void disable() {
 		deregisterCommands();
