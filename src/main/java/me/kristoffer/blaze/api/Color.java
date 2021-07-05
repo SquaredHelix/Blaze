@@ -43,7 +43,44 @@ public class Color {
 		return ChatColor.of(name);
 	}
 
+	public String gradient(String text, String... additionalHex) {
+		String endText = "";
+		int length = text.length();
+		System.out.println("xyz");
+		double pieceLength = (double) length / (double) additionalHex.length;
+		for (int i = 0; i < additionalHex.length - 1; i++) {
+			int currentPieceStart = (int) (0 + pieceLength * i);
+			int currentPieceEnd = (int) (pieceLength + pieceLength * i);
+			String piece;
+			if (i == additionalHex.length - 2) {
+				piece = text.substring(currentPieceStart, length);
+			} else {
+				piece = text.substring(currentPieceStart, currentPieceEnd);
+			}
+			endText += gradient(piece, additionalHex[i], additionalHex[i + 1]);
+		}
+
+		return endText;
+	}
+
 	public String gradient(String text, String hexStart, String hexEnd) {
+		boolean bold = false;
+		boolean italic = false;
+		boolean underline = false;
+		boolean strikethrough = false;
+		if (text.startsWith("§l")) {
+			bold = true;
+			text = text.replace("§l", "");
+		} else if (text.startsWith("§o")) {
+			italic = true;
+			text = text.replace("§o", "");
+		} else if (text.startsWith("§n")) {
+			underline = true;
+			text = text.replace("§n", "");
+		} else if (text.startsWith("§m")) {
+			strikethrough = true;
+			text = text.replace("§m", "");
+		}
 		String endText = "";
 		int textLength = text.length();
 		java.awt.Color startColor = hexToColor(hexStart);
@@ -97,8 +134,22 @@ public class Color {
 				startGreen = 0;
 			if (startBlue < 0)
 				startBlue = 0;
-			endText += ChatColor.of(new java.awt.Color((int) startRed, (int) startGreen, (int) startBlue)).toString()
-					+ c;
+			if (bold) {
+				endText += ChatColor.of(new java.awt.Color((int) startRed, (int) startGreen, (int) startBlue))
+						.toString() + BOLD + c;
+			} else if (italic) {
+				endText += ChatColor.of(new java.awt.Color((int) startRed, (int) startGreen, (int) startBlue))
+						.toString() + ITALIC + c;
+			} else if (underline) {
+				endText += ChatColor.of(new java.awt.Color((int) startRed, (int) startGreen, (int) startBlue))
+						.toString() + UNDERLINE + c;
+			} else if (strikethrough) {
+				endText += ChatColor.of(new java.awt.Color((int) startRed, (int) startGreen, (int) startBlue))
+						.toString() + STRIKETHROUGH + c;
+			} else {
+				endText += ChatColor.of(new java.awt.Color((int) startRed, (int) startGreen, (int) startBlue))
+						.toString() + c;
+			}
 		}
 		return endText;
 	}

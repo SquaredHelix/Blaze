@@ -16,6 +16,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import me.kristoffer.blaze.util.Runnable;
+import me.kristoffer.blaze.api.Color;
 import me.kristoffer.blaze.backend.org.bukkit.Art;
 import me.kristoffer.blaze.backend.org.bukkit.Axis;
 import me.kristoffer.blaze.backend.org.bukkit.BanList;
@@ -212,6 +213,7 @@ public class Module implements Closable {
 		bindings.putMember("Runnable", Runnable.class);
 		bindings.putMember("Math", Math.class);
 		bindings.putMember("Util", new Util());
+		bindings.putMember("Color", new Color());
 		bindings.putMember("AnvilInventory", AnvilInventory.class);
 		bindings.putMember("blaze", api);
 
