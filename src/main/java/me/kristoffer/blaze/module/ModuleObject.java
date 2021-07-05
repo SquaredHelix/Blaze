@@ -1,8 +1,15 @@
 package me.kristoffer.blaze.module;
 
-abstract class ModuleObject {
+import org.bukkit.plugin.Plugin;
+
+abstract class ModuleObject implements Closable {
+	
+	public Plugin plugin;
+	
+	public ModuleObject(Plugin plugin) {
+		this.plugin = plugin;
+	}
 	
 	abstract void init();
-	abstract void close();
 	
 }

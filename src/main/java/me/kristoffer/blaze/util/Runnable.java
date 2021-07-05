@@ -1,4 +1,4 @@
-package me.kristoffer.blaze;
+package me.kristoffer.blaze.util;
 
 public interface Runnable<T> {
 	
