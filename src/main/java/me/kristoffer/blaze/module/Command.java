@@ -8,7 +8,7 @@ import org.bukkit.plugin.Plugin;
 
 import me.kristoffer.blaze.util.ReflectionUtils;
 
-class Command extends ModuleObject {
+public class Command extends ModuleObject {
 
 	private String name;
 	private BiConsumer<Player, String[]> function;

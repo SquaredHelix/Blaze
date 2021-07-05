@@ -11,7 +11,7 @@ import org.bukkit.plugin.Plugin;
 
 import me.kristoffer.blaze.util.ReflectionUtils;
 
-class Listener extends ModuleObject implements org.bukkit.event.Listener {
+public class Listener extends ModuleObject implements org.bukkit.event.Listener {
 
 	private String eventName;
 	private Consumer<Event> function;
