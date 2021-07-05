@@ -14,6 +14,8 @@ import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import me.kristoffer.blaze.util.ReflectionUtils;
+
 public class Blaze extends JavaPlugin implements Listener {
 
 	private ModuleLoader moduleLoader;

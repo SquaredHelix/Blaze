@@ -8,12 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -27,6 +26,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import me.kristoffer.blaze.api.Color;
 import me.kristoffer.blaze.backend.org.bukkit.Art;
 import me.kristoffer.blaze.backend.org.bukkit.Axis;
 import me.kristoffer.blaze.backend.org.bukkit.BanList;
@@ -166,6 +166,7 @@ public class ModuleLoader {
 	private Plugin plugin;
 	private Module currentModule;
 	public ArrayList<Module> registeredModules = new ArrayList<Module>();
+	public HashMap<String, Debuggable> debugMap = new HashMap<String, Debuggable>();
 
 	public ModuleLoader(Plugin plugin) {
 		this.plugin = plugin;
@@ -248,7 +249,7 @@ public class ModuleLoader {
 	public void loadFile(String path, boolean silent) {
 		String localPath = path.replace(plugin.getDataFolder().getAbsolutePath().toString() + "\\", "");
 		Context context = createContext(localPath);
-		currentModule = new Module(context);
+		currentModule = new Module(this, context);
 		registeredModules.add(currentModule);
 		moduleMap.put(localPath, currentModule);
 		if (!silent) {
@@ -274,32 +275,34 @@ public class ModuleLoader {
 		Module module = moduleMap.get(path);
 		module.registeredUI.stream().collect(Collectors.toSet()).forEach(module.registeredUI::remove);
 		module.disable();
+		module.context.close();
 		moduleMap.remove(path);
 	}
 
 	public void reload(String path, boolean silent) {
-		Module module = moduleMap.get(path);
-		Set<UI> uiDebugs = module.registeredUI.stream().filter(ui -> ui.debugKey != null).collect(Collectors.toSet());
 		disable(path, true);
 		if (!silent) {
 			Bukkit.getConsoleSender().sendMessage("Reloading " + org.bukkit.ChatColor.GREEN + path);
 		}
 		loadFile(path, true);
-		module = moduleMap.get(path);
-		module.registeredUI.stream().forEach(newUI -> {
-			ArrayList<Player> viewers = new ArrayList<Player>();
-			uiDebugs.stream().filter(oldUI -> newUI.debugKey.equals(oldUI.debugKey)).map(oldUI -> oldUI.viewers)
-					.findFirst().get().forEach(viewers::add);
-			new BukkitRunnable() {
-
-				@Override
-				public void run() {
-					viewers.forEach(newUI::open);
-				}
-
-			}.runTaskLater(plugin, 20L);
-		});
 	}
+
+	public void debug(Debuggable debuggable, String debugID) {
+		if (debugMap.containsKey(debugID)) {
+			debugMap.get(debugID).reload(debuggable);
+		}
+		debugMap.put(debugID, debuggable);
+	}
+
+	public BiFunction<Debuggable, String, Object> debug = new BiFunction<Debuggable, String, Object>() {
+
+		@Override
+		public Object apply(Debuggable debuggable, String debugID) {
+			debug(debuggable, debugID);
+			return null;
+		}
+
+	};
 
 	public void useExperimentalBindings() {
 		Value bindings = currentModule.context.getBindings("js");
@@ -337,6 +340,7 @@ public class ModuleLoader {
 			bindings.putMember("config", configMap);
 		}
 
+		bindings.putMember("debug", debug);
 		bindings.putMember("this", localPath);
 		bindings.putMember("Bukkit", plugin.getServer());
 		bindings.putMember("Runnable", Runnable.class);

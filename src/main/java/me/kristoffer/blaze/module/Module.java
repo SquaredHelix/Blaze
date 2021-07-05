@@ -1,4 +1,4 @@
-package me.kristoffer.blaze;
+package me.kristoffer.blaze.module;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,9 @@ import org.bukkit.event.Event;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Value;
 
+import me.kristoffer.blaze.ModuleLoader;
+import me.kristoffer.blaze.Runnable;
+import me.kristoffer.blaze.UI;
 import me.kristoffer.blaze.util.ReflectionUtils;
 
 public class Module {
@@ -20,7 +23,7 @@ public class Module {
 	public Context context;
 	public ModuleLoader loader;
 
-	public Module(ModuleLoader loader,Context context) {
+	public Module(ModuleLoader loader, Context context) {
 		this.loader = loader;
 		this.context = context;
 	}
@@ -71,13 +74,13 @@ public class Module {
 	protected void deregisterListeners() {
 		listenerMap.keySet().stream().collect(Collectors.toSet()).forEach(this::deregisterListener);
 	}
-	
+
 	public ArrayList<UI> registeredUI = new ArrayList<UI>();
-	
+
 	protected void registerUI(UI ui) {
 		registeredUI.add(ui);
 	}
-	
+
 	protected void deregisterUI(UI ui) {
 		registeredUI.remove(ui);
 	}
