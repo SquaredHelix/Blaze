@@ -32,6 +32,28 @@
 			<artifactId>reflections</artifactId>
 			<version>0.9.12</version>
 		</dependency>
+
+		<!-- GraalJS -->
+		<dependency>
+			<groupId>org.graalvm.sdk</groupId>
+			<artifactId>graal-sdk</artifactId>
+			<version>21.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graalvm.js</groupId>
+			<artifactId>js</artifactId>
+			<version>21.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graalvm.js</groupId>
+			<artifactId>js-scriptengine</artifactId>
+			<version>21.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graalvm.truffle</groupId>
+			<artifactId>truffle-api</artifactId>
+			<version>21.1.0</version>
+		</dependency>
 	</dependencies>
 
 	<pluginRepositories>
@@ -68,9 +90,12 @@
 								<includes>
 									<include>org.reflections</include>
 									<include>org.javassist</include>
+									<include>org.graalvm.sdk</include>
+									<include>org.graalvm.js</include>
+									<include>org.graalvm.truffle</include>
 								</includes>
 							</artifactSet>
-							<minimizeJar>true</minimizeJar>
+							<minimizeJar>false</minimizeJar>
 							<relocations>
 								<relocation>
 									<pattern>org.reflections</pattern>

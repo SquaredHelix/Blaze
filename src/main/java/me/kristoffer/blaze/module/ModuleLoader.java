@@ -33,7 +33,7 @@ public class ModuleLoader {
 	}
 
 	public void loadFile(String path, boolean silent) {
-		String localPath = path.replace(plugin.getDataFolder().getAbsolutePath().toString() + "\\", "");
+		String localPath = path.replace(plugin.getDataFolder().getAbsolutePath().toString(), "");
 		if (!(localPath.endsWith(".js") || localPath.endsWith(".mjs")))
 			return;
 		Module module = new Module(plugin, localPath);

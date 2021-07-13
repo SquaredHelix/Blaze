@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 
+import javax.script.ScriptException;
+
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.Plugin;
 import org.graalvm.polyglot.Context;
@@ -14,6 +16,8 @@ import org.graalvm.polyglot.Value;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.oracle.truffle.js.scriptengine.GraalJSEngineFactory;
+import com.oracle.truffle.js.scriptengine.GraalJSScriptEngine;
 
 import me.kristoffer.blaze.util.Runnable;
 import me.kristoffer.blaze.api.Color;
@@ -165,6 +169,7 @@ public class Module implements Closable {
 		this.fileName = fileName;
 		manager = new ModuleManager(); // TODO: Context
 		api = new ModuleAPI(this);
+		Thread.currentThread().setContextClassLoader(ClassLoader.getSystemClassLoader());
 		context = createContext();
 	}
 
@@ -595,7 +600,6 @@ public class Module implements Closable {
 		bindings.putMember("EntityDamageEvent", "EntityDamageEvent");
 		bindings.putMember("BlockFertilizeEvent", "BlockFertilizeEvent");
 
-		
 		return context;
 	}
 
