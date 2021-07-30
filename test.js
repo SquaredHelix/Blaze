@@ -2,5 +2,5 @@
 
 blaze.onEvent(PlayerMoveEvent, event => {
     var player = event.getPlayer()
-    player.getLevel()
+    
 })
