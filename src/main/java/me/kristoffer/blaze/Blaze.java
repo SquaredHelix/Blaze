@@ -17,6 +17,7 @@ public class Blaze extends JavaPlugin implements Listener {
 	private ModuleLoader moduleLoader;
 
 	public void onEnable() {
+		//new TSGenerator(new File(getDataFolder().getAbsolutePath() + "/blaze.d.ts"));
 		moduleLoader = new ModuleLoader(this);
 		moduleLoader.loadFolder("");
 		setupWatchers();

@@ -1,11 +1,11 @@
-package me.kristoffer.bukkittranslate;
+package me.kristoffer.blaze;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -17,16 +17,15 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 
-public class Main {
+public class TSGenerator {
 
-	private static HashMap<String, String> loadedClasses = new HashMap<String, String>();
-	private static PrintWriter writer;
-	private static PrintWriter eventWriter;
+	private PrintWriter writer;
+	// private PrintWriter eventWriter;
 
-	public static void main(String[] args) {
+	public TSGenerator(File file) {
 		try {
-			writer = new PrintWriter("tsout.d.ts", "UTF-8");
-			eventWriter = new PrintWriter("bindings.txt", "UTF-8");
+			writer = new PrintWriter(file, "UTF-8");
+			// eventWriter = new PrintWriter("bindings.txt", "UTF-8");
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +34,7 @@ public class Main {
 		List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
 		classLoadersList.add(ClasspathHelper.contextClassLoader());
 		classLoadersList.add(ClasspathHelper.staticClassLoader());
-		
+
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
 				.setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
 				.addUrls(ClasspathHelper.forJavaClassPath())
@@ -69,8 +68,9 @@ public class Main {
 			});
 			writer.println("}");
 			writer.println("namespace " + enumx.getSimpleName() + " {");
-			eventWriter.println(
-					"bindings.putMember(\"" + enumx.getSimpleName() + "\", \"" + enumx.getSimpleName() + "\");");
+			// eventWriter.println(
+			// "bindings.putMember(\"" + enumx.getSimpleName() + "\", \"" +
+			// enumx.getSimpleName() + "\");");
 			Arrays.stream(enumx.getMethods()).forEach(method -> {
 				// System.out.println(method.toString());
 				/*
@@ -110,8 +110,9 @@ public class Main {
 			}
 			if (superclass.endsWith("Event")) {
 				writer.println("namespace " + clazz.getSimpleName() + " {");
-				eventWriter.println(
-						"bindings.putMember(\"" + clazz.getSimpleName() + "\", \"" + clazz.getSimpleName() + "\");");
+				// eventWriter.println(
+				// "bindings.putMember(\"" + clazz.getSimpleName() + "\", \"" +
+				// clazz.getSimpleName() + "\");");
 				Arrays.stream(clazz.getMethods()).forEach(method -> {
 					// System.out.println(method.toString());
 					/*
@@ -197,34 +198,38 @@ public class Main {
 					header += " {";
 					writer.println(header);
 					Arrays.stream(clazz.getDeclaredMethods()).forEach(method -> {
-						// System.out.println(method.toString());
-						/*
-						 * Arrays.stream(method.getParameterTypes()).forEach(paramClazz -> { String
-						 * simpleName = paramClazz.getSimpleName(); String longName =
-						 * paramClazz.getTypeName(); if (loadedClasses.containsKey(simpleName)) { if
-						 * (!loadedClasses.get(simpleName).equals(longName)) {
-						 * System.out.println("Found potential conflict " + simpleName); } }
-						 * loadedClasses.put(simpleName, longName); });
-						 */
-						String parameters = "";
-						int i = 0;
-						for (Parameter param : method.getParameters()) {
-							parameters += param.getName() + ": ";
-							parameters += param.getType().getSimpleName();
-							if (!(method.getParameters().length - 1 == i)) {
-								parameters += ", ";
+						try {
+							// System.out.println(method.toString());
+							/*
+							 * Arrays.stream(method.getParameterTypes()).forEach(paramClazz -> { String
+							 * simpleName = paramClazz.getSimpleName(); String longName =
+							 * paramClazz.getTypeName(); if (loadedClasses.containsKey(simpleName)) { if
+							 * (!loadedClasses.get(simpleName).equals(longName)) {
+							 * System.out.println("Found potential conflict " + simpleName); } }
+							 * loadedClasses.put(simpleName, longName); });
+							 */
+							String parameters = "";
+							int i = 0;
+							for (Parameter param : method.getParameters()) {
+								parameters += param.getName() + ": ";
+								parameters += param.getType().getSimpleName();
+								if (!(method.getParameters().length - 1 == i)) {
+									parameters += ", ";
+								}
+								i++;
 							}
-							i++;
+							writer.println("	" + method.getName() + "(" + parameters + "): "
+									+ method.getReturnType().getSimpleName());
+						} catch (NoClassDefFoundError ex) {
+							ex.printStackTrace();
 						}
-						writer.println("	" + method.getName() + "(" + parameters + "): "
-								+ method.getReturnType().getSimpleName());
 					});
 					writer.println("}");
 				}
 			}
 		});
 		writer.close();
-		eventWriter.close();
+		// eventWriter.close();
 	}
 
 }
