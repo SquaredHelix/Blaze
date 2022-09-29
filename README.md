@@ -7,4 +7,6 @@
 -----
 Blaze is a loader for JavaScript (via GraalJS) with bindings to Bukkit. It has the ability to dynamically add and remove commands and listeners at runtime. As well as a code reloading system. Write JavaScript and have it instantly take effect in-game.
 
+Note that at this point in time this project is not ready for production. You may encounter memory issues with the code hot-replacement system, and possible attack vectors would need to be better evaluated.
+
 Download [here](https://github.com/SquaredHelix/Blaze/releases/latest/download/Blaze.jar)
