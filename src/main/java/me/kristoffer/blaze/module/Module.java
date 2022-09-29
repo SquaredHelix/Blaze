@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 
-import javax.script.ScriptException;
-
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.Plugin;
 import org.graalvm.polyglot.Context;
@@ -16,10 +14,7 @@ import org.graalvm.polyglot.Value;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.oracle.truffle.js.scriptengine.GraalJSEngineFactory;
-import com.oracle.truffle.js.scriptengine.GraalJSScriptEngine;
 
-import me.kristoffer.blaze.util.Runnable;
 import me.kristoffer.blaze.api.Color;
 import me.kristoffer.blaze.backend.org.bukkit.Art;
 import me.kristoffer.blaze.backend.org.bukkit.Axis;
@@ -154,6 +149,7 @@ import me.kristoffer.blaze.backend.org.bukkit.potion.PotionType;
 import me.kristoffer.blaze.backend.org.bukkit.scoreboard.DisplaySlot;
 import me.kristoffer.blaze.backend.org.bukkit.scoreboard.RenderType;
 import me.kristoffer.blaze.backend.org.bukkit.scoreboard.Team;
+import me.kristoffer.blaze.util.Runnable;
 import me.kristoffer.blaze.util.Util;
 
 public class Module implements Closable {
@@ -169,8 +165,11 @@ public class Module implements Closable {
 		this.fileName = fileName;
 		manager = new ModuleManager(); // TODO: Context
 		api = new ModuleAPI(this);
-		Thread.currentThread().setContextClassLoader(ClassLoader.getSystemClassLoader());
+		// Swap loaders as a patch for truffle-api
+		ClassLoader oldCl = Thread.currentThread().getContextClassLoader();
+		Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
 		context = createContext();
+		Thread.currentThread().setContextClassLoader(oldCl);
 	}
 
 	@Override
@@ -183,7 +182,7 @@ public class Module implements Closable {
 
 	@SuppressWarnings("unchecked")
 	private Context createContext() {
-		Context context = Context.newBuilder("js").allowHostClassLookup(s -> true).allowHostAccess(HostAccess.ALL)
+		Context context = Context.newBuilder("js").option("engine.WarnInterpreterOnly", "false").allowHostClassLookup(s -> true).allowHostAccess(HostAccess.ALL)
 				.allowIO(true).build();
 
 		String configPath = null;

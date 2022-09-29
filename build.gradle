@@ -1,0 +1,38 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    
+    maven {
+        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
+    }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
+    implementation 'org.reflections:reflections:0.9.12'
+    
+  	implementation "org.graalvm.js:js:22.0.0"
+  	implementation "org.graalvm.sdk:graal-sdk:22.0.0"
+  	implementation "org.graalvm.truffle:truffle-api:22.0.0"
+}
+
+shadowJar {
+   archiveName = "${project.name}-${project.version}.jar"
+}
+
+group = 'me.kristoffer'
+version = '${project.vesion}'
+description = 'Blaze'
+
+application {
+	mainClassName = "me.kristoffer.blaze.Blaze"
+}
+
