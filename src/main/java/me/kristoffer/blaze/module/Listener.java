@@ -9,13 +9,18 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.Plugin;
 
+import me.kristoffer.blaze.TSDefined;
 import me.kristoffer.blaze.util.ReflectionUtils;
 
-public class Listener extends ModuleObject implements org.bukkit.event.Listener {
+public class Listener extends ModuleObject implements org.bukkit.event.Listener, TSDefined {
 
 	private String eventName;
 	private Consumer<Event> function;
 	private String prefix;
+
+	public Listener() {
+		super(null);
+	}
 
 	public Listener(Plugin plugin, String eventName, Consumer<Event> function, String prefix) {
 		super(plugin);
@@ -51,5 +56,13 @@ public class Listener extends ModuleObject implements org.bukkit.event.Listener 
 	public void remove() {
 		close();
 	}
-	
+
+	@Override
+	public String defineTypescript() {
+		return """
+				type ListenerFunction<Type> = (event: Type) => void
+				type CommandFunction = (player: Player, args: any) => void
+				""";
+	}
+
 }

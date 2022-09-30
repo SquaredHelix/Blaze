@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -11,8 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.Scanners;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
@@ -21,6 +21,10 @@ public class TSGenerator {
 
 	private PrintWriter writer;
 	// private PrintWriter eventWriter;
+
+	public static void main(String[] args) {
+		new TSGenerator(new File("blaze.d.ts"));
+	}
 
 	public TSGenerator(File file) {
 		try {
@@ -36,9 +40,8 @@ public class TSGenerator {
 		classLoadersList.add(ClasspathHelper.staticClassLoader());
 
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
-				.setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
-				.addUrls(ClasspathHelper.forJavaClassPath())
-				.filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("org.bukkit"))));
+				.setScanners(Scanners.SubTypes, Scanners.Resources).addUrls(ClasspathHelper.forJavaClassPath())
+				.filterInputsBy(new FilterBuilder().includePackage("org.bukkit")));
 
 		Set<Class<? extends Object>> classes = reflections.getSubTypesOf(Object.class);
 		Set<Class<? extends Enum>> enums = reflections.getSubTypesOf(Enum.class);
@@ -228,6 +231,20 @@ public class TSGenerator {
 				}
 			}
 		});
+
+		reflections = new Reflections(new ConfigurationBuilder().setScanners(Scanners.SubTypes, Scanners.Resources)
+				.addUrls(ClasspathHelper.forJavaClassPath())
+				.filterInputsBy(new FilterBuilder().includePackage("me.kristoffer.blaze")));
+		reflections.getSubTypesOf(TSDefined.class).forEach(clazz -> {
+			try {
+				writer.println((String) clazz.getDeclaredMethod("defineTypescript")
+						.invoke(clazz.getDeclaredConstructor().newInstance()));
+			} catch (IllegalArgumentException | NoSuchMethodException | SecurityException | IllegalAccessException
+					| InvocationTargetException | InstantiationException e) {
+				e.printStackTrace();
+			}
+		});
+
 		writer.close();
 		// eventWriter.close();
 	}

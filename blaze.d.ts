@@ -72,6 +72,8 @@ declare enum TreeType {
 	CRIMSON_FUNGUS,
 	WARPED_FUNGUS,
 	AZALEA,
+	MANGROVE,
+	TALL_MANGROVE,
 }
 namespace TreeType {
 	function values(): TreeType[]
@@ -137,10 +139,10 @@ declare enum PatternType {
 	PIGLIN,
 }
 namespace PatternType {
-	function getByIdentifier(arg0: String): PatternType
-	function getIdentifier(): String
 	function values(): PatternType[]
 	function valueOf(arg0: String): PatternType
+	function getIdentifier(): String
+	function getByIdentifier(arg0: String): PatternType
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -183,19 +185,21 @@ namespace CacheStrategy {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum TreeSpecies {
-	GENERIC,
-	REDWOOD,
-	BIRCH,
-	JUNGLE,
-	ACACIA,
-	DARK_OAK,
+declare enum Shape {
+	NORTH_SOUTH,
+	EAST_WEST,
+	ASCENDING_EAST,
+	ASCENDING_WEST,
+	ASCENDING_NORTH,
+	ASCENDING_SOUTH,
+	SOUTH_EAST,
+	SOUTH_WEST,
+	NORTH_WEST,
+	NORTH_EAST,
 }
-namespace TreeSpecies {
-	function getData(): byte
-	function getByData(arg0: byte): TreeSpecies
-	function values(): TreeSpecies[]
-	function valueOf(arg0: String): TreeSpecies
+namespace Shape {
+	function values(): Shape[]
+	function valueOf(arg0: String): Shape
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -213,21 +217,19 @@ namespace TreeSpecies {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Shape {
-	NORTH_SOUTH,
-	EAST_WEST,
-	ASCENDING_EAST,
-	ASCENDING_WEST,
-	ASCENDING_NORTH,
-	ASCENDING_SOUTH,
-	SOUTH_EAST,
-	SOUTH_WEST,
-	NORTH_WEST,
-	NORTH_EAST,
+declare enum TreeSpecies {
+	GENERIC,
+	REDWOOD,
+	BIRCH,
+	JUNGLE,
+	ACACIA,
+	DARK_OAK,
 }
-namespace Shape {
-	function values(): Shape[]
-	function valueOf(arg0: String): Shape
+namespace TreeSpecies {
+	function values(): TreeSpecies[]
+	function valueOf(arg0: String): TreeSpecies
+	function getByData(arg0: byte): TreeSpecies
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -288,10 +290,40 @@ declare enum EnchantmentTarget {
 	VANISHABLE,
 }
 namespace EnchantmentTarget {
-	function includes(arg0: ItemStack): boolean
-	function includes(arg0: Material): boolean
 	function values(): EnchantmentTarget[]
 	function valueOf(arg0: String): EnchantmentTarget
+	function includes(arg0: ItemStack): boolean
+	function includes(arg0: Material): boolean
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum Type {
+	OAK,
+	SPRUCE,
+	BIRCH,
+	JUNGLE,
+	ACACIA,
+	DARK_OAK,
+	MANGROVE,
+}
+namespace Type {
+	function values(): Type[]
+	function valueOf(arg0: String): Type
+	function getMaterial(): Material
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -383,18 +415,17 @@ namespace Property {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Type {
-	BROWN,
-	WHITE,
-	BLACK,
-	BLACK_AND_WHITE,
-	GOLD,
-	SALT_AND_PEPPER,
-	THE_KILLER_BUNNY,
+declare enum EquipmentSlot {
+	HAND,
+	OFF_HAND,
+	FEET,
+	LEGS,
+	CHEST,
+	HEAD,
 }
-namespace Type {
-	function values(): Type[]
-	function valueOf(arg0: String): Type
+namespace EquipmentSlot {
+	function values(): EquipmentSlot[]
+	function valueOf(arg0: String): EquipmentSlot
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -412,17 +443,46 @@ namespace Type {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum EquipmentSlot {
-	HAND,
-	OFF_HAND,
-	FEET,
-	LEGS,
-	CHEST,
-	HEAD,
+declare enum Tilt {
+	NONE,
+	UNSTABLE,
+	PARTIAL,
+	FULL,
 }
-namespace EquipmentSlot {
-	function values(): EquipmentSlot[]
-	function valueOf(arg0: String): EquipmentSlot
+namespace Tilt {
+	function values(): Tilt[]
+	function valueOf(arg0: String): Tilt
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum RegainReason {
+	REGEN,
+	SATIATED,
+	EATING,
+	ENDER_CRYSTAL,
+	MAGIC,
+	MAGIC_REGEN,
+	WITHER_SPAWN,
+	WITHER,
+	CUSTOM,
+}
+namespace RegainReason {
+	function values(): RegainReason[]
+	function valueOf(arg0: String): RegainReason
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -460,6 +520,7 @@ declare enum Material {
 	COARSE_DIRT,
 	PODZOL,
 	ROOTED_DIRT,
+	MUD,
 	CRIMSON_NYLIUM,
 	WARPED_NYLIUM,
 	COBBLESTONE,
@@ -469,6 +530,7 @@ declare enum Material {
 	JUNGLE_PLANKS,
 	ACACIA_PLANKS,
 	DARK_OAK_PLANKS,
+	MANGROVE_PLANKS,
 	CRIMSON_PLANKS,
 	WARPED_PLANKS,
 	OAK_SAPLING,
@@ -477,6 +539,7 @@ declare enum Material {
 	JUNGLE_SAPLING,
 	ACACIA_SAPLING,
 	DARK_OAK_SAPLING,
+	MANGROVE_PROPAGULE,
 	BEDROCK,
 	SAND,
 	RED_SAND,
@@ -548,6 +611,9 @@ declare enum Material {
 	JUNGLE_LOG,
 	ACACIA_LOG,
 	DARK_OAK_LOG,
+	MANGROVE_LOG,
+	MANGROVE_ROOTS,
+	MUDDY_MANGROVE_ROOTS,
 	CRIMSON_STEM,
 	WARPED_STEM,
 	STRIPPED_OAK_LOG,
@@ -556,6 +622,7 @@ declare enum Material {
 	STRIPPED_JUNGLE_LOG,
 	STRIPPED_ACACIA_LOG,
 	STRIPPED_DARK_OAK_LOG,
+	STRIPPED_MANGROVE_LOG,
 	STRIPPED_CRIMSON_STEM,
 	STRIPPED_WARPED_STEM,
 	STRIPPED_OAK_WOOD,
@@ -564,6 +631,7 @@ declare enum Material {
 	STRIPPED_JUNGLE_WOOD,
 	STRIPPED_ACACIA_WOOD,
 	STRIPPED_DARK_OAK_WOOD,
+	STRIPPED_MANGROVE_WOOD,
 	STRIPPED_CRIMSON_HYPHAE,
 	STRIPPED_WARPED_HYPHAE,
 	OAK_WOOD,
@@ -572,6 +640,7 @@ declare enum Material {
 	JUNGLE_WOOD,
 	ACACIA_WOOD,
 	DARK_OAK_WOOD,
+	MANGROVE_WOOD,
 	CRIMSON_HYPHAE,
 	WARPED_HYPHAE,
 	OAK_LEAVES,
@@ -580,6 +649,7 @@ declare enum Material {
 	JUNGLE_LEAVES,
 	ACACIA_LEAVES,
 	DARK_OAK_LEAVES,
+	MANGROVE_LEAVES,
 	AZALEA_LEAVES,
 	FLOWERING_AZALEA_LEAVES,
 	SPONGE,
@@ -651,6 +721,7 @@ declare enum Material {
 	JUNGLE_SLAB,
 	ACACIA_SLAB,
 	DARK_OAK_SLAB,
+	MANGROVE_SLAB,
 	CRIMSON_SLAB,
 	WARPED_SLAB,
 	STONE_SLAB,
@@ -661,6 +732,7 @@ declare enum Material {
 	COBBLESTONE_SLAB,
 	BRICK_SLAB,
 	STONE_BRICK_SLAB,
+	MUD_BRICK_SLAB,
 	NETHER_BRICK_SLAB,
 	QUARTZ_SLAB,
 	RED_SANDSTONE_SLAB,
@@ -685,7 +757,6 @@ declare enum Material {
 	PURPUR_PILLAR,
 	PURPUR_STAIRS,
 	SPAWNER,
-	OAK_STAIRS,
 	CHEST,
 	CRAFTING_TABLE,
 	FARMLAND,
@@ -704,6 +775,7 @@ declare enum Material {
 	JUNGLE_FENCE,
 	ACACIA_FENCE,
 	DARK_OAK_FENCE,
+	MANGROVE_FENCE,
 	CRIMSON_FENCE,
 	WARPED_FENCE,
 	PUMPKIN,
@@ -728,11 +800,14 @@ declare enum Material {
 	MOSSY_STONE_BRICKS,
 	CRACKED_STONE_BRICKS,
 	CHISELED_STONE_BRICKS,
+	PACKED_MUD,
+	MUD_BRICKS,
 	DEEPSLATE_BRICKS,
 	CRACKED_DEEPSLATE_BRICKS,
 	DEEPSLATE_TILES,
 	CRACKED_DEEPSLATE_TILES,
 	CHISELED_DEEPSLATE,
+	REINFORCED_DEEPSLATE,
 	BROWN_MUSHROOM_BLOCK,
 	RED_MUSHROOM_BLOCK,
 	MUSHROOM_STEM,
@@ -744,6 +819,7 @@ declare enum Material {
 	GLOW_LICHEN,
 	BRICK_STAIRS,
 	STONE_BRICK_STAIRS,
+	MUD_BRICK_STAIRS,
 	MYCELIUM,
 	LILY_PAD,
 	NETHER_BRICKS,
@@ -751,6 +827,10 @@ declare enum Material {
 	CHISELED_NETHER_BRICKS,
 	NETHER_BRICK_FENCE,
 	NETHER_BRICK_STAIRS,
+	SCULK,
+	SCULK_VEIN,
+	SCULK_CATALYST,
+	SCULK_SHRIEKER,
 	ENCHANTING_TABLE,
 	END_PORTAL_FRAME,
 	END_STONE,
@@ -759,9 +839,13 @@ declare enum Material {
 	SANDSTONE_STAIRS,
 	ENDER_CHEST,
 	EMERALD_BLOCK,
+	OAK_STAIRS,
 	SPRUCE_STAIRS,
 	BIRCH_STAIRS,
 	JUNGLE_STAIRS,
+	ACACIA_STAIRS,
+	DARK_OAK_STAIRS,
+	MANGROVE_STAIRS,
 	CRIMSON_STAIRS,
 	WARPED_STAIRS,
 	COMMAND_BLOCK,
@@ -774,6 +858,7 @@ declare enum Material {
 	MOSSY_STONE_BRICK_WALL,
 	GRANITE_WALL,
 	STONE_BRICK_WALL,
+	MUD_BRICK_WALL,
 	NETHER_BRICK_WALL,
 	ANDESITE_WALL,
 	RED_NETHER_BRICK_WALL,
@@ -832,8 +917,6 @@ declare enum Material {
 	BLACK_CARPET,
 	TERRACOTTA,
 	PACKED_ICE,
-	ACACIA_STAIRS,
-	DARK_OAK_STAIRS,
 	DIRT_PATH,
 	SUNFLOWER,
 	LILAC,
@@ -1058,6 +1141,7 @@ declare enum Material {
 	JUNGLE_BUTTON,
 	ACACIA_BUTTON,
 	DARK_OAK_BUTTON,
+	MANGROVE_BUTTON,
 	CRIMSON_BUTTON,
 	WARPED_BUTTON,
 	STONE_PRESSURE_PLATE,
@@ -1070,6 +1154,7 @@ declare enum Material {
 	JUNGLE_PRESSURE_PLATE,
 	ACACIA_PRESSURE_PLATE,
 	DARK_OAK_PRESSURE_PLATE,
+	MANGROVE_PRESSURE_PLATE,
 	CRIMSON_PRESSURE_PLATE,
 	WARPED_PRESSURE_PLATE,
 	IRON_DOOR,
@@ -1079,6 +1164,7 @@ declare enum Material {
 	JUNGLE_DOOR,
 	ACACIA_DOOR,
 	DARK_OAK_DOOR,
+	MANGROVE_DOOR,
 	CRIMSON_DOOR,
 	WARPED_DOOR,
 	IRON_TRAPDOOR,
@@ -1088,6 +1174,7 @@ declare enum Material {
 	JUNGLE_TRAPDOOR,
 	ACACIA_TRAPDOOR,
 	DARK_OAK_TRAPDOOR,
+	MANGROVE_TRAPDOOR,
 	CRIMSON_TRAPDOOR,
 	WARPED_TRAPDOOR,
 	OAK_FENCE_GATE,
@@ -1096,6 +1183,7 @@ declare enum Material {
 	JUNGLE_FENCE_GATE,
 	ACACIA_FENCE_GATE,
 	DARK_OAK_FENCE_GATE,
+	MANGROVE_FENCE_GATE,
 	CRIMSON_FENCE_GATE,
 	WARPED_FENCE_GATE,
 	POWERED_RAIL,
@@ -1112,11 +1200,19 @@ declare enum Material {
 	WARPED_FUNGUS_ON_A_STICK,
 	ELYTRA,
 	OAK_BOAT,
+	OAK_CHEST_BOAT,
 	SPRUCE_BOAT,
+	SPRUCE_CHEST_BOAT,
 	BIRCH_BOAT,
+	BIRCH_CHEST_BOAT,
 	JUNGLE_BOAT,
+	JUNGLE_CHEST_BOAT,
 	ACACIA_BOAT,
+	ACACIA_CHEST_BOAT,
 	DARK_OAK_BOAT,
+	DARK_OAK_CHEST_BOAT,
+	MANGROVE_BOAT,
+	MANGROVE_CHEST_BOAT,
 	STRUCTURE_BLOCK,
 	JIGSAW,
 	TURTLE_HELMET,
@@ -1215,6 +1311,7 @@ declare enum Material {
 	JUNGLE_SIGN,
 	ACACIA_SIGN,
 	DARK_OAK_SIGN,
+	MANGROVE_SIGN,
 	CRIMSON_SIGN,
 	WARPED_SIGN,
 	BUCKET,
@@ -1229,6 +1326,7 @@ declare enum Material {
 	COD_BUCKET,
 	TROPICAL_FISH_BUCKET,
 	AXOLOTL_BUCKET,
+	TADPOLE_BUCKET,
 	BRICK,
 	CLAY_BALL,
 	DRIED_KELP_BLOCK,
@@ -1237,6 +1335,7 @@ declare enum Material {
 	SLIME_BALL,
 	EGG,
 	COMPASS,
+	RECOVERY_COMPASS,
 	BUNDLE,
 	FISHING_ROD,
 	CLOCK,
@@ -1314,6 +1413,7 @@ declare enum Material {
 	CAULDRON,
 	ENDER_EYE,
 	GLISTERING_MELON_SLICE,
+	ALLAY_SPAWN_EGG,
 	AXOLOTL_SPAWN_EGG,
 	BAT_SPAWN_EGG,
 	BEE_SPAWN_EGG,
@@ -1332,6 +1432,7 @@ declare enum Material {
 	ENDERMITE_SPAWN_EGG,
 	EVOKER_SPAWN_EGG,
 	FOX_SPAWN_EGG,
+	FROG_SPAWN_EGG,
 	GHAST_SPAWN_EGG,
 	GLOW_SQUID_SPAWN_EGG,
 	GOAT_SPAWN_EGG,
@@ -1366,6 +1467,7 @@ declare enum Material {
 	SQUID_SPAWN_EGG,
 	STRAY_SPAWN_EGG,
 	STRIDER_SPAWN_EGG,
+	TADPOLE_SPAWN_EGG,
 	TRADER_LLAMA_SPAWN_EGG,
 	TROPICAL_FISH_SPAWN_EGG,
 	TURTLE_SPAWN_EGG,
@@ -1373,6 +1475,7 @@ declare enum Material {
 	VILLAGER_SPAWN_EGG,
 	VINDICATOR_SPAWN_EGG,
 	WANDERING_TRADER_SPAWN_EGG,
+	WARDEN_SPAWN_EGG,
 	WITCH_SPAWN_EGG,
 	WITHER_SKELETON_SPAWN_EGG,
 	WOLF_SPAWN_EGG,
@@ -1468,7 +1571,10 @@ declare enum Material {
 	MUSIC_DISC_WARD,
 	MUSIC_DISC_11,
 	MUSIC_DISC_WAIT,
+	MUSIC_DISC_OTHERSIDE,
+	MUSIC_DISC_5,
 	MUSIC_DISC_PIGSTEP,
+	DISC_FRAGMENT_5,
 	TRIDENT,
 	PHANTOM_MEMBRANE,
 	NAUTILUS_SHELL,
@@ -1482,6 +1588,7 @@ declare enum Material {
 	MOJANG_BANNER_PATTERN,
 	GLOBE_BANNER_PATTERN,
 	PIGLIN_BANNER_PATTERN,
+	GOAT_HORN,
 	COMPOSTER,
 	BARREL,
 	SMOKER,
@@ -1541,6 +1648,11 @@ declare enum Material {
 	LARGE_AMETHYST_BUD,
 	AMETHYST_CLUSTER,
 	POINTED_DRIPSTONE,
+	OCHRE_FROGLIGHT,
+	VERDANT_FROGLIGHT,
+	PEARLESCENT_FROGLIGHT,
+	FROGSPAWN,
+	ECHO_SHARD,
 	WATER,
 	LAVA,
 	TALL_SEAGRASS,
@@ -1556,6 +1668,7 @@ declare enum Material {
 	ACACIA_WALL_SIGN,
 	JUNGLE_WALL_SIGN,
 	DARK_OAK_WALL_SIGN,
+	MANGROVE_WALL_SIGN,
 	REDSTONE_WALL_TORCH,
 	SOUL_WALL_TORCH,
 	NETHER_PORTAL,
@@ -1575,6 +1688,7 @@ declare enum Material {
 	POTTED_JUNGLE_SAPLING,
 	POTTED_ACACIA_SAPLING,
 	POTTED_DARK_OAK_SAPLING,
+	POTTED_MANGROVE_PROPAGULE,
 	POTTED_FERN,
 	POTTED_DANDELION,
 	POTTED_POPPY,
@@ -2133,40 +2247,42 @@ declare enum Material {
 	LEGACY_RECORD_12,
 }
 namespace Material {
-	function getMaxStackSize(): int
-	function getMaxDurability(): short
-	function matchMaterial(arg0: String, arg1: boolean): Material
-	function matchMaterial(arg0: String): Material
-	function isTransparent(): boolean
-	function isFlammable(): boolean
-	function isOccluding(): boolean
-	function isInteractable(): boolean
-	function getHardness(): float
-	function getBlastResistance(): float
-	function getSlipperiness(): float
-	function getCraftingRemainingItem(): Material
-	function getEquipmentSlot(): EquipmentSlot
-	function getMaterial(arg0: String): Material
-	function getMaterial(arg0: String, arg1: boolean): Material
-	function createBlockData(arg0: Consumer): BlockData
-	function createBlockData(arg0: String): BlockData
-	function createBlockData(): BlockData
-	function hasGravity(): boolean
-	function getData(): Class
-	function isLegacy(): boolean
-	function getNewData(arg0: byte): MaterialData
-	function isBlock(): boolean
-	function isEdible(): boolean
-	function isSolid(): boolean
-	function isAir(): boolean
-	function isBurnable(): boolean
-	function isFuel(): boolean
-	function isItem(): boolean
 	function values(): Material[]
 	function valueOf(arg0: String): Material
 	function isRecord(): boolean
 	function getKey(): NamespacedKey
 	function getId(): int
+	function getMaterial(arg0: String, arg1: boolean): Material
+	function getMaterial(arg0: String): Material
+	function getMaxStackSize(): int
+	function getNewData(arg0: byte): MaterialData
+	function isLegacy(): boolean
+	function matchMaterial(arg0: String, arg1: boolean): Material
+	function matchMaterial(arg0: String): Material
+	function isAir(): boolean
+	function isEdible(): boolean
+	function isBlock(): boolean
+	function isBurnable(): boolean
+	function getMaxDurability(): short
+	function isFuel(): boolean
+	function isOccluding(): boolean
+	function createBlockData(): BlockData
+	function createBlockData(arg0: Consumer): BlockData
+	function createBlockData(arg0: String): BlockData
+	function isTransparent(): boolean
+	function isItem(): boolean
+	function isSolid(): boolean
+	function isFlammable(): boolean
+	function hasGravity(): boolean
+	function getEquipmentSlot(): EquipmentSlot
+	function isInteractable(): boolean
+	function getBlastResistance(): float
+	function getSlipperiness(): float
+	function getHardness(): float
+	function getCreativeCategory(): CreativeCategory
+	function getCraftingRemainingItem(): Material
+	function getDefaultAttributeModifiers(arg0: EquipmentSlot): Multimap
+	function getData(): Class
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -2184,46 +2300,18 @@ namespace Material {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum RegainReason {
-	REGEN,
-	SATIATED,
-	EATING,
-	ENDER_CRYSTAL,
-	MAGIC,
-	MAGIC_REGEN,
-	WITHER_SPAWN,
-	WITHER,
-	CUSTOM,
+declare enum Type {
+	BROWN,
+	WHITE,
+	BLACK,
+	BLACK_AND_WHITE,
+	GOLD,
+	SALT_AND_PEPPER,
+	THE_KILLER_BUNNY,
 }
-namespace RegainReason {
-	function values(): RegainReason[]
-	function valueOf(arg0: String): RegainReason
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum Tilt {
-	NONE,
-	UNSTABLE,
-	PARTIAL,
-	FULL,
-}
-namespace Tilt {
-	function values(): Tilt[]
-	function valueOf(arg0: String): Tilt
+namespace Type {
+	function values(): Type[]
+	function valueOf(arg0: String): Type
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -2282,12 +2370,12 @@ declare enum MushroomBlockTexture {
 	ALL_STEM,
 }
 namespace MushroomBlockTexture {
-	function getCapByFace(arg0: BlockFace): MushroomBlockTexture
-	function getData(): byte
-	function getByData(arg0: byte): MushroomBlockTexture
-	function getCapFace(): BlockFace
 	function values(): MushroomBlockTexture[]
 	function valueOf(arg0: String): MushroomBlockTexture
+	function getByData(arg0: byte): MushroomBlockTexture
+	function getCapFace(): BlockFace
+	function getCapByFace(arg0: BlockFace): MushroomBlockTexture
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -2313,10 +2401,10 @@ declare enum PistonMoveReaction {
 	PUSH_ONLY,
 }
 namespace PistonMoveReaction {
-	function getById(arg0: int): PistonMoveReaction
 	function values(): PistonMoveReaction[]
 	function valueOf(arg0: String): PistonMoveReaction
 	function getId(): int
+	function getById(arg0: int): PistonMoveReaction
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -2375,6 +2463,32 @@ declare enum IgniteCause {
 namespace IgniteCause {
 	function values(): IgniteCause[]
 	function valueOf(arg0: String): IgniteCause
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum Variant {
+	TEMPERATE,
+	WARM,
+	COLD,
+}
+namespace Variant {
+	function values(): Variant[]
+	function valueOf(arg0: String): Variant
+	function getKey(): NamespacedKey
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -2620,10 +2734,35 @@ declare enum WarningState {
 	DEFAULT,
 }
 namespace WarningState {
-	function printFor(arg0: Warning): boolean
 	function value(arg0: String): WarningState
 	function values(): WarningState[]
 	function valueOf(arg0: String): WarningState
+	function printFor(arg0: Warning): boolean
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum BlockSupport {
+	FULL,
+	CENTER,
+	RIGID,
+}
+namespace BlockSupport {
+	function values(): BlockSupport[]
+	function valueOf(arg0: String): BlockSupport
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3020,14 +3159,14 @@ namespace SoundCategory {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Type {
-	TOP,
-	BOTTOM,
-	DOUBLE,
+declare enum AttachedFace {
+	FLOOR,
+	WALL,
+	CEILING,
 }
-namespace Type {
-	function values(): Type[]
-	function valueOf(arg0: String): Type
+namespace AttachedFace {
+	function values(): AttachedFace[]
+	function valueOf(arg0: String): AttachedFace
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3045,14 +3184,14 @@ namespace Type {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum AttachedFace {
-	FLOOR,
-	WALL,
-	CEILING,
+declare enum Type {
+	TOP,
+	BOTTOM,
+	DOUBLE,
 }
-namespace AttachedFace {
-	function values(): AttachedFace[]
-	function valueOf(arg0: String): AttachedFace
+namespace Type {
+	function values(): Type[]
+	function valueOf(arg0: String): Type
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3135,6 +3274,33 @@ namespace TargetReason {
 	function notify(): void
 	function notifyAll(): void
 }
+declare enum Status {
+	IN_WATER,
+	UNDER_WATER,
+	UNDER_FLOWING_WATER,
+	ON_LAND,
+	IN_AIR,
+}
+namespace Status {
+	function values(): Status[]
+	function valueOf(arg0: String): Status
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
 declare enum HeightMap {
 	MOTION_BLOCKING,
 	MOTION_BLOCKING_NO_LEAVES,
@@ -3146,6 +3312,31 @@ declare enum HeightMap {
 namespace HeightMap {
 	function values(): HeightMap[]
 	function valueOf(arg0: String): HeightMap
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum CocoaPlantSize {
+	SMALL,
+	MEDIUM,
+	LARGE,
+}
+namespace CocoaPlantSize {
+	function values(): CocoaPlantSize[]
+	function valueOf(arg0: String): CocoaPlantSize
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3189,31 +3380,6 @@ namespace Type {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum CocoaPlantSize {
-	SMALL,
-	MEDIUM,
-	LARGE,
-}
-namespace CocoaPlantSize {
-	function values(): CocoaPlantSize[]
-	function valueOf(arg0: String): CocoaPlantSize
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
 declare enum Gene {
 	NORMAL,
 	LAZY,
@@ -3224,9 +3390,9 @@ declare enum Gene {
 	AGGRESSIVE,
 }
 namespace Gene {
-	function isRecessive(): boolean
 	function values(): Gene[]
 	function valueOf(arg0: String): Gene
+	function isRecessive(): boolean
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3300,14 +3466,18 @@ namespace BedEnterResult {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum LockType {
-	ADDING_OR_CHANGING,
-	REMOVING_OR_CHANGING,
-	ADDING,
+declare enum EventPriority {
+	LOWEST,
+	LOW,
+	NORMAL,
+	HIGH,
+	HIGHEST,
+	MONITOR,
 }
-namespace LockType {
-	function values(): LockType[]
-	function valueOf(arg0: String): LockType
+namespace EventPriority {
+	function values(): EventPriority[]
+	function valueOf(arg0: String): EventPriority
+	function getSlot(): int
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3325,18 +3495,14 @@ namespace LockType {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum EventPriority {
-	LOWEST,
-	LOW,
-	NORMAL,
-	HIGH,
-	HIGHEST,
-	MONITOR,
+declare enum LockType {
+	ADDING_OR_CHANGING,
+	REMOVING_OR_CHANGING,
+	ADDING,
 }
-namespace EventPriority {
-	function values(): EventPriority[]
-	function valueOf(arg0: String): EventPriority
-	function getSlot(): int
+namespace LockType {
+	function values(): LockType[]
+	function valueOf(arg0: String): LockType
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3389,6 +3555,12 @@ declare enum Pose {
 	SNEAKING,
 	LONG_JUMPING,
 	DYING,
+	CROAKING,
+	USING_TONGUE,
+	ROARING,
+	SNIFFING,
+	EMERGING,
+	DIGGING,
 }
 namespace Pose {
 	function values(): Pose[]
@@ -3479,17 +3651,17 @@ declare enum DyeColor {
 	BLACK,
 }
 namespace DyeColor {
-	function getByWoolData(arg0: byte): DyeColor
-	function getWoolData(): byte
-	function getByDyeData(arg0: byte): DyeColor
-	function legacyValueOf(arg0: String): DyeColor
-	function getFireworkColor(): Color
-	function getByFireworkColor(arg0: Color): DyeColor
-	function getColor(): Color
-	function getDyeData(): byte
-	function getByColor(arg0: Color): DyeColor
 	function values(): DyeColor[]
 	function valueOf(arg0: String): DyeColor
+	function getColor(): Color
+	function getByColor(arg0: Color): DyeColor
+	function legacyValueOf(arg0: String): DyeColor
+	function getByFireworkColor(arg0: Color): DyeColor
+	function getWoolData(): byte
+	function getDyeData(): byte
+	function getFireworkColor(): Color
+	function getByWoolData(arg0: byte): DyeColor
+	function getByDyeData(arg0: byte): DyeColor
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3606,10 +3778,10 @@ declare enum EntityEffect {
 	BREAK_EQUIPMENT_BOOTS,
 }
 namespace EntityEffect {
-	function getApplicable(): Class
-	function getData(): byte
 	function values(): EntityEffect[]
 	function valueOf(arg0: String): EntityEffect
+	function getApplicable(): Class
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3675,14 +3847,13 @@ namespace PluginChannelDirection {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum ConversationState {
-	UNSTARTED,
-	STARTED,
-	ABANDONED,
+declare enum Half {
+	TOP,
+	BOTTOM,
 }
-namespace ConversationState {
-	function values(): ConversationState[]
-	function valueOf(arg0: String): ConversationState
+namespace Half {
+	function values(): Half[]
+	function valueOf(arg0: String): Half
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3700,13 +3871,14 @@ namespace ConversationState {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Half {
-	TOP,
-	BOTTOM,
+declare enum ConversationState {
+	UNSTARTED,
+	STARTED,
+	ABANDONED,
 }
-namespace Half {
-	function values(): Half[]
-	function valueOf(arg0: String): Half
+namespace ConversationState {
+	function values(): ConversationState[]
+	function valueOf(arg0: String): ConversationState
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3810,12 +3982,12 @@ declare enum Statistic {
 	STRIDER_ONE_CM,
 }
 namespace Statistic {
-	function isSubstatistic(): boolean
-	function isBlock(): boolean
 	function values(): Statistic[]
 	function valueOf(arg0: String): Statistic
 	function getKey(): NamespacedKey
 	function getType(): Type
+	function isBlock(): boolean
+	function isSubstatistic(): boolean
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3870,38 +4042,10 @@ declare enum CropState {
 	RIPE,
 }
 namespace CropState {
-	function getData(): byte
-	function getByData(arg0: byte): CropState
 	function values(): CropState[]
 	function valueOf(arg0: String): CropState
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum Environment {
-	NORMAL,
-	NETHER,
-	THE_END,
-	CUSTOM,
-}
-namespace Environment {
-	function getEnvironment(arg0: int): Environment
-	function values(): Environment[]
-	function valueOf(arg0: String): Environment
-	function getId(): int
+	function getByData(arg0: byte): CropState
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -3947,43 +4091,17 @@ namespace Spell {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Art {
-	KEBAB,
-	AZTEC,
-	ALBAN,
-	AZTEC2,
-	BOMB,
-	PLANT,
-	WASTELAND,
-	POOL,
-	COURBET,
-	SEA,
-	SUNSET,
-	CREEBET,
-	WANDERER,
-	GRAHAM,
-	MATCH,
-	BUST,
-	STAGE,
-	VOID,
-	SKULL_AND_ROSES,
-	WITHER,
-	FIGHTERS,
-	POINTER,
-	PIGSCENE,
-	BURNING_SKULL,
-	SKELETON,
-	DONKEY_KONG,
+declare enum Environment {
+	NORMAL,
+	NETHER,
+	THE_END,
+	CUSTOM,
 }
-namespace Art {
-	function getBlockWidth(): int
-	function getBlockHeight(): int
-	function getById(arg0: int): Art
-	function values(): Art[]
-	function valueOf(arg0: String): Art
-	function getKey(): NamespacedKey
+namespace Environment {
+	function values(): Environment[]
+	function valueOf(arg0: String): Environment
 	function getId(): int
-	function getByName(arg0: String): Art
+	function getEnvironment(arg0: int): Environment
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4023,14 +4141,72 @@ declare enum BlockFace {
 	SELF,
 }
 namespace BlockFace {
-	function getDirection(): Vector
-	function getOppositeFace(): BlockFace
-	function isCartesian(): boolean
-	function getModX(): int
-	function getModY(): int
-	function getModZ(): int
 	function values(): BlockFace[]
 	function valueOf(arg0: String): BlockFace
+	function getModX(): int
+	function getModY(): int
+	function getOppositeFace(): BlockFace
+	function getModZ(): int
+	function isCartesian(): boolean
+	function getDirection(): Vector
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum Art {
+	KEBAB,
+	AZTEC,
+	ALBAN,
+	AZTEC2,
+	BOMB,
+	PLANT,
+	WASTELAND,
+	POOL,
+	COURBET,
+	SEA,
+	SUNSET,
+	CREEBET,
+	WANDERER,
+	GRAHAM,
+	MATCH,
+	BUST,
+	STAGE,
+	VOID,
+	SKULL_AND_ROSES,
+	WITHER,
+	FIGHTERS,
+	POINTER,
+	PIGSCENE,
+	BURNING_SKULL,
+	SKELETON,
+	DONKEY_KONG,
+	EARTH,
+	WIND,
+	WATER,
+	FIRE,
+}
+namespace Art {
+	function values(): Art[]
+	function valueOf(arg0: String): Art
+	function getKey(): NamespacedKey
+	function getId(): int
+	function getByName(arg0: String): Art
+	function getById(arg0: int): Art
+	function getBlockHeight(): int
+	function getBlockWidth(): int
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4050,6 +4226,7 @@ namespace BlockFace {
 }
 declare enum PlayerAnimationType {
 	ARM_SWING,
+	OFF_ARM_SWING,
 }
 namespace PlayerAnimationType {
 	function values(): PlayerAnimationType[]
@@ -4095,6 +4272,93 @@ namespace PluginLoadOrder {
 	function notify(): void
 	function notifyAll(): void
 }
+declare enum Biome {
+	OCEAN,
+	PLAINS,
+	DESERT,
+	WINDSWEPT_HILLS,
+	FOREST,
+	TAIGA,
+	SWAMP,
+	MANGROVE_SWAMP,
+	RIVER,
+	NETHER_WASTES,
+	THE_END,
+	FROZEN_OCEAN,
+	FROZEN_RIVER,
+	SNOWY_PLAINS,
+	MUSHROOM_FIELDS,
+	BEACH,
+	JUNGLE,
+	SPARSE_JUNGLE,
+	DEEP_OCEAN,
+	STONY_SHORE,
+	SNOWY_BEACH,
+	BIRCH_FOREST,
+	DARK_FOREST,
+	SNOWY_TAIGA,
+	OLD_GROWTH_PINE_TAIGA,
+	WINDSWEPT_FOREST,
+	SAVANNA,
+	SAVANNA_PLATEAU,
+	BADLANDS,
+	WOODED_BADLANDS,
+	SMALL_END_ISLANDS,
+	END_MIDLANDS,
+	END_HIGHLANDS,
+	END_BARRENS,
+	WARM_OCEAN,
+	LUKEWARM_OCEAN,
+	COLD_OCEAN,
+	DEEP_LUKEWARM_OCEAN,
+	DEEP_COLD_OCEAN,
+	DEEP_FROZEN_OCEAN,
+	THE_VOID,
+	SUNFLOWER_PLAINS,
+	WINDSWEPT_GRAVELLY_HILLS,
+	FLOWER_FOREST,
+	ICE_SPIKES,
+	OLD_GROWTH_BIRCH_FOREST,
+	OLD_GROWTH_SPRUCE_TAIGA,
+	WINDSWEPT_SAVANNA,
+	ERODED_BADLANDS,
+	BAMBOO_JUNGLE,
+	SOUL_SAND_VALLEY,
+	CRIMSON_FOREST,
+	WARPED_FOREST,
+	BASALT_DELTAS,
+	DRIPSTONE_CAVES,
+	LUSH_CAVES,
+	DEEP_DARK,
+	MEADOW,
+	GROVE,
+	SNOWY_SLOPES,
+	FROZEN_PEAKS,
+	JAGGED_PEAKS,
+	STONY_PEAKS,
+	CUSTOM,
+}
+namespace Biome {
+	function values(): Biome[]
+	function valueOf(arg0: String): Biome
+	function getKey(): NamespacedKey
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
 declare enum PowerCause {
 	LIGHTNING,
 	SET_ON,
@@ -4120,120 +4384,15 @@ namespace PowerCause {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Biome {
-	OCEAN,
-	PLAINS,
-	DESERT,
-	MOUNTAINS,
-	FOREST,
-	TAIGA,
-	SWAMP,
-	RIVER,
-	NETHER_WASTES,
-	THE_END,
-	FROZEN_OCEAN,
-	FROZEN_RIVER,
-	SNOWY_TUNDRA,
-	SNOWY_MOUNTAINS,
-	MUSHROOM_FIELDS,
-	MUSHROOM_FIELD_SHORE,
-	BEACH,
-	DESERT_HILLS,
-	WOODED_HILLS,
-	TAIGA_HILLS,
-	MOUNTAIN_EDGE,
-	JUNGLE,
-	JUNGLE_HILLS,
-	JUNGLE_EDGE,
-	DEEP_OCEAN,
-	STONE_SHORE,
-	SNOWY_BEACH,
-	BIRCH_FOREST,
-	BIRCH_FOREST_HILLS,
-	DARK_FOREST,
-	SNOWY_TAIGA,
-	SNOWY_TAIGA_HILLS,
-	GIANT_TREE_TAIGA,
-	GIANT_TREE_TAIGA_HILLS,
-	WOODED_MOUNTAINS,
-	SAVANNA,
-	SAVANNA_PLATEAU,
-	BADLANDS,
-	WOODED_BADLANDS_PLATEAU,
-	BADLANDS_PLATEAU,
-	SMALL_END_ISLANDS,
-	END_MIDLANDS,
-	END_HIGHLANDS,
-	END_BARRENS,
-	WARM_OCEAN,
-	LUKEWARM_OCEAN,
-	COLD_OCEAN,
-	DEEP_WARM_OCEAN,
-	DEEP_LUKEWARM_OCEAN,
-	DEEP_COLD_OCEAN,
-	DEEP_FROZEN_OCEAN,
-	THE_VOID,
-	SUNFLOWER_PLAINS,
-	DESERT_LAKES,
-	GRAVELLY_MOUNTAINS,
-	FLOWER_FOREST,
-	TAIGA_MOUNTAINS,
-	SWAMP_HILLS,
-	ICE_SPIKES,
-	MODIFIED_JUNGLE,
-	MODIFIED_JUNGLE_EDGE,
-	TALL_BIRCH_FOREST,
-	TALL_BIRCH_HILLS,
-	DARK_FOREST_HILLS,
-	SNOWY_TAIGA_MOUNTAINS,
-	GIANT_SPRUCE_TAIGA,
-	GIANT_SPRUCE_TAIGA_HILLS,
-	MODIFIED_GRAVELLY_MOUNTAINS,
-	SHATTERED_SAVANNA,
-	SHATTERED_SAVANNA_PLATEAU,
-	ERODED_BADLANDS,
-	MODIFIED_WOODED_BADLANDS_PLATEAU,
-	MODIFIED_BADLANDS_PLATEAU,
-	BAMBOO_JUNGLE,
-	BAMBOO_JUNGLE_HILLS,
-	SOUL_SAND_VALLEY,
-	CRIMSON_FOREST,
-	WARPED_FOREST,
-	BASALT_DELTAS,
-	DRIPSTONE_CAVES,
-	LUSH_CAVES,
-	CUSTOM,
-}
-namespace Biome {
-	function values(): Biome[]
-	function valueOf(arg0: String): Biome
-	function getKey(): NamespacedKey
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
 declare enum CoalType {
 	COAL,
 	CHARCOAL,
 }
 namespace CoalType {
-	function getData(): byte
-	function getByData(arg0: byte): CoalType
 	function values(): CoalType[]
 	function valueOf(arg0: String): CoalType
+	function getByData(arg0: byte): CoalType
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4284,14 +4443,17 @@ namespace Phase {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum PickupStatus {
-	DISALLOWED,
-	ALLOWED,
-	CREATIVE_ONLY,
+declare enum RespawnPhase {
+	START,
+	PREPARING_TO_SUMMON_PILLARS,
+	SUMMONING_PILLARS,
+	SUMMONING_DRAGON,
+	END,
+	NONE,
 }
-namespace PickupStatus {
-	function values(): PickupStatus[]
-	function valueOf(arg0: String): PickupStatus
+namespace RespawnPhase {
+	function values(): RespawnPhase[]
+	function valueOf(arg0: String): RespawnPhase
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4309,17 +4471,14 @@ namespace PickupStatus {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum RespawnPhase {
-	START,
-	PREPARING_TO_SUMMON_PILLARS,
-	SUMMONING_PILLARS,
-	SUMMONING_DRAGON,
-	END,
-	NONE,
+declare enum PickupStatus {
+	DISALLOWED,
+	ALLOWED,
+	CREATIVE_ONLY,
 }
-namespace RespawnPhase {
-	function values(): RespawnPhase[]
-	function valueOf(arg0: String): RespawnPhase
+namespace PickupStatus {
+	function values(): PickupStatus[]
+	function valueOf(arg0: String): PickupStatus
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4369,10 +4528,10 @@ declare enum Difficulty {
 	HARD,
 }
 namespace Difficulty {
-	function getByValue(arg0: int): Difficulty
 	function values(): Difficulty[]
 	function valueOf(arg0: String): Difficulty
 	function getValue(): int
+	function getByValue(arg0: int): Difficulty
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4444,6 +4603,31 @@ namespace Type {
 	function notify(): void
 	function notifyAll(): void
 }
+declare enum CreateReason {
+	FIRE,
+	NETHER_PAIR,
+	END_PLATFORM,
+}
+namespace CreateReason {
+	function values(): CreateReason[]
+	function valueOf(arg0: String): CreateReason
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
 declare enum Instrument {
 	PIANO,
 	BASS_DRUM,
@@ -4463,35 +4647,10 @@ declare enum Instrument {
 	PLING,
 }
 namespace Instrument {
-	function getByType(arg0: byte): Instrument
 	function values(): Instrument[]
 	function valueOf(arg0: String): Instrument
 	function getType(): byte
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum CreateReason {
-	FIRE,
-	NETHER_PAIR,
-	END_PLATFORM,
-}
-namespace CreateReason {
-	function values(): CreateReason[]
-	function valueOf(arg0: String): CreateReason
+	function getByType(arg0: byte): Instrument
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4562,12 +4721,14 @@ namespace Part {
 }
 declare enum TransformReason {
 	CURED,
+	FROZEN,
 	INFECTION,
 	DROWNED,
 	SHEARED,
 	LIGHTNING,
 	SPLIT,
 	PIGLIN_ZOMBIFIED,
+	METAMORPHOSIS,
 	UNKNOWN,
 }
 namespace TransformReason {
@@ -4605,6 +4766,8 @@ declare enum LootTables {
 	BASTION_OTHER,
 	BASTION_BRIDGE,
 	BASTION_HOGLIN_STABLE,
+	ANCIENT_CITY,
+	ANCIENT_CITY_ICE_BOX,
 	RUINED_PORTAL,
 	SHIPWRECK_MAP,
 	SHIPWRECK_SUPPLY,
@@ -4745,61 +4908,10 @@ declare enum LootTables {
 	SHEEP_YELLOW,
 }
 namespace LootTables {
-	function getLootTable(): LootTable
 	function values(): LootTables[]
 	function valueOf(arg0: String): LootTables
 	function getKey(): NamespacedKey
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum DamageCause {
-	CONTACT,
-	ENTITY_ATTACK,
-	ENTITY_SWEEP_ATTACK,
-	PROJECTILE,
-	SUFFOCATION,
-	FALL,
-	FIRE,
-	FIRE_TICK,
-	MELTING,
-	LAVA,
-	DROWNING,
-	BLOCK_EXPLOSION,
-	ENTITY_EXPLOSION,
-	VOID,
-	LIGHTNING,
-	SUICIDE,
-	STARVATION,
-	POISON,
-	MAGIC,
-	WITHER,
-	FALLING_BLOCK,
-	THORNS,
-	DRAGON_BREATH,
-	CUSTOM,
-	FLY_INTO_WALL,
-	HOT_FLOOR,
-	CRAMMING,
-	DRYOUT,
-	FREEZE,
-}
-namespace DamageCause {
-	function values(): DamageCause[]
-	function valueOf(arg0: String): DamageCause
+	function getLootTable(): LootTable
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4850,6 +4962,9 @@ declare enum SpawnReason {
 	PATROL,
 	BEEHIVE,
 	PIGLIN_ZOMBIFIED,
+	SPELL,
+	FROZEN,
+	METAMORPHOSIS,
 	COMMAND,
 	CUSTOM,
 	DEFAULT,
@@ -4857,6 +4972,58 @@ declare enum SpawnReason {
 namespace SpawnReason {
 	function values(): SpawnReason[]
 	function valueOf(arg0: String): SpawnReason
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum DamageCause {
+	CONTACT,
+	ENTITY_ATTACK,
+	ENTITY_SWEEP_ATTACK,
+	PROJECTILE,
+	SUFFOCATION,
+	FALL,
+	FIRE,
+	FIRE_TICK,
+	MELTING,
+	LAVA,
+	DROWNING,
+	BLOCK_EXPLOSION,
+	ENTITY_EXPLOSION,
+	VOID,
+	LIGHTNING,
+	SUICIDE,
+	STARVATION,
+	POISON,
+	MAGIC,
+	WITHER,
+	FALLING_BLOCK,
+	THORNS,
+	DRAGON_BREATH,
+	CUSTOM,
+	FLY_INTO_WALL,
+	HOT_FLOOR,
+	CRAMMING,
+	DRYOUT,
+	FREEZE,
+	SONIC_BOOM,
+}
+namespace DamageCause {
+	function values(): DamageCause[]
+	function valueOf(arg0: String): DamageCause
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -4926,6 +5093,55 @@ namespace Phase {
 	function notify(): void
 	function notifyAll(): void
 }
+declare enum PotionType {
+	UNCRAFTABLE,
+	WATER,
+	MUNDANE,
+	THICK,
+	AWKWARD,
+	NIGHT_VISION,
+	INVISIBILITY,
+	JUMP,
+	FIRE_RESISTANCE,
+	SPEED,
+	SLOWNESS,
+	WATER_BREATHING,
+	INSTANT_HEAL,
+	INSTANT_DAMAGE,
+	POISON,
+	REGEN,
+	STRENGTH,
+	WEAKNESS,
+	LUCK,
+	TURTLE_MASTER,
+	SLOW_FALLING,
+}
+namespace PotionType {
+	function values(): PotionType[]
+	function valueOf(arg0: String): PotionType
+	function isInstant(): boolean
+	function isExtendable(): boolean
+	function getMaxLevel(): int
+	function getEffectType(): PotionEffectType
+	function isUpgradeable(): boolean
+	function getByEffect(arg0: PotionEffectType): PotionType
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
 declare enum ExhaustionReason {
 	BLOCK_MINED,
 	HUNGER_EFFECT,
@@ -4962,41 +5178,20 @@ namespace ExhaustionReason {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum PotionType {
-	UNCRAFTABLE,
-	WATER,
-	MUNDANE,
-	THICK,
-	AWKWARD,
-	NIGHT_VISION,
-	INVISIBILITY,
-	JUMP,
-	FIRE_RESISTANCE,
-	SPEED,
-	SLOWNESS,
-	WATER_BREATHING,
-	INSTANT_HEAL,
-	INSTANT_DAMAGE,
-	POISON,
-	REGEN,
-	STRENGTH,
-	WEAKNESS,
-	LUCK,
-	TURTLE_MASTER,
-	SLOW_FALLING,
+declare enum PermissionDefault {
+	TRUE,
+	FALSE,
+	OP,
+	NOT_OP,
 }
-namespace PotionType {
-	function getMaxLevel(): int
-	function isUpgradeable(): boolean
-	function isExtendable(): boolean
-	function getByEffect(arg0: PotionEffectType): PotionType
-	function getEffectType(): PotionEffectType
-	function isInstant(): boolean
-	function values(): PotionType[]
-	function valueOf(arg0: String): PotionType
+namespace PermissionDefault {
+	function toString(): String
+	function values(): PermissionDefault[]
+	function valueOf(arg0: String): PermissionDefault
+	function getValue(arg0: boolean): boolean
+	function getByName(arg0: String): PermissionDefault
 	function name(): String
 	function equals(arg0: Object): boolean
-	function toString(): String
 	function hashCode(): int
 	function compareTo(arg0: Object): int
 	function compareTo(arg0: Enum): int
@@ -5017,41 +5212,13 @@ declare enum GrassSpecies {
 	FERN_LIKE,
 }
 namespace GrassSpecies {
-	function getData(): byte
-	function getByData(arg0: byte): GrassSpecies
 	function values(): GrassSpecies[]
 	function valueOf(arg0: String): GrassSpecies
+	function getByData(arg0: byte): GrassSpecies
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum PermissionDefault {
-	TRUE,
-	FALSE,
-	OP,
-	NOT_OP,
-}
-namespace PermissionDefault {
-	function toString(): String
-	function values(): PermissionDefault[]
-	function valueOf(arg0: String): PermissionDefault
-	function getValue(arg0: boolean): boolean
-	function getByName(arg0: String): PermissionDefault
-	function name(): String
-	function equals(arg0: Object): boolean
 	function hashCode(): int
 	function compareTo(arg0: Object): int
 	function compareTo(arg0: Enum): int
@@ -5257,6 +5424,17 @@ declare enum Sound {
 	BLOCK_FLOWERING_AZALEA_HIT,
 	BLOCK_FLOWERING_AZALEA_PLACE,
 	BLOCK_FLOWERING_AZALEA_STEP,
+	BLOCK_FROGLIGHT_BREAK,
+	BLOCK_FROGLIGHT_FALL,
+	BLOCK_FROGLIGHT_HIT,
+	BLOCK_FROGLIGHT_PLACE,
+	BLOCK_FROGLIGHT_STEP,
+	BLOCK_FROGSPAWN_BREAK,
+	BLOCK_FROGSPAWN_FALL,
+	BLOCK_FROGSPAWN_HATCH,
+	BLOCK_FROGSPAWN_HIT,
+	BLOCK_FROGSPAWN_PLACE,
+	BLOCK_FROGSPAWN_STEP,
 	BLOCK_FUNGUS_BREAK,
 	BLOCK_FUNGUS_FALL,
 	BLOCK_FUNGUS_HIT,
@@ -5284,6 +5462,7 @@ declare enum Sound {
 	BLOCK_GRAVEL_PLACE,
 	BLOCK_GRAVEL_STEP,
 	BLOCK_GRINDSTONE_USE,
+	BLOCK_GROWING_PLANT_CROP,
 	BLOCK_HANGING_ROOTS_BREAK,
 	BLOCK_HANGING_ROOTS_FALL,
 	BLOCK_HANGING_ROOTS_HIT,
@@ -5321,6 +5500,11 @@ declare enum Sound {
 	BLOCK_LODESTONE_HIT,
 	BLOCK_LODESTONE_PLACE,
 	BLOCK_LODESTONE_STEP,
+	BLOCK_MANGROVE_ROOTS_BREAK,
+	BLOCK_MANGROVE_ROOTS_FALL,
+	BLOCK_MANGROVE_ROOTS_HIT,
+	BLOCK_MANGROVE_ROOTS_PLACE,
+	BLOCK_MANGROVE_ROOTS_STEP,
 	BLOCK_MEDIUM_AMETHYST_BUD_BREAK,
 	BLOCK_MEDIUM_AMETHYST_BUD_PLACE,
 	BLOCK_METAL_BREAK,
@@ -5340,6 +5524,21 @@ declare enum Sound {
 	BLOCK_MOSS_HIT,
 	BLOCK_MOSS_PLACE,
 	BLOCK_MOSS_STEP,
+	BLOCK_MUDDY_MANGROVE_ROOTS_BREAK,
+	BLOCK_MUDDY_MANGROVE_ROOTS_FALL,
+	BLOCK_MUDDY_MANGROVE_ROOTS_HIT,
+	BLOCK_MUDDY_MANGROVE_ROOTS_PLACE,
+	BLOCK_MUDDY_MANGROVE_ROOTS_STEP,
+	BLOCK_MUD_BREAK,
+	BLOCK_MUD_BRICKS_BREAK,
+	BLOCK_MUD_BRICKS_FALL,
+	BLOCK_MUD_BRICKS_HIT,
+	BLOCK_MUD_BRICKS_PLACE,
+	BLOCK_MUD_BRICKS_STEP,
+	BLOCK_MUD_FALL,
+	BLOCK_MUD_HIT,
+	BLOCK_MUD_PLACE,
+	BLOCK_MUD_STEP,
 	BLOCK_NETHERITE_BLOCK_BREAK,
 	BLOCK_NETHERITE_BLOCK_FALL,
 	BLOCK_NETHERITE_BLOCK_HIT,
@@ -5392,6 +5591,11 @@ declare enum Sound {
 	BLOCK_NYLIUM_HIT,
 	BLOCK_NYLIUM_PLACE,
 	BLOCK_NYLIUM_STEP,
+	BLOCK_PACKED_MUD_BREAK,
+	BLOCK_PACKED_MUD_FALL,
+	BLOCK_PACKED_MUD_HIT,
+	BLOCK_PACKED_MUD_PLACE,
+	BLOCK_PACKED_MUD_STEP,
 	BLOCK_PISTON_CONTRACT,
 	BLOCK_PISTON_EXTEND,
 	BLOCK_POINTED_DRIPSTONE_BREAK,
@@ -5443,6 +5647,17 @@ declare enum Sound {
 	BLOCK_SCAFFOLDING_HIT,
 	BLOCK_SCAFFOLDING_PLACE,
 	BLOCK_SCAFFOLDING_STEP,
+	BLOCK_SCULK_BREAK,
+	BLOCK_SCULK_CATALYST_BLOOM,
+	BLOCK_SCULK_CATALYST_BREAK,
+	BLOCK_SCULK_CATALYST_FALL,
+	BLOCK_SCULK_CATALYST_HIT,
+	BLOCK_SCULK_CATALYST_PLACE,
+	BLOCK_SCULK_CATALYST_STEP,
+	BLOCK_SCULK_CHARGE,
+	BLOCK_SCULK_FALL,
+	BLOCK_SCULK_HIT,
+	BLOCK_SCULK_PLACE,
 	BLOCK_SCULK_SENSOR_BREAK,
 	BLOCK_SCULK_SENSOR_CLICKING,
 	BLOCK_SCULK_SENSOR_CLICKING_STOP,
@@ -5450,6 +5665,19 @@ declare enum Sound {
 	BLOCK_SCULK_SENSOR_HIT,
 	BLOCK_SCULK_SENSOR_PLACE,
 	BLOCK_SCULK_SENSOR_STEP,
+	BLOCK_SCULK_SHRIEKER_BREAK,
+	BLOCK_SCULK_SHRIEKER_FALL,
+	BLOCK_SCULK_SHRIEKER_HIT,
+	BLOCK_SCULK_SHRIEKER_PLACE,
+	BLOCK_SCULK_SHRIEKER_SHRIEK,
+	BLOCK_SCULK_SHRIEKER_STEP,
+	BLOCK_SCULK_SPREAD,
+	BLOCK_SCULK_STEP,
+	BLOCK_SCULK_VEIN_BREAK,
+	BLOCK_SCULK_VEIN_FALL,
+	BLOCK_SCULK_VEIN_HIT,
+	BLOCK_SCULK_VEIN_PLACE,
+	BLOCK_SCULK_VEIN_STEP,
 	BLOCK_SHROOMLIGHT_BREAK,
 	BLOCK_SHROOMLIGHT_FALL,
 	BLOCK_SHROOMLIGHT_HIT,
@@ -5557,6 +5785,13 @@ declare enum Sound {
 	BLOCK_WOOL_PLACE,
 	BLOCK_WOOL_STEP,
 	ENCHANT_THORNS_HIT,
+	ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM,
+	ENTITY_ALLAY_AMBIENT_WITH_ITEM,
+	ENTITY_ALLAY_DEATH,
+	ENTITY_ALLAY_HURT,
+	ENTITY_ALLAY_ITEM_GIVEN,
+	ENTITY_ALLAY_ITEM_TAKEN,
+	ENTITY_ALLAY_ITEM_THROWN,
 	ENTITY_ARMOR_STAND_BREAK,
 	ENTITY_ARMOR_STAND_FALL,
 	ENTITY_ARMOR_STAND_HIT,
@@ -5703,6 +5938,14 @@ declare enum Sound {
 	ENTITY_FOX_SNIFF,
 	ENTITY_FOX_SPIT,
 	ENTITY_FOX_TELEPORT,
+	ENTITY_FROG_AMBIENT,
+	ENTITY_FROG_DEATH,
+	ENTITY_FROG_EAT,
+	ENTITY_FROG_HURT,
+	ENTITY_FROG_LAY_SPAWN,
+	ENTITY_FROG_LONG_JUMP,
+	ENTITY_FROG_STEP,
+	ENTITY_FROG_TONGUE,
 	ENTITY_GENERIC_BIG_FALL,
 	ENTITY_GENERIC_BURN,
 	ENTITY_GENERIC_DEATH,
@@ -5732,6 +5975,7 @@ declare enum Sound {
 	ENTITY_GOAT_AMBIENT,
 	ENTITY_GOAT_DEATH,
 	ENTITY_GOAT_EAT,
+	ENTITY_GOAT_HORN_BREAK,
 	ENTITY_GOAT_HURT,
 	ENTITY_GOAT_LONG_JUMP,
 	ENTITY_GOAT_MILK,
@@ -5740,6 +5984,7 @@ declare enum Sound {
 	ENTITY_GOAT_SCREAMING_AMBIENT,
 	ENTITY_GOAT_SCREAMING_DEATH,
 	ENTITY_GOAT_SCREAMING_EAT,
+	ENTITY_GOAT_SCREAMING_HORN_BREAK,
 	ENTITY_GOAT_SCREAMING_HURT,
 	ENTITY_GOAT_SCREAMING_LONG_JUMP,
 	ENTITY_GOAT_SCREAMING_MILK,
@@ -5888,6 +6133,7 @@ declare enum Sound {
 	ENTITY_PARROT_IMITATE_STRAY,
 	ENTITY_PARROT_IMITATE_VEX,
 	ENTITY_PARROT_IMITATE_VINDICATOR,
+	ENTITY_PARROT_IMITATE_WARDEN,
 	ENTITY_PARROT_IMITATE_WITCH,
 	ENTITY_PARROT_IMITATE_WITHER,
 	ENTITY_PARROT_IMITATE_WITHER_SKELETON,
@@ -6047,6 +6293,10 @@ declare enum Sound {
 	ENTITY_STRIDER_SADDLE,
 	ENTITY_STRIDER_STEP,
 	ENTITY_STRIDER_STEP_LAVA,
+	ENTITY_TADPOLE_DEATH,
+	ENTITY_TADPOLE_FLOP,
+	ENTITY_TADPOLE_GROW_UP,
+	ENTITY_TADPOLE_HURT,
 	ENTITY_TNT_PRIMED,
 	ENTITY_TROPICAL_FISH_AMBIENT,
 	ENTITY_TROPICAL_FISH_DEATH,
@@ -6102,6 +6352,26 @@ declare enum Sound {
 	ENTITY_WANDERING_TRADER_REAPPEARED,
 	ENTITY_WANDERING_TRADER_TRADE,
 	ENTITY_WANDERING_TRADER_YES,
+	ENTITY_WARDEN_AGITATED,
+	ENTITY_WARDEN_AMBIENT,
+	ENTITY_WARDEN_ANGRY,
+	ENTITY_WARDEN_ATTACK_IMPACT,
+	ENTITY_WARDEN_DEATH,
+	ENTITY_WARDEN_DIG,
+	ENTITY_WARDEN_EMERGE,
+	ENTITY_WARDEN_HEARTBEAT,
+	ENTITY_WARDEN_HURT,
+	ENTITY_WARDEN_LISTENING,
+	ENTITY_WARDEN_LISTENING_ANGRY,
+	ENTITY_WARDEN_NEARBY_CLOSE,
+	ENTITY_WARDEN_NEARBY_CLOSER,
+	ENTITY_WARDEN_NEARBY_CLOSEST,
+	ENTITY_WARDEN_ROAR,
+	ENTITY_WARDEN_SNIFF,
+	ENTITY_WARDEN_SONIC_BOOM,
+	ENTITY_WARDEN_SONIC_CHARGE,
+	ENTITY_WARDEN_STEP,
+	ENTITY_WARDEN_TENDRIL_CLICKS,
 	ENTITY_WITCH_AMBIENT,
 	ENTITY_WITCH_CELEBRATE,
 	ENTITY_WITCH_DEATH,
@@ -6180,11 +6450,16 @@ declare enum Sound {
 	ITEM_BUCKET_EMPTY_FISH,
 	ITEM_BUCKET_EMPTY_LAVA,
 	ITEM_BUCKET_EMPTY_POWDER_SNOW,
+	ITEM_BUCKET_EMPTY_TADPOLE,
 	ITEM_BUCKET_FILL,
 	ITEM_BUCKET_FILL_AXOLOTL,
 	ITEM_BUCKET_FILL_FISH,
 	ITEM_BUCKET_FILL_LAVA,
 	ITEM_BUCKET_FILL_POWDER_SNOW,
+	ITEM_BUCKET_FILL_TADPOLE,
+	ITEM_BUNDLE_DROP_CONTENTS,
+	ITEM_BUNDLE_INSERT,
+	ITEM_BUNDLE_REMOVE_ONE,
 	ITEM_CHORUS_FRUIT_TELEPORT,
 	ITEM_CROP_PLANT,
 	ITEM_CROSSBOW_HIT,
@@ -6200,6 +6475,15 @@ declare enum Sound {
 	ITEM_FIRECHARGE_USE,
 	ITEM_FLINTANDSTEEL_USE,
 	ITEM_GLOW_INK_SAC_USE,
+	ITEM_GOAT_HORN_PLAY,
+	ITEM_GOAT_HORN_SOUND_0,
+	ITEM_GOAT_HORN_SOUND_1,
+	ITEM_GOAT_HORN_SOUND_2,
+	ITEM_GOAT_HORN_SOUND_3,
+	ITEM_GOAT_HORN_SOUND_4,
+	ITEM_GOAT_HORN_SOUND_5,
+	ITEM_GOAT_HORN_SOUND_6,
+	ITEM_GOAT_HORN_SOUND_7,
 	ITEM_HOE_TILL,
 	ITEM_HONEYCOMB_WAX_ON,
 	ITEM_HONEY_BOTTLE_DRINK,
@@ -6224,12 +6508,14 @@ declare enum Sound {
 	MUSIC_CREDITS,
 	MUSIC_DISC_11,
 	MUSIC_DISC_13,
+	MUSIC_DISC_5,
 	MUSIC_DISC_BLOCKS,
 	MUSIC_DISC_CAT,
 	MUSIC_DISC_CHIRP,
 	MUSIC_DISC_FAR,
 	MUSIC_DISC_MALL,
 	MUSIC_DISC_MELLOHI,
+	MUSIC_DISC_OTHERSIDE,
 	MUSIC_DISC_PIGSTEP,
 	MUSIC_DISC_STAL,
 	MUSIC_DISC_STRAD,
@@ -6244,6 +6530,18 @@ declare enum Sound {
 	MUSIC_NETHER_NETHER_WASTES,
 	MUSIC_NETHER_SOUL_SAND_VALLEY,
 	MUSIC_NETHER_WARPED_FOREST,
+	MUSIC_OVERWORLD_DEEP_DARK,
+	MUSIC_OVERWORLD_DRIPSTONE_CAVES,
+	MUSIC_OVERWORLD_FROZEN_PEAKS,
+	MUSIC_OVERWORLD_GROVE,
+	MUSIC_OVERWORLD_JAGGED_PEAKS,
+	MUSIC_OVERWORLD_JUNGLE_AND_FOREST,
+	MUSIC_OVERWORLD_LUSH_CAVES,
+	MUSIC_OVERWORLD_MEADOW,
+	MUSIC_OVERWORLD_OLD_GROWTH_TAIGA,
+	MUSIC_OVERWORLD_SNOWY_SLOPES,
+	MUSIC_OVERWORLD_STONY_PEAKS,
+	MUSIC_OVERWORLD_SWAMP,
 	MUSIC_UNDER_WATER,
 	PARTICLE_SOUL_ESCAPE,
 	UI_BUTTON_CLICK,
@@ -6390,22 +6688,27 @@ declare enum EntityType {
 	GLOW_SQUID,
 	GOAT,
 	MARKER,
+	ALLAY,
+	CHEST_BOAT,
+	FROG,
+	TADPOLE,
+	WARDEN,
 	FISHING_HOOK,
 	LIGHTNING,
 	PLAYER,
 	UNKNOWN,
 }
 namespace EntityType {
-	function getEntityClass(): Class
-	function isSpawnable(): boolean
-	function getTypeId(): short
-	function fromName(arg0: String): EntityType
-	function fromId(arg0: int): EntityType
 	function getName(): String
 	function values(): EntityType[]
 	function valueOf(arg0: String): EntityType
 	function getKey(): NamespacedKey
 	function isAlive(): boolean
+	function fromName(arg0: String): EntityType
+	function getEntityClass(): Class
+	function getTypeId(): short
+	function fromId(arg0: int): EntityType
+	function isSpawnable(): boolean
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -6488,10 +6791,10 @@ declare enum Rotation {
 	COUNTER_CLOCKWISE_45,
 }
 namespace Rotation {
-	function rotateClockwise(): Rotation
-	function rotateCounterClockwise(): Rotation
 	function values(): Rotation[]
 	function valueOf(arg0: String): Rotation
+	function rotateCounterClockwise(): Rotation
+	function rotateClockwise(): Rotation
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -6628,13 +6931,13 @@ declare enum ClickType {
 	UNKNOWN,
 }
 namespace ClickType {
+	function values(): ClickType[]
+	function valueOf(arg0: String): ClickType
+	function isCreativeAction(): boolean
 	function isRightClick(): boolean
 	function isLeftClick(): boolean
 	function isShiftClick(): boolean
 	function isKeyboardClick(): boolean
-	function isCreativeAction(): boolean
-	function values(): ClickType[]
-	function valueOf(arg0: String): ClickType
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -6681,6 +6984,37 @@ namespace Color {
 	function notify(): void
 	function notifyAll(): void
 }
+declare enum CreativeCategory {
+	BUILDING_BLOCKS,
+	DECORATIONS,
+	REDSTONE,
+	TRANSPORTATION,
+	MISC,
+	FOOD,
+	TOOLS,
+	COMBAT,
+	BREWING,
+}
+namespace CreativeCategory {
+	function values(): CreativeCategory[]
+	function valueOf(arg0: String): CreativeCategory
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
 declare enum Tone {
 	G,
 	A,
@@ -6691,13 +7025,13 @@ declare enum Tone {
 	F,
 }
 namespace Tone {
-	function isSharpable(): boolean
-	function isSharped(arg0: byte): boolean
-	function getById(arg0: byte): Tone
 	function values(): Tone[]
 	function valueOf(arg0: String): Tone
-	function getId(): byte
 	function getId(arg0: boolean): byte
+	function getId(): byte
+	function getById(arg0: byte): Tone
+	function isSharpable(): boolean
+	function isSharped(arg0: byte): boolean
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -6827,43 +7161,10 @@ declare enum GameMode {
 	SPECTATOR,
 }
 namespace GameMode {
-	function getByValue(arg0: int): GameMode
 	function values(): GameMode[]
 	function valueOf(arg0: String): GameMode
 	function getValue(): int
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum Type {
-	TABBY,
-	BLACK,
-	RED,
-	SIAMESE,
-	BRITISH_SHORTHAIR,
-	CALICO,
-	PERSIAN,
-	RAGDOLL,
-	WHITE,
-	JELLIE,
-	ALL_BLACK,
-}
-namespace Type {
-	function values(): Type[]
-	function valueOf(arg0: String): Type
+	function getByValue(arg0: int): GameMode
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -6928,14 +7229,69 @@ declare enum Effect {
 	BAT_TAKEOFF,
 	END_GATEWAY_SPAWN,
 	ENDERDRAGON_GROWL,
+	PHANTOM_BITE,
+	ZOMBIE_CONVERTED_TO_DROWNED,
+	HUSK_CONVERTED_TO_ZOMBIE,
+	GRINDSTONE_USE,
+	BOOK_PAGE_TURN,
+	SMITHING_TABLE_USE,
+	POINTED_DRIPSTONE_LAND,
+	POINTED_DRIPSTONE_DRIP_LAVA_INTO_CAULDRON,
+	POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON,
+	SKELETON_CONVERTED_TO_STRAY,
+	COMPOSTER_FILL_ATTEMPT,
+	LAVA_INTERACT,
+	REDSTONE_TORCH_BURNOUT,
+	END_PORTAL_FRAME_FILL,
+	DRIPPING_DRIPSTONE,
+	BONE_MEAL_USE,
+	ENDER_DRAGON_DESTROY_BLOCK,
+	SPONGE_DRY,
+	ELECTRIC_SPARK,
+	COPPER_WAX_ON,
+	COPPER_WAX_OFF,
+	OXIDISED_COPPER_SCRAPE,
 }
 namespace Effect {
-	function getData(): Class
-	function getById(arg0: int): Effect
 	function values(): Effect[]
 	function valueOf(arg0: String): Effect
 	function getId(): int
 	function getType(): Type
+	function getById(arg0: int): Effect
+	function getData(): Class
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum Type {
+	TABBY,
+	BLACK,
+	RED,
+	SIAMESE,
+	BRITISH_SHORTHAIR,
+	CALICO,
+	PERSIAN,
+	RAGDOLL,
+	WHITE,
+	JELLIE,
+	ALL_BLACK,
+}
+namespace Type {
+	function values(): Type[]
+	function valueOf(arg0: String): Type
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -6960,6 +7316,31 @@ declare enum DragType {
 namespace DragType {
 	function values(): DragType[]
 	function valueOf(arg0: String): DragType
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum Height {
+	NONE,
+	LOW,
+	TALL,
+}
+namespace Height {
+	function values(): Height[]
+	function valueOf(arg0: String): Height
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7026,14 +7407,15 @@ namespace Type {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Height {
-	NONE,
-	LOW,
-	TALL,
+declare enum Attachment {
+	FLOOR,
+	CEILING,
+	SINGLE_WALL,
+	DOUBLE_WALL,
 }
-namespace Height {
-	function values(): Height[]
-	function valueOf(arg0: String): Height
+namespace Attachment {
+	function values(): Attachment[]
+	function valueOf(arg0: String): Attachment
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7051,15 +7433,23 @@ namespace Height {
 	function notify(): void
 	function notifyAll(): void
 }
-declare enum Attachment {
-	FLOOR,
-	CEILING,
-	SINGLE_WALL,
-	DOUBLE_WALL,
+declare enum Orientation {
+	DOWN_EAST,
+	DOWN_NORTH,
+	DOWN_SOUTH,
+	DOWN_WEST,
+	UP_EAST,
+	UP_NORTH,
+	UP_SOUTH,
+	UP_WEST,
+	WEST_UP,
+	EAST_UP,
+	NORTH_UP,
+	SOUTH_UP,
 }
-namespace Attachment {
-	function values(): Attachment[]
-	function valueOf(arg0: String): Attachment
+namespace Orientation {
+	function values(): Orientation[]
+	function valueOf(arg0: String): Orientation
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7134,44 +7524,10 @@ declare enum Type {
 	RED_X,
 }
 namespace Type {
-	function byValue(arg0: byte): Type
 	function values(): Type[]
 	function valueOf(arg0: String): Type
 	function getValue(): byte
-	function name(): String
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function compareTo(arg0: Object): int
-	function compareTo(arg0: Enum): int
-	function valueOf(arg0: Class, arg1: String): Enum
-	function describeConstable(): Optional
-	function getDeclaringClass(): Class
-	function ordinal(): int
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare enum Orientation {
-	DOWN_EAST,
-	DOWN_NORTH,
-	DOWN_SOUTH,
-	DOWN_WEST,
-	UP_EAST,
-	UP_NORTH,
-	UP_SOUTH,
-	UP_WEST,
-	WEST_UP,
-	EAST_UP,
-	NORTH_UP,
-	SOUTH_UP,
-}
-namespace Orientation {
-	function values(): Orientation[]
-	function valueOf(arg0: String): Orientation
+	function byValue(arg0: byte): Type
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7196,6 +7552,36 @@ declare enum Mode {
 namespace Mode {
 	function values(): Mode[]
 	function valueOf(arg0: String): Mode
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum SpawnCategory {
+	MONSTER,
+	ANIMAL,
+	WATER_ANIMAL,
+	WATER_AMBIENT,
+	WATER_UNDERGROUND_CREATURE,
+	AMBIENT,
+	AXOLOTL,
+	MISC,
+}
+namespace SpawnCategory {
+	function values(): SpawnCategory[]
+	function valueOf(arg0: String): SpawnCategory
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7248,6 +7634,31 @@ declare enum Style {
 namespace Style {
 	function values(): Style[]
 	function valueOf(arg0: String): Style
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum Head {
+	CENTER,
+	LEFT,
+	RIGHT,
+}
+namespace Head {
+	function values(): Head[]
+	function valueOf(arg0: String): Head
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7475,11 +7886,11 @@ declare enum InventoryType {
 	COMPOSTER,
 }
 namespace InventoryType {
-	function isCreatable(): boolean
-	function getDefaultSize(): int
-	function getDefaultTitle(): String
 	function values(): InventoryType[]
 	function valueOf(arg0: String): InventoryType
+	function getDefaultSize(): int
+	function getDefaultTitle(): String
+	function isCreatable(): boolean
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7528,6 +7939,8 @@ namespace State {
 }
 declare enum Cause {
 	COMMAND,
+	CUSTOM,
+	SPAWNER,
 	TRIDENT,
 	TRAP,
 	WEATHER,
@@ -7644,10 +8057,10 @@ declare enum SandstoneType {
 	SMOOTH,
 }
 namespace SandstoneType {
-	function getData(): byte
-	function getByData(arg0: byte): SandstoneType
 	function values(): SandstoneType[]
 	function valueOf(arg0: String): SandstoneType
+	function getByData(arg0: byte): SandstoneType
+	function getData(): byte
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7753,7 +8166,6 @@ declare enum Particle {
 	SNOW_SHOVEL,
 	SLIME,
 	HEART,
-	BARRIER,
 	ITEM_CRACK,
 	BLOCK_CRACK,
 	BLOCK_DUST,
@@ -7794,7 +8206,6 @@ declare enum Particle {
 	LANDING_OBSIDIAN_TEAR,
 	REVERSE_PORTAL,
 	WHITE_ASH,
-	LIGHT,
 	DUST_COLOR_TRANSITION,
 	VIBRATION,
 	FALLING_SPORE_BLOSSOM,
@@ -7811,14 +8222,44 @@ declare enum Particle {
 	WAX_OFF,
 	ELECTRIC_SPARK,
 	SCRAPE,
+	SONIC_BOOM,
+	SCULK_SOUL,
+	SCULK_CHARGE,
+	SCULK_CHARGE_POP,
+	SHRIEK,
+	BLOCK_MARKER,
 	LEGACY_BLOCK_CRACK,
 	LEGACY_BLOCK_DUST,
 	LEGACY_FALLING_DUST,
 }
 namespace Particle {
-	function getDataType(): Class
 	function values(): Particle[]
 	function valueOf(arg0: String): Particle
+	function getDataType(): Class
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
+declare enum SkinModel {
+	CLASSIC,
+	SLIM,
+}
+namespace SkinModel {
+	function values(): SkinModel[]
+	function valueOf(arg0: String): SkinModel
 	function name(): String
 	function equals(arg0: Object): boolean
 	function toString(): String
@@ -7862,6 +8303,32 @@ namespace Action {
 	function notify(): void
 	function notifyAll(): void
 }
+declare enum AdvancementDisplayType {
+	TASK,
+	CHALLENGE,
+	GOAL,
+}
+namespace AdvancementDisplayType {
+	function values(): AdvancementDisplayType[]
+	function valueOf(arg0: String): AdvancementDisplayType
+	function getColor(): ChatColor
+	function name(): String
+	function equals(arg0: Object): boolean
+	function toString(): String
+	function hashCode(): int
+	function compareTo(arg0: Object): int
+	function compareTo(arg0: Enum): int
+	function valueOf(arg0: Class, arg1: String): Enum
+	function describeConstable(): Optional
+	function getDeclaringClass(): Class
+	function ordinal(): int
+	function wait(arg0: long, arg1: int): void
+	function wait(): void
+	function wait(arg0: long): void
+	function getClass(): Class
+	function notify(): void
+	function notifyAll(): void
+}
 declare enum Cause {
 	AREA_EFFECT_CLOUD,
 	ARROW,
@@ -7886,6 +8353,7 @@ declare enum Cause {
 	TURTLE_HELMET,
 	UNKNOWN,
 	VILLAGER_TRADE,
+	WARDEN,
 	WITHER_ROSE,
 }
 namespace Cause {
@@ -7984,18 +8452,18 @@ declare enum ChatColor {
 	RESET,
 }
 namespace ChatColor {
-	function getLastColors(arg0: String): String
-	function isColor(): boolean
-	function getByChar(arg0: String): ChatColor
-	function getByChar(arg0: char): ChatColor
-	function asBungee(): ChatColor
-	function isFormat(): boolean
-	function stripColor(arg0: String): String
-	function translateAlternateColorCodes(arg0: char, arg1: String): String
 	function toString(): String
 	function values(): ChatColor[]
 	function getChar(): char
 	function valueOf(arg0: String): ChatColor
+	function isColor(): boolean
+	function translateAlternateColorCodes(arg0: char, arg1: String): String
+	function isFormat(): boolean
+	function asBungee(): ChatColor
+	function getLastColors(arg0: String): String
+	function getByChar(arg0: char): ChatColor
+	function getByChar(arg0: String): ChatColor
+	function stripColor(arg0: String): String
 	function name(): String
 	function equals(arg0: Object): boolean
 	function hashCode(): int
@@ -8090,10957 +8558,33 @@ namespace RaidStatus {
 	function notify(): void
 	function notifyAll(): void
 }
-declare class PerlinNoiseGenerator extends NoiseGenerator {
-	getNoise(arg0: double): double
-	getNoise(arg0: double, arg1: double, arg2: double, arg3: int, arg4: double, arg5: double): double
-	getNoise(arg0: double, arg1: double, arg2: double): double
-	getNoise(arg0: double, arg1: int, arg2: double, arg3: double): double
-	getNoise(arg0: double, arg1: double, arg2: int, arg3: double, arg4: double): double
-	getNoise(arg0: double, arg1: double): double
-	noise(arg0: double, arg1: double, arg2: double): double
-	getInstance(): PerlinNoiseGenerator
-}
-declare class SmithingRecipe implements Recipe, Keyed {
-	getAddition(): RecipeChoice
-	getBase(): RecipeChoice
-	getKey(): NamespacedKey
-	getResult(): ItemStack
-}
-declare interface DaylightDetector extends TileState {
-}
-namespace EntitySpawnEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityTameEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getOwner(): AnimalTamer
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace FurnaceBurnEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBurnTime(): int
-	function setBurnTime(arg0: int): void
-	function getFuel(): ItemStack
-	function isBurning(): boolean
-	function setBurning(arg0: boolean): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ServerCommandEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getCommand(): String
-	function setCommand(arg0: String): void
-	function getSender(): CommandSender
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Diode extends MaterialData implements Directional, Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	setDelay(arg0: int): void
-	getDelay(): int
-	getFacing(): BlockFace
-	isPowered(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Diode
-	clone(): MaterialData
-}
-declare interface Jigsaw extends TileState {
-}
-declare class Location implements Cloneable, ConfigurationSerializable {
-	isWorldLoaded(): boolean
-	getDirection(): Vector
-	setDirection(arg0: Vector): Location
-	lengthSquared(): double
-	distanceSquared(arg0: Location): double
-	checkFinite(): void
-	deserialize(arg0: Map): Location
-	normalizeYaw(arg0: float): float
-	normalizePitch(arg0: float): float
-	setWorld(arg0: World): void
-	setX(arg0: double): void
-	getBlockX(): int
-	locToBlock(arg0: double): int
-	setY(arg0: double): void
-	getBlockY(): int
-	setZ(arg0: double): void
-	getBlockZ(): int
-	setYaw(arg0: float): void
-	getYaw(): float
-	setPitch(arg0: float): void
-	getPitch(): float
-	subtract(arg0: Location): Location
-	subtract(arg0: double, arg1: double, arg2: double): Location
-	subtract(arg0: Vector): Location
-	toVector(): Vector
-	serialize(): Map
-	getBlock(): Block
-	getWorld(): World
-	getX(): double
-	getY(): double
-	getZ(): double
-	getChunk(): Chunk
-	add(arg0: Vector): Location
-	add(arg0: double, arg1: double, arg2: double): Location
-	add(arg0: Location): Location
-	equals(arg0: Object): boolean
-	length(): double
-	toString(): String
-	hashCode(): int
-	clone(): Location
-	clone(): Object
-	zero(): Location
-	distance(arg0: Location): double
-	multiply(arg0: double): Location
-}
-declare interface HelpTopicFactory {
-	createTopic(arg0: Command): HelpTopic
-}
-declare class PressurePlate extends MaterialData implements PressureSensor {
-	isPressed(): boolean
-	toString(): String
-	clone(): PressurePlate
-	clone(): MaterialData
-	clone(): Object
-}
-declare class TrapDoor extends SimpleAttachableMaterialData implements Openable {
-	setFacingDirection(arg0: BlockFace): void
-	setInverted(arg0: boolean): void
-	getAttachedFace(): BlockFace
-	setOpen(arg0: boolean): void
-	isInverted(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): MaterialData
-	clone(): Object
-	clone(): SimpleAttachableMaterialData
-	clone(): TrapDoor
-	isOpen(): boolean
-}
-declare interface SculkSensor extends TileState {
-	setLastVibrationFrequency(arg0: int): void
-	getLastVibrationFrequency(): int
-}
-declare interface Sign extends TileState, Colorable {
-	setEditable(arg0: boolean): void
-	isGlowingText(): boolean
-	setGlowingText(arg0: boolean): void
-	getLines(): String[]
-	getLine(arg0: int): String
-	setLine(arg0: int, arg1: String): void
-	isEditable(): boolean
-}
-declare interface Blaze extends Monster {
-}
-namespace PlayerBucketEntityEvent {
-	function getOriginalBucket(): ItemStack
-	function getEntityBucket(): ItemStack
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Zoglin extends Monster, Ageable {
-	isBaby(): boolean
-	setBaby(arg0: boolean): void
-}
-declare class Hopper extends MaterialData implements Directional, Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	isPowered(): boolean
-	setActive(arg0: boolean): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Hopper
-	clone(): Object
-	clone(): MaterialData
-	isActive(): boolean
-}
-declare interface TabExecutor extends TabCompleter, CommandExecutor {
-}
-declare interface FurnaceInventory extends Inventory {
-	setSmelting(arg0: ItemStack): void
-	getSmelting(): ItemStack
-	getFuel(): ItemStack
-	setFuel(arg0: ItemStack): void
-	getHolder(): Furnace
-	getHolder(): InventoryHolder
-	setResult(arg0: ItemStack): void
-	getResult(): ItemStack
-}
-declare class Tripwire extends MaterialData {
-	isActivated(): boolean
-	setActivated(arg0: boolean): void
-	isObjectTriggering(): boolean
-	setObjectTriggering(arg0: boolean): void
-	toString(): String
-	clone(): Tripwire
-	clone(): MaterialData
-	clone(): Object
-}
-declare class EulerAngle {
-	setX(arg0: double): EulerAngle
-	setY(arg0: double): EulerAngle
-	setZ(arg0: double): EulerAngle
-	subtract(arg0: double, arg1: double, arg2: double): EulerAngle
-	getX(): double
-	getY(): double
-	getZ(): double
-	add(arg0: double, arg1: double, arg2: double): EulerAngle
-	equals(arg0: Object): boolean
-	hashCode(): int
-}
-namespace InventoryOpenEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getPlayer(): HumanEntity
-	function getHandlers(): HandlerList
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Flags extends Enum implements PluginAwareness {
-	values(): Flags[]
-	valueOf(arg0: String): Flags
-}
-declare interface Redstone {
-	isPowered(): boolean
-}
-declare class Step extends TexturedMaterial {
-	setInverted(arg0: boolean): void
-	getTextures(): List
-	getTextureIndex(): int
-	setTextureIndex(arg0: int): void
-	isInverted(): boolean
-	toString(): String
-	clone(): MaterialData
-	clone(): Object
-	clone(): TexturedMaterial
-	clone(): Step
-}
-declare class Rails extends MaterialData {
-	getDirection(): BlockFace
-	setDirection(arg0: BlockFace, arg1: boolean): void
-	getConvertedData(): byte
-	isOnSlope(): boolean
-	isCurve(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Rails
-	clone(): Object
-	clone(): MaterialData
-}
-declare interface IronGolem extends Golem {
-	isPlayerCreated(): boolean
-	setPlayerCreated(arg0: boolean): void
-}
-namespace ExplosionPrimeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRadius(): float
-	function setRadius(arg0: float): void
-	function getFire(): boolean
-	function setFire(arg0: boolean): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockGrowEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getNewState(): BlockState
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Wither extends Monster, Boss {
-}
-namespace HangingBreakByEntityEvent {
-	function getRemover(): Entity
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getCause(): RemoveCause
-	function getHandlers(): HandlerList
-	function getEntity(): Hanging
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BannerMeta extends ItemMeta {
-	getBaseColor(): DyeColor
-	setBaseColor(arg0: DyeColor): void
-	getPatterns(): List
-	setPatterns(arg0: List): void
-	removePattern(arg0: int): Pattern
-	numberOfPatterns(): int
-	addPattern(arg0: Pattern): void
-	getPattern(arg0: int): Pattern
-	setPattern(arg0: int, arg1: Pattern): void
-}
-declare class Spigot extends Spigot {
-	isSilent(): boolean
-}
-declare interface Warning extends Annotation {
-	value(): boolean
-	reason(): String
-}
-namespace InventoryCreativeEvent {
-	function getCursor(): ItemStack
-	function setCursor(arg0: ItemStack): void
-	function getHandlerList(): HandlerList
-	function getSlotType(): SlotType
-	function getCurrentItem(): ItemStack
-	function isRightClick(): boolean
-	function isLeftClick(): boolean
-	function isShiftClick(): boolean
-	function setCurrentItem(arg0: ItemStack): void
-	function getClickedInventory(): Inventory
-	function getHotbarButton(): int
-	function getRawSlot(): int
-	function getAction(): InventoryAction
-	function getClick(): ClickType
-	function getSlot(): int
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CommandMap {
-	registerAll(arg0: String, arg1: List): void
-	clearCommands(): void
-	tabComplete(arg0: CommandSender, arg1: String, arg2: Location): List
-	tabComplete(arg0: CommandSender, arg1: String): List
-	getCommand(arg0: String): Command
-	dispatch(arg0: CommandSender, arg1: String): boolean
-	register(arg0: String, arg1: String, arg2: Command): boolean
-	register(arg0: String, arg1: Command): boolean
-}
-declare interface Prompt extends Cloneable {
-	getPromptText(arg0: ConversationContext): String
-	blocksForInput(arg0: ConversationContext): boolean
-	acceptInput(arg0: ConversationContext, arg1: String): Prompt
-}
-declare interface Lightable extends BlockData {
-	isLit(): boolean
-	setLit(arg0: boolean): void
-}
-declare interface Directional extends BlockData {
-	getFacing(): BlockFace
-	setFacing(arg0: BlockFace): void
-	getFaces(): Set
-}
-namespace PlayerLocaleChangeEvent {
-	function getHandlerList(): HandlerList
-	function getLocale(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface ExplosiveMinecart extends Minecart {
-}
-declare interface Spellcaster extends Illager {
-	getSpell(): Spell
-	setSpell(arg0: Spell): void
-}
-namespace VehicleEntityCollisionEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isPickupCancelled(): boolean
-	function setPickupCancelled(arg0: boolean): void
-	function isCollisionCancelled(): boolean
-	function setCollisionCancelled(arg0: boolean): void
-	function getEntity(): Entity
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace VehicleDamageEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getAttacker(): Entity
-	function setDamage(arg0: double): void
-	function getDamage(): double
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CachedServerIcon {
-}
-declare interface BanEntry {
-	getExpiration(): Date
-	setExpiration(arg0: Date): void
-	getCreated(): Date
-	setCreated(arg0: Date): void
-	setSource(arg0: String): void
-	setReason(arg0: String): void
-	save(): void
-	getTarget(): String
-	getReason(): String
-	getSource(): String
-}
-declare interface AnvilInventory extends Inventory {
-	getRenameText(): String
-	getRepairCost(): int
-	setRepairCost(arg0: int): void
-	getMaximumRepairCost(): int
-	setMaximumRepairCost(arg0: int): void
-}
-declare interface SuspiciousStewMeta extends ItemMeta {
-	hasCustomEffects(): boolean
-	getCustomEffects(): List
-	addCustomEffect(arg0: PotionEffect, arg1: boolean): boolean
-	removeCustomEffect(arg0: PotionEffectType): boolean
-	hasCustomEffect(arg0: PotionEffectType): boolean
-	clearCustomEffects(): boolean
-	clone(): Object
-	clone(): ItemMeta
-	clone(): SuspiciousStewMeta
-}
-declare class Skull extends MaterialData implements Directional {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Skull
-	clone(): MaterialData
-}
-namespace PlayerLevelChangeEvent {
-	function getHandlerList(): HandlerList
-	function getOldLevel(): int
-	function getNewLevel(): int
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerResourcePackStatusEvent {
-	function getHandlerList(): HandlerList
-	function getStatus(): Status
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class YamlConfiguration extends FileConfiguration {
-	saveToString(): String
-	buildHeader(): String
-	loadFromString(arg0: String): void
-	parseHeader(arg0: String): String
-	convertMapsToSections(arg0: Map, arg1: ConfigurationSection): void
-	loadConfiguration(arg0: Reader): YamlConfiguration
-	loadConfiguration(arg0: File): YamlConfiguration
-	options(): MemoryConfigurationOptions
-	options(): ConfigurationOptions
-	options(): FileConfigurationOptions
-	options(): YamlConfigurationOptions
-}
-namespace EntityCombustByBlockEvent {
-	function getCombuster(): Block
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getDuration(): int
-	function setDuration(arg0: int): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class EnchantmentOffer {
-	getEnchantment(): Enchantment
-	setEnchantment(arg0: Enchantment): void
-	getEnchantmentLevel(): int
-	setEnchantmentLevel(arg0: int): void
-	getCost(): int
-	setCost(arg0: int): void
-}
-declare class RegexPrompt extends ValidatingPrompt {
-	isInputValid(arg0: ConversationContext, arg1: String): boolean
-}
-declare interface PersistentDataAdapterContext {
-	newPersistentDataContainer(): PersistentDataContainer
-}
-declare class ChatPaginator {
-	paginate(arg0: String, arg1: int, arg2: int, arg3: int): ChatPage
-	paginate(arg0: String, arg1: int): ChatPage
-	wordWrap(arg0: String, arg1: int): String[]
-}
-declare interface MerchantInventory extends Inventory {
-	getSelectedRecipeIndex(): int
-	getSelectedRecipe(): MerchantRecipe
-	getMerchant(): Merchant
-}
-declare interface Stairs extends Bisected, Directional, Waterlogged {
-	getShape(): Shape
-	setShape(arg0: Shape): void
-}
-declare class ChunkGenerator {
-	generateChunkData(arg0: World, arg1: Random, arg2: int, arg3: int, arg4: BiomeGrid): ChunkData
-	createChunkData(arg0: World): ChunkData
-	getDefaultPopulators(arg0: World): List
-	getFixedSpawnLocation(arg0: World, arg1: Random): Location
-	isParallelCapable(): boolean
-	shouldGenerateCaves(): boolean
-	shouldGenerateDecorations(): boolean
-	shouldGenerateMobs(): boolean
-	shouldGenerateStructures(): boolean
-	canSpawn(arg0: World, arg1: int, arg2: int): boolean
-	$SWITCH_TABLE$org$bukkit$World$Environment(): int[]
-}
-declare interface Illager extends Raider {
-}
-declare interface PoweredMinecart extends Minecart {
-	getFuel(): int
-	setFuel(arg0: int): void
-}
-namespace TimeSkipEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getSkipReason(): SkipReason
-	function getSkipAmount(): long
-	function setSkipAmount(arg0: long): void
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PressureSensor {
-	isPressed(): boolean
-}
-declare class LootTables extends Enum implements Keyed {
-	getLootTable(): LootTable
-	values(): LootTables[]
-	valueOf(arg0: String): LootTables
-	getKey(): NamespacedKey
-}
-namespace PluginEvent {
-	function getPlugin(): Plugin
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Pillager extends Illager, InventoryHolder {
-}
-declare class StringPrompt implements Prompt {
-	blocksForInput(arg0: ConversationContext): boolean
-}
-declare interface MagmaCube extends Slime {
-}
-declare interface CommandMinecart extends Minecart {
-	getCommand(): String
-	setCommand(arg0: String): void
-	setName(arg0: String): void
-}
-declare interface BanList {
-	getBanEntry(arg0: String): BanEntry
-	getBanEntries(): Set
-	addBan(arg0: String, arg1: String, arg2: Date, arg3: String): BanEntry
-	isBanned(arg0: String): boolean
-	pardon(arg0: String): void
-}
-declare class EntityType extends Enum implements Keyed {
-	getEntityClass(): Class
-	isSpawnable(): boolean
-	getTypeId(): short
-	fromName(arg0: String): EntityType
-	fromId(arg0: int): EntityType
-	getName(): String
-	values(): EntityType[]
-	valueOf(arg0: String): EntityType
-	getKey(): NamespacedKey
-	isAlive(): boolean
-}
-declare interface Lockable {
-	getLock(): String
-	setLock(arg0: String): void
-	isLocked(): boolean
-}
-namespace RemoteServerCommandEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getCommand(): String
-	function setCommand(arg0: String): void
-	function getSender(): CommandSender
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class BroadcastPermissions {
-	registerPermissions(arg0: Permission): Permission
-}
-declare class DustTransition extends DustOptions {
-	getToColor(): Color
-}
-namespace EntityBreedEvent {
-	function setExperience(arg0: int): void
-	function getBredWith(): ItemStack
-	function getExperience(): int
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getMother(): LivingEntity
-	function getFather(): LivingEntity
-	function getBreeder(): LivingEntity
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Snow extends BlockData {
-	getMinimumLayers(): int
-	getMaximumLayers(): int
-	getLayers(): int
-	setLayers(arg0: int): void
-}
-declare class NullConversationPrefix implements ConversationPrefix {
-	getPrefix(arg0: ConversationContext): String
-}
-declare interface RemoteConsoleCommandSender extends CommandSender {
-}
-declare class Wool extends MaterialData implements Colorable {
-	getColor(): DyeColor
-	toString(): String
-	clone(): Wool
-	clone(): MaterialData
-	clone(): Object
-	setColor(arg0: DyeColor): void
-}
-namespace InventoryPickupItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getInventory(): Inventory
-	function getItem(): Item
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Pig extends Steerable, Vehicle {
-}
-declare interface Wall extends Waterlogged {
-	getHeight(arg0: BlockFace): Height
-	isUp(): boolean
-	setUp(arg0: boolean): void
-	setHeight(arg0: BlockFace, arg1: Height): void
-}
-declare interface ShulkerBox extends Container, Lootable, Lidded {
-	getColor(): DyeColor
-}
-declare class PlayerNamePrompt extends ValidatingPrompt {
-	isInputValid(arg0: ConversationContext, arg1: String): boolean
-	acceptValidatedInput(arg0: ConversationContext, arg1: Player): Prompt
-	acceptValidatedInput(arg0: ConversationContext, arg1: String): Prompt
-}
-declare interface Cod extends Fish {
-}
-namespace WeatherChangeEvent {
-	function toWeatherState(): boolean
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Trident extends AbstractArrow, ThrowableProjectile {
-}
-namespace VehicleDestroyEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getAttacker(): Entity
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Consumer {
-	accept(arg0: Object): void
-}
-declare interface WorldBorder {
-	getDamageBuffer(): double
-	setDamageBuffer(arg0: double): void
-	getDamageAmount(): double
-	setDamageAmount(arg0: double): void
-	getWarningTime(): int
-	setWarningTime(arg0: int): void
-	getWarningDistance(): int
-	setWarningDistance(arg0: int): void
-	getCenter(): Location
-	setCenter(arg0: Location): void
-	setCenter(arg0: double, arg1: double): void
-	isInside(arg0: Location): boolean
-	getSize(): double
-	reset(): void
-	setSize(arg0: double, arg1: long): void
-	setSize(arg0: double): void
-}
-declare interface Llama extends ChestedHorse {
-	getStrength(): int
-	setStrength(arg0: int): void
-	getInventory(): Inventory
-	getInventory(): LlamaInventory
-	getInventory(): AbstractHorseInventory
-	getColor(): Color
-	setColor(arg0: Color): void
-}
-declare interface MushroomCow extends Cow {
-	setVariant(arg0: Variant): void
-	getVariant(): Variant
-}
-declare class TimingsCommand extends BukkitCommand {
-	executeSpigotTimings(arg0: CommandSender, arg1: String[]): void
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-declare interface MapView {
-	getRenderers(): List
-	addRenderer(arg0: MapRenderer): void
-	removeRenderer(arg0: MapRenderer): boolean
-	isTrackingPosition(): boolean
-	setTrackingPosition(arg0: boolean): void
-	isUnlimitedTracking(): boolean
-	setUnlimitedTracking(arg0: boolean): void
-	setWorld(arg0: World): void
-	getWorld(): World
-	isVirtual(): boolean
-	getScale(): Scale
-	setScale(arg0: Scale): void
-	getCenterX(): int
-	getCenterZ(): int
-	setCenterX(arg0: int): void
-	setCenterZ(arg0: int): void
-	setLocked(arg0: boolean): void
-	getId(): int
-	isLocked(): boolean
-}
-declare class Wood extends MaterialData {
-	getSpeciesType(arg0: Material, arg1: TreeSpecies): Material
-	setSpecies(arg0: TreeSpecies): void
-	getSpecies(): TreeSpecies
-	$SWITCH_TABLE$org$bukkit$Material(): int[]
-	$SWITCH_TABLE$org$bukkit$TreeSpecies(): int[]
-	toString(): String
-	clone(): Wood
-	clone(): MaterialData
-	clone(): Object
-}
-declare interface PiglinAbstract extends Monster, Ageable {
-	isImmuneToZombification(): boolean
-	setImmuneToZombification(arg0: boolean): void
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-	isBaby(): boolean
-	setBaby(arg0: boolean): void
-}
-namespace CraftItemEvent {
-	function getInventory(): Inventory
-	function getInventory(): CraftingInventory
-	function getRecipe(): Recipe
-	function getHandlerList(): HandlerList
-	function getSlotType(): SlotType
-	function getCurrentItem(): ItemStack
-	function isRightClick(): boolean
-	function isLeftClick(): boolean
-	function isShiftClick(): boolean
-	function setCurrentItem(arg0: ItemStack): void
-	function getClickedInventory(): Inventory
-	function getHotbarButton(): int
-	function getCursor(): ItemStack
-	function setCursor(arg0: ItemStack): void
-	function getRawSlot(): int
-	function getAction(): InventoryAction
-	function getClick(): ClickType
-	function getSlot(): int
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace LeavesDecayEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Command extends MaterialData implements Redstone {
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): Command
-}
-namespace PigZombieAngerEvent {
-	function getNewAnger(): int
-	function setNewAnger(arg0: int): void
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): PigZombie
-	function getTarget(): Entity
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface ScoreboardManager {
-	getMainScoreboard(): Scoreboard
-	getNewScoreboard(): Scoreboard
-}
-declare class PerlinOctaveGenerator extends OctaveGenerator {
-	createOctaves(arg0: Random, arg1: int): NoiseGenerator[]
-}
-namespace WorldEvent {
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface TripwireHook extends Attachable, Directional, Powerable {
-}
-namespace BlockExplodeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getYield(): float
-	function blockList(): List
-	function setYield(arg0: float): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface TippedArrow extends Arrow {
-}
-declare interface Cow extends Animals {
-}
-declare interface RedstoneWire extends AnaloguePowerable {
-	getAllowedFaces(): Set
-	getFace(arg0: BlockFace): Connection
-	setFace(arg0: BlockFace, arg1: Connection): void
-}
-declare interface Goat extends Animals {
-	isScreaming(): boolean
-	setScreaming(arg0: boolean): void
-}
-declare interface Furnace extends Directional, Lightable {
-}
-declare interface TechnicalPiston extends Directional {
-	setType(arg0: Type): void
-	getType(): Type
-}
-declare interface RespawnAnchor extends BlockData {
-	getMaximumCharges(): int
-	getCharges(): int
-	setCharges(arg0: int): void
-}
-namespace EntityUnleashEvent {
-	function getHandlerList(): HandlerList
-	function getReason(): UnleashReason
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace SlimeSplitEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Slime
-	function getEntity(): Entity
-	function setCount(arg0: int): void
-	function getCount(): int
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerVelocityEvent {
-	function setVelocity(arg0: Vector): void
-	function getVelocity(): Vector
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BeaconInventory extends Inventory {
-	setItem(arg0: ItemStack): void
-	getItem(): ItemStack
-}
-declare interface EnderChest extends TileState {
-}
-declare interface Chest extends Directional, Waterlogged {
-	setType(arg0: Type): void
-	getType(): Type
-}
-declare class YamlConfigurationOptions extends FileConfigurationOptions {
-	copyDefaults(arg0: boolean): MemoryConfigurationOptions
-	copyDefaults(arg0: boolean): YamlConfigurationOptions
-	copyDefaults(arg0: boolean): ConfigurationOptions
-	copyDefaults(arg0: boolean): FileConfigurationOptions
-	header(arg0: String): FileConfigurationOptions
-	header(arg0: String): YamlConfigurationOptions
-	copyHeader(arg0: boolean): YamlConfigurationOptions
-	copyHeader(arg0: boolean): FileConfigurationOptions
-	indent(arg0: int): YamlConfigurationOptions
-	indent(): int
-	configuration(): YamlConfiguration
-	configuration(): FileConfiguration
-	configuration(): MemoryConfiguration
-	configuration(): Configuration
-	pathSeparator(arg0: char): MemoryConfigurationOptions
-	pathSeparator(arg0: char): ConfigurationOptions
-	pathSeparator(arg0: char): FileConfigurationOptions
-	pathSeparator(arg0: char): YamlConfigurationOptions
-}
-declare interface ItemFrame extends Hanging {
-	setRotation(arg0: Rotation): void
-	getItemDropChance(): float
-	setItemDropChance(arg0: float): void
-	getRotation(): Rotation
-	setVisible(arg0: boolean): void
-	isFixed(): boolean
-	isVisible(): boolean
-	setItem(arg0: ItemStack, arg1: boolean): void
-	setItem(arg0: ItemStack): void
-	setFixed(arg0: boolean): void
-	getItem(): ItemStack
-}
-declare class MonsterEggs extends TexturedMaterial {
-	getTextures(): List
-	clone(): MaterialData
-	clone(): Object
-	clone(): TexturedMaterial
-	clone(): MonsterEggs
-}
-namespace WorldSaveEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Chunk extends PersistentDataHolder {
-	getChunkSnapshot(): ChunkSnapshot
-	getChunkSnapshot(arg0: boolean, arg1: boolean, arg2: boolean): ChunkSnapshot
-	getEntities(): Entity[]
-	getTileEntities(): BlockState[]
-	isSlimeChunk(): boolean
-	isForceLoaded(): boolean
-	setForceLoaded(arg0: boolean): void
-	addPluginChunkTicket(arg0: Plugin): boolean
-	removePluginChunkTicket(arg0: Plugin): boolean
-	getPluginChunkTickets(): Collection
-	getInhabitedTime(): long
-	setInhabitedTime(arg0: long): void
-	getBlock(arg0: int, arg1: int, arg2: int): Block
-	getWorld(): World
-	getX(): int
-	getZ(): int
-	load(arg0: boolean): boolean
-	load(): boolean
-	contains(arg0: BlockData): boolean
-	isLoaded(): boolean
-	unload(arg0: boolean): boolean
-	unload(): boolean
-}
-namespace BlockRedstoneEvent {
-	function getOldCurrent(): int
-	function getNewCurrent(): int
-	function setNewCurrent(arg0: int): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface FireworkEffectMeta extends ItemMeta {
-	setEffect(arg0: FireworkEffect): void
-	hasEffect(): boolean
-	getEffect(): FireworkEffect
-	clone(): Object
-	clone(): ItemMeta
-	clone(): FireworkEffectMeta
-}
-declare interface ConversationAbandonedListener extends EventListener {
-	conversationAbandoned(arg0: ConversationAbandonedEvent): void
-}
-namespace EnchantItemEvent {
-	function getEnchanter(): Player
-	function getEnchantBlock(): Block
-	function getExpLevelCost(): int
-	function setExpLevelCost(arg0: int): void
-	function getEnchantsToAdd(): Map
-	function whichButton(): int
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BlockData extends Cloneable {
-	getMaterial(): Material
-	getSoundGroup(): SoundGroup
-	getAsString(arg0: boolean): String
-	getAsString(): String
-	clone(): BlockData
-	clone(): Object
-	matches(arg0: BlockData): boolean
-	merge(arg0: BlockData): BlockData
-}
-declare interface PermissionRemovedExecutor {
-	attachmentRemoved(arg0: PermissionAttachment): void
-}
-declare class Spigot extends Spigot {
-}
-declare class CampfireRecipe extends CookingRecipe {
-}
-namespace PlayerToggleFlightEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isFlying(): boolean
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Spider extends Monster {
-}
-declare class BukkitCommand extends Command {
-}
-declare class ItemStack implements Cloneable, ConfigurationSerializable {
-	deserialize(arg0: Map): ItemStack
-	getMaxStackSize(): int
-	setDurability(arg0: short): void
-	hasItemMeta(): boolean
-	getItemMeta(): ItemMeta
-	setItemMeta0(arg0: ItemMeta, arg1: Material): boolean
-	getDurability(): short
-	setItemMeta(arg0: ItemMeta): boolean
-	containsEnchantment(arg0: Enchantment): boolean
-	getEnchantments(): Map
-	addEnchantments(arg0: Map): void
-	addEnchantment(arg0: Enchantment, arg1: int): void
-	addUnsafeEnchantment(arg0: Enchantment, arg1: int): void
-	addUnsafeEnchantments(arg0: Map): void
-	removeEnchantment(arg0: Enchantment): int
-	getEnchantmentLevel(arg0: Enchantment): int
-	serialize(): Map
-	setData(arg0: MaterialData): void
-	getData(): MaterialData
-	setType(arg0: Material): void
-	createData(arg0: byte): void
-	getAmount(): int
-	setAmount(arg0: int): void
-	isSimilar(arg0: ItemStack): boolean
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	clone(): Object
-	clone(): ItemStack
-	getType(): Material
-}
-declare interface Hanging extends Entity, Attachable {
-	setFacingDirection(arg0: BlockFace, arg1: boolean): boolean
-}
-declare interface BlockDataMeta extends ItemMeta {
-	hasBlockData(): boolean
-	getBlockData(arg0: Material): BlockData
-	setBlockData(arg0: BlockData): void
-}
-declare interface Sapling extends BlockData {
-	getMaximumStage(): int
-	getStage(): int
-	setStage(arg0: int): void
-}
-declare class DefaultPermissions {
-	registerPermission(arg0: Permission, arg1: Permission): Permission
-	registerPermission(arg0: String, arg1: String): Permission
-	registerPermission(arg0: String, arg1: String, arg2: PermissionDefault, arg3: Map): Permission
-	registerPermission(arg0: String, arg1: String, arg2: PermissionDefault): Permission
-	registerPermission(arg0: String, arg1: String, arg2: PermissionDefault, arg3: Permission): Permission
-	registerPermission(arg0: String, arg1: String, arg2: Permission): Permission
-	registerPermission(arg0: String, arg1: String, arg2: PermissionDefault, arg3: Map, arg4: Permission): Permission
-	registerPermission(arg0: Permission): Permission
-	registerPermission(arg0: Permission, arg1: boolean): Permission
-	registerCorePermissions(): void
-}
-declare class MapFont {
-	getHeight(): int
-	getWidth(arg0: String): int
-	isValid(arg0: String): boolean
-	getChar(arg0: char): CharacterSprite
-	setChar(arg0: char, arg1: CharacterSprite): void
-}
-declare interface Bisected extends BlockData {
-	getHalf(): Half
-	setHalf(arg0: Half): void
-}
-namespace MoistureChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getNewState(): BlockState
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class GameRule {
-	getName(): String
-	equals(arg0: Object): boolean
-	toString(): String
-	values(): GameRule[]
-	getType(): Class
-	getByName(arg0: String): GameRule
-}
-declare class StonecuttingRecipe implements Recipe, Keyed {
-	setInputChoice(arg0: RecipeChoice): StonecuttingRecipe
-	getInputChoice(): RecipeChoice
-	getGroup(): String
-	setGroup(arg0: String): void
-	getKey(): NamespacedKey
-	setInput(arg0: Material): StonecuttingRecipe
-	getInput(): ItemStack
-	getResult(): ItemStack
-}
-declare interface CaveVines extends Ageable, CaveVinesPlant {
-}
-namespace InventoryCloseEvent {
-	function getHandlerList(): HandlerList
-	function getPlayer(): HumanEntity
-	function getHandlers(): HandlerList
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerRespawnEvent {
-	function isAnchorSpawn(): boolean
-	function getRespawnLocation(): Location
-	function setRespawnLocation(arg0: Location): void
-	function getHandlerList(): HandlerList
-	function isBedSpawn(): boolean
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerBucketFishEvent {
-	function getWaterBucket(): ItemStack
-	function getFishBucket(): ItemStack
-	function getEntity(): Entity
-	function getEntity(): Fish
-	function getOriginalBucket(): ItemStack
-	function getEntityBucket(): ItemStack
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface LeashHitch extends Hanging {
-}
-declare interface Cake extends BlockData {
-	getMaximumBites(): int
-	getBites(): int
-	setBites(arg0: int): void
-}
-declare interface CaveVinesPlant extends BlockData {
-	isBerries(): boolean
-	setBerries(arg0: boolean): void
-}
-declare interface Chain extends Orientable, Waterlogged {
-}
-declare interface Skull extends TileState {
-	setRotation(arg0: BlockFace): void
-	getRotation(): BlockFace
-	getOwningPlayer(): OfflinePlayer
-	setOwningPlayer(arg0: OfflinePlayer): void
-	getSkullType(): SkullType
-	setSkullType(arg0: SkullType): void
-	hasOwner(): boolean
-	getOwner(): String
-	setOwner(arg0: String): boolean
-}
-declare class FormattedCommandAlias extends Command {
-	buildCommand(arg0: String, arg1: String[]): String
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-	inRange(arg0: int, arg1: int, arg2: int): boolean
-}
-namespace VehicleCreateEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityPlaceEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlockFace(): BlockFace
-	function getBlock(): Block
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ServerListPingEvent {
-	function getHandlerList(): HandlerList
-	function getNumPlayers(): int
-	function getMaxPlayers(): int
-	function setMaxPlayers(arg0: int): void
-	function setServerIcon(arg0: CachedServerIcon): void
-	function getMotd(): String
-	function setMotd(arg0: String): void
-	function iterator(): Iterator
-	function getAddress(): InetAddress
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-	function spliterator(): Spliterator
-	function forEach(arg0: Consumer): void
-}
-declare interface Vehicle extends Entity {
-	setVelocity(arg0: Vector): void
-	getVelocity(): Vector
-}
-declare interface ServicesManager {
-	unregisterAll(arg0: Plugin): void
-	getRegistration(arg0: Class): RegisteredServiceProvider
-	getRegistrations(arg0: Class): Collection
-	getRegistrations(arg0: Plugin): List
-	getKnownServices(): Collection
-	isProvidedFor(arg0: Class): boolean
-	load(arg0: Class): Object
-	register(arg0: Class, arg1: Object, arg2: Plugin, arg3: ServicePriority): void
-	unregister(arg0: Object): void
-	unregister(arg0: Class, arg1: Object): void
-}
-declare interface Server extends PluginMessageRecipient {
-	getLootTable(arg0: NamespacedKey): LootTable
-	getOnlinePlayers(): Collection
-	getConsoleSender(): ConsoleCommandSender
-	getItemFactory(): ItemFactory
-	getPluginManager(): PluginManager
-	getOfflinePlayer(arg0: UUID): OfflinePlayer
-	getOfflinePlayer(arg0: String): OfflinePlayer
-	createChunkData(arg0: World): ChunkData
-	dispatchCommand(arg0: CommandSender, arg1: String): boolean
-	getMaxPlayers(): int
-	getBukkitVersion(): String
-	getViewDistance(): int
-	getWorldType(): String
-	getGenerateStructures(): boolean
-	getMaxWorldSize(): int
-	getAllowEnd(): boolean
-	getAllowNether(): boolean
-	hasWhitelist(): boolean
-	setWhitelist(arg0: boolean): void
-	isWhitelistEnforced(): boolean
-	setWhitelistEnforced(arg0: boolean): void
-	getWhitelistedPlayers(): Set
-	reloadWhitelist(): void
-	broadcastMessage(arg0: String): int
-	getUpdateFolder(): String
-	getUpdateFolderFile(): File
-	getConnectionThrottle(): long
-	getTicksPerAnimalSpawns(): int
-	getTicksPerMonsterSpawns(): int
-	getTicksPerWaterSpawns(): int
-	getTicksPerAmbientSpawns(): int
-	getPlayerExact(arg0: String): Player
-	matchPlayer(arg0: String): List
-	getScheduler(): BukkitScheduler
-	getServicesManager(): ServicesManager
-	createWorld(arg0: WorldCreator): World
-	unloadWorld(arg0: World, arg1: boolean): boolean
-	unloadWorld(arg0: String, arg1: boolean): boolean
-	createExplorerMap(arg0: World, arg1: Location, arg2: StructureType): ItemStack
-	createExplorerMap(arg0: World, arg1: Location, arg2: StructureType, arg3: int, arg4: boolean): ItemStack
-	getPluginCommand(arg0: String): PluginCommand
-	savePlayers(): void
-	getRecipesFor(arg0: ItemStack): List
-	recipeIterator(): Iterator
-	clearRecipes(): void
-	resetRecipes(): void
-	removeRecipe(arg0: NamespacedKey): boolean
-	getCommandAliases(): Map
-	getSpawnRadius(): int
-	setSpawnRadius(arg0: int): void
-	getOnlineMode(): boolean
-	getAllowFlight(): boolean
-	getBannedPlayers(): Set
-	getOperators(): Set
-	getDefaultGameMode(): GameMode
-	setDefaultGameMode(arg0: GameMode): void
-	getWorldContainer(): File
-	getOfflinePlayers(): OfflinePlayer[]
-	getMessenger(): Messenger
-	createInventory(arg0: InventoryHolder, arg1: InventoryType): Inventory
-	createInventory(arg0: InventoryHolder, arg1: int, arg2: String): Inventory
-	createInventory(arg0: InventoryHolder, arg1: InventoryType, arg2: String): Inventory
-	createInventory(arg0: InventoryHolder, arg1: int): Inventory
-	createMerchant(arg0: String): Merchant
-	getMonsterSpawnLimit(): int
-	getAnimalSpawnLimit(): int
-	getWaterAnimalSpawnLimit(): int
-	getWaterAmbientSpawnLimit(): int
-	getAmbientSpawnLimit(): int
-	isPrimaryThread(): boolean
-	getShutdownMessage(): String
-	getWarningState(): WarningState
-	getScoreboardManager(): ScoreboardManager
-	getServerIcon(): CachedServerIcon
-	loadServerIcon(arg0: File): CachedServerIcon
-	loadServerIcon(arg0: BufferedImage): CachedServerIcon
-	setIdleTimeout(arg0: int): void
-	getIdleTimeout(): int
-	createBossBar(arg0: String, arg1: BarColor, arg2: BarStyle, arg3: BarFlag[]): BossBar
-	createBossBar(arg0: NamespacedKey, arg1: String, arg2: BarColor, arg3: BarStyle, arg4: BarFlag[]): KeyedBossBar
-	getBossBars(): Iterator
-	removeBossBar(arg0: NamespacedKey): boolean
-	getAdvancement(arg0: NamespacedKey): Advancement
-	advancementIterator(): Iterator
-	createBlockData(arg0: Material, arg1: Consumer): BlockData
-	createBlockData(arg0: String): BlockData
-	createBlockData(arg0: Material, arg1: String): BlockData
-	createBlockData(arg0: Material): BlockData
-	selectEntities(arg0: CommandSender, arg1: String): List
-	reload(): void
-	getWorld(arg0: UUID): World
-	getWorld(arg0: String): World
-	getEntity(arg0: UUID): Entity
-	spigot(): Spigot
-	getPlayer(arg0: UUID): Player
-	getPlayer(arg0: String): Player
-	getBossBar(arg0: NamespacedKey): KeyedBossBar
-	getRecipe(arg0: NamespacedKey): Recipe
-	getMotd(): String
-	getIp(): String
-	getWorlds(): List
-	reloadData(): void
-	addRecipe(arg0: Recipe): boolean
-	isHardcore(): boolean
-	getIPBans(): Set
-	banIP(arg0: String): void
-	unbanIP(arg0: String): void
-	getBanList(arg0: Type): BanList
-	getHelpMap(): HelpMap
-	getTags(arg0: String, arg1: Class): Iterable
-	getTicksPerWaterAmbientSpawns(): int
-	getName(): String
-	shutdown(): void
-	getUnsafe(): UnsafeValues
-	getLogger(): Logger
-	getPort(): int
-	broadcast(arg0: String, arg1: String): int
-	getMap(arg0: int): MapView
-	createMap(arg0: World): MapView
-	getTag(arg0: String, arg1: NamespacedKey, arg2: Class): Tag
-	getVersion(): String
-}
-namespace TabCompleteEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getCompletions(): List
-	function setCompletions(arg0: List): void
-	function getSender(): CommandSender
-	function getBuffer(): String
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class OctaveGenerator {
-	noise(arg0: double, arg1: double, arg2: double, arg3: double, arg4: boolean): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: double): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: boolean): double
-	noise(arg0: double, arg1: double, arg2: double): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: boolean): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double): double
-	setScale(arg0: double): void
-	setXScale(arg0: double): void
-	setYScale(arg0: double): void
-	setZScale(arg0: double): void
-	getXScale(): double
-	getYScale(): double
-	getZScale(): double
-	getOctaves(): NoiseGenerator[]
-}
-declare interface Bamboo extends Ageable, Sapling {
-	getLeaves(): Leaves
-	setLeaves(arg0: Leaves): void
-}
-declare interface Raid {
-	getActiveTicks(): long
-	getBadOmenLevel(): int
-	setBadOmenLevel(arg0: int): void
-	getSpawnedGroups(): int
-	getTotalGroups(): int
-	getTotalWaves(): int
-	getTotalHealth(): float
-	getStatus(): RaidStatus
-	isStarted(): boolean
-	getHeroes(): Set
-	getRaiders(): List
-	getLocation(): Location
-}
-declare interface MetadataStore {
-	setMetadata(arg0: Object, arg1: String, arg2: MetadataValue): void
-	getMetadata(arg0: Object, arg1: String): List
-	hasMetadata(arg0: Object, arg1: String): boolean
-	removeMetadata(arg0: Object, arg1: String, arg2: Plugin): void
-	invalidateAll(arg0: Plugin): void
-}
-namespace EntityPortalEvent {
-	function getHandlerList(): HandlerList
-	function setSearchRadius(arg0: int): void
-	function getSearchRadius(): int
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getFrom(): Location
-	function setFrom(arg0: Location): void
-	function getTo(): Location
-	function setTo(arg0: Location): void
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class LazyMetadataValue extends MetadataValueAdapter {
-	eval(): void
-	value(): Object
-	invalidate(): void
-}
-declare class Sandstone extends MaterialData {
-	setType(arg0: SandstoneType): void
-	toString(): String
-	clone(): Object
-	clone(): Sandstone
-	clone(): MaterialData
-	getType(): SandstoneType
-}
-declare class Stairs extends MaterialData implements Directional {
-	setFacingDirection(arg0: BlockFace): void
-	setInverted(arg0: boolean): void
-	getAscendingDirection(): BlockFace
-	getDescendingDirection(): BlockFace
-	getFacing(): BlockFace
-	isInverted(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Stairs
-	clone(): Object
-	clone(): MaterialData
-}
-namespace PlayerToggleSprintEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isSprinting(): boolean
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Builder {
-	withFlicker(): Builder
-	flicker(arg0: boolean): Builder
-	trail(arg0: boolean): Builder
-	withTrail(): Builder
-	withColor(arg0: Iterable): Builder
-	withColor(arg0: Color[]): Builder
-	withColor(arg0: Color): Builder
-	withFade(arg0: Color): Builder
-	withFade(arg0: Iterable): Builder
-	withFade(arg0: Color[]): Builder
-	build(): FireworkEffect
-	with(arg0: Type): Builder
-}
-namespace PlayerItemBreakEvent {
-	function getHandlerList(): HandlerList
-	function getBrokenItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityDropItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getItemDrop(): Item
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class MetadataStoreBase {
-	setMetadata(arg0: Object, arg1: String, arg2: MetadataValue): void
-	getMetadata(arg0: Object, arg1: String): List
-	hasMetadata(arg0: Object, arg1: String): boolean
-	removeMetadata(arg0: Object, arg1: String, arg2: Plugin): void
-	invalidateAll(arg0: Plugin): void
-	disambiguate(arg0: Object, arg1: String): String
-}
-declare class PluginDescriptionFile {
-	getDescription(): String
-	getProvides(): List
-	getContributors(): List
-	getSoftDepend(): List
-	getLoadBefore(): List
-	getCommands(): Map
-	getFullName(): String
-	getPermissionDefault(): PermissionDefault
-	getAwareness(): Set
-	getAPIVersion(): String
-	getLibraries(): List
-	getClassLoaderOf(): String
-	makePluginNameList(arg0: Map, arg1: String): List
-	getPrefix(): String
-	asMap(arg0: Object): Map
-	loadMap(arg0: Map): void
-	getMain(): String
-	getLoad(): PluginLoadOrder
-	getAuthors(): List
-	getWebsite(): String
-	getDepend(): List
-	saveMap(): Map
-	getRawName(): String
-	getName(): String
-	getPermissions(): List
-	save(arg0: Writer): void
-	getVersion(): String
-}
-declare interface LlamaInventory extends AbstractHorseInventory {
-	getDecor(): ItemStack
-	setDecor(arg0: ItemStack): void
-}
-declare interface Fish extends WaterMob {
-}
-namespace EnderDragonChangePhaseEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setNewPhase(arg0: Phase): void
-	function getCurrentPhase(): Phase
-	function getNewPhase(): Phase
-	function getEntity(): Entity
-	function getEntity(): EnderDragon
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Enchantment implements Keyed {
-	getStartLevel(): int
-	getMaxLevel(): int
-	canEnchantItem(arg0: ItemStack): boolean
-	getItemTarget(): EnchantmentTarget
-	conflictsWith(arg0: Enchantment): boolean
-	registerEnchantment(arg0: Enchantment): void
-	isAcceptingRegistrations(): boolean
-	stopAcceptingRegistrations(): void
-	isTreasure(): boolean
-	isCursed(): boolean
-	getByKey(arg0: NamespacedKey): Enchantment
-	getName(): String
-	equals(arg0: Object): boolean
-	toString(): String
-	values(): Enchantment[]
-	hashCode(): int
-	getKey(): NamespacedKey
-	getByName(arg0: String): Enchantment
-}
-namespace PlayerFishEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getExpToDrop(): int
-	function setExpToDrop(arg0: int): void
-	function getCaught(): Entity
-	function getHook(): FishHook
-	function getState(): State
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface SkullMeta extends ItemMeta {
-	getOwningPlayer(): OfflinePlayer
-	setOwningPlayer(arg0: OfflinePlayer): boolean
-	hasOwner(): boolean
-	clone(): SkullMeta
-	clone(): ItemMeta
-	clone(): Object
-	getOwner(): String
-	setOwner(arg0: String): boolean
-}
-declare interface EnchantingInventory extends Inventory {
-	setSecondary(arg0: ItemStack): void
-	getSecondary(): ItemStack
-	setItem(arg0: ItemStack): void
-	getItem(): ItemStack
-}
-declare interface EventHandler extends Annotation {
-	ignoreCancelled(): boolean
-	priority(): EventPriority
-}
-declare interface Hopper extends Directional {
-	isEnabled(): boolean
-	setEnabled(arg0: boolean): void
-}
-declare class FurnaceAndDispenser extends DirectionalContainer {
-	clone(): Object
-	clone(): MaterialData
-	clone(): DirectionalContainer
-	clone(): FurnaceAndDispenser
-}
-declare interface EvokerFangs extends Entity {
-	getOwner(): LivingEntity
-	setOwner(arg0: LivingEntity): void
-}
-declare interface BlockInventoryHolder extends InventoryHolder {
-	getBlock(): Block
-}
-declare interface Block extends Metadatable {
-	getPistonMoveReaction(): PistonMoveReaction
-	getBoundingBox(): BoundingBox
-	getBlockData(): BlockData
-	getLightLevel(): byte
-	setBlockData(arg0: BlockData): void
-	setBlockData(arg0: BlockData, arg1: boolean): void
-	getRelative(arg0: BlockFace, arg1: int): Block
-	getRelative(arg0: int, arg1: int, arg2: int): Block
-	getRelative(arg0: BlockFace): Block
-	getLightFromSky(): byte
-	getLightFromBlocks(): byte
-	isBlockPowered(): boolean
-	isBlockIndirectlyPowered(): boolean
-	isBlockFacePowered(arg0: BlockFace): boolean
-	getBlockPower(arg0: BlockFace): int
-	getBlockPower(): int
-	getTemperature(): double
-	getHumidity(): double
-	breakNaturally(arg0: ItemStack): boolean
-	breakNaturally(): boolean
-	applyBoneMeal(arg0: BlockFace): boolean
-	isPreferredTool(arg0: ItemStack): boolean
-	getBreakSpeed(arg0: Player): float
-	getCollisionShape(): VoxelShape
-	getWorld(): World
-	getX(): int
-	getY(): int
-	getZ(): int
-	getChunk(): Chunk
-	getData(): byte
-	setType(arg0: Material): void
-	setType(arg0: Material, arg1: boolean): void
-	getFace(arg0: Block): BlockFace
-	getBiome(): Biome
-	setBiome(arg0: Biome): void
-	isLiquid(): boolean
-	getDrops(): Collection
-	getDrops(arg0: ItemStack): Collection
-	getDrops(arg0: ItemStack, arg1: Entity): Collection
-	isPassable(): boolean
-	rayTrace(arg0: Location, arg1: Vector, arg2: double, arg3: FluidCollisionMode): RayTraceResult
-	isBlockFaceIndirectlyPowered(arg0: BlockFace): boolean
-	isEmpty(): boolean
-	getLocation(): Location
-	getLocation(arg0: Location): Location
-	getState(): BlockState
-	getType(): Material
-}
-declare interface GlowSquid extends Squid {
-	getDarkTicksRemaining(): int
-	setDarkTicksRemaining(arg0: int): void
-}
-declare class FileConfigurationOptions extends MemoryConfigurationOptions {
-	copyDefaults(arg0: boolean): FileConfigurationOptions
-	copyDefaults(arg0: boolean): ConfigurationOptions
-	copyDefaults(arg0: boolean): MemoryConfigurationOptions
-	header(arg0: String): FileConfigurationOptions
-	header(): String
-	copyHeader(): boolean
-	copyHeader(arg0: boolean): FileConfigurationOptions
-	configuration(): FileConfiguration
-	configuration(): Configuration
-	configuration(): MemoryConfiguration
-	pathSeparator(arg0: char): ConfigurationOptions
-	pathSeparator(arg0: char): MemoryConfigurationOptions
-	pathSeparator(arg0: char): FileConfigurationOptions
-}
-declare interface Sheep extends Animals, Colorable {
-	isSheared(): boolean
-	setSheared(arg0: boolean): void
-}
-declare class Type extends Enum implements Keyed {
-	values(): Type[]
-	valueOf(arg0: String): Type
-	getKey(): NamespacedKey
-}
-declare interface EnderChest extends Directional, Waterlogged {
-}
-namespace PluginDisableEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getPlugin(): Plugin
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class BlockPopulator {
-	populate(arg0: World, arg1: Random, arg2: Chunk): void
-}
-namespace PlayerItemDamageEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setDamage(arg0: int): void
-	function getDamage(): int
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace StriderTemperatureChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isShivering(): boolean
-	function getEntity(): Entity
-	function getEntity(): Strider
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface SmallDripleaf extends Dripleaf, Bisected {
-}
-namespace PlayerShearEntityEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getHand(): EquipmentSlot
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace FurnaceSmeltEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setResult(arg0: ItemStack): void
-	function getSource(): ItemStack
-	function getHandlers(): HandlerList
-	function getResult(): ItemStack
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Rotatable extends BlockData {
-	setRotation(arg0: BlockFace): void
-	getRotation(): BlockFace
-}
-declare class PluginCommand extends Command implements PluginIdentifiableCommand {
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	setExecutor(arg0: CommandExecutor): void
-	getExecutor(): CommandExecutor
-	setTabCompleter(arg0: TabCompleter): void
-	getTabCompleter(): TabCompleter
-	getPlugin(): Plugin
-	toString(): String
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-namespace ExpBottleEvent {
-	function setExperience(arg0: int): void
-	function getExperience(): int
-	function getHandlerList(): HandlerList
-	function getShowEffect(): boolean
-	function setShowEffect(arg0: boolean): void
-	function getEntity(): Projectile
-	function getEntity(): ThrownExpBottle
-	function getEntity(): Entity
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHitBlock(): Block
-	function getHitBlockFace(): BlockFace
-	function getHitEntity(): Entity
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockIgniteEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getIgnitingEntity(): Entity
-	function getIgnitingBlock(): Block
-	function getPlayer(): Player
-	function getCause(): IgniteCause
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Nameable {
-	setCustomName(arg0: String): void
-	getCustomName(): String
-}
-namespace PlayerDeathEvent {
-	function getNewLevel(): int
-	function setDeathMessage(arg0: String): void
-	function getDeathMessage(): String
-	function setNewLevel(arg0: int): void
-	function getNewTotalExp(): int
-	function setNewTotalExp(arg0: int): void
-	function getKeepLevel(): boolean
-	function setKeepLevel(arg0: boolean): void
-	function setKeepInventory(arg0: boolean): void
-	function getKeepInventory(): boolean
-	function getEntity(): LivingEntity
-	function getEntity(): Player
-	function getEntity(): Entity
-	function getNewExp(): int
-	function setNewExp(arg0: int): void
-	function getHandlerList(): HandlerList
-	function getDroppedExp(): int
-	function setDroppedExp(arg0: int): void
-	function getDrops(): List
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Wrapper implements Serializable {
-	newWrapper(arg0: ConfigurationSerializable): Wrapper
-}
-declare interface Wolf extends Tameable, Sittable {
-	getCollarColor(): DyeColor
-	setCollarColor(arg0: DyeColor): void
-	isAngry(): boolean
-	setAngry(arg0: boolean): void
-}
-declare interface MetadataValue {
-	getOwningPlugin(): Plugin
-	asInt(): int
-	asFloat(): float
-	asDouble(): double
-	asLong(): long
-	asShort(): short
-	asByte(): byte
-	asBoolean(): boolean
-	asString(): String
-	value(): Object
-	invalidate(): void
-}
-declare interface PotionBrewer {
-	createEffect(arg0: PotionEffectType, arg1: int, arg2: int): PotionEffect
-	getEffectsFromDamage(arg0: int): Collection
-	getEffects(arg0: PotionType, arg1: boolean, arg2: boolean): Collection
-}
-declare class DoubleChest implements InventoryHolder {
-	getLeftSide(): InventoryHolder
-	getRightSide(): InventoryHolder
-	getInventory(): Inventory
-	getWorld(): World
-	getX(): double
-	getY(): double
-	getZ(): double
-	getLocation(): Location
-}
-namespace HangingEvent {
-	function getEntity(): Hanging
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CrossbowMeta extends ItemMeta {
-	hasChargedProjectiles(): boolean
-	getChargedProjectiles(): List
-	setChargedProjectiles(arg0: List): void
-	addChargedProjectile(arg0: ItemStack): void
-}
-declare interface Lidded {
-	close(): void
-	open(): void
-}
-declare class CocoaPlant extends MaterialData implements Directional, Attachable {
-	$SWITCH_TABLE$org$bukkit$material$CocoaPlant$CocoaPlantSize(): int[]
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	getFacing(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): CocoaPlant
-	getSize(): CocoaPlantSize
-	setSize(arg0: CocoaPlantSize): void
-}
-declare interface RecipeChoice extends Predicate, Cloneable {
-	getItemStack(): ItemStack
-	clone(): Object
-	clone(): RecipeChoice
-	test(arg0: Object): boolean
-	test(arg0: ItemStack): boolean
-}
-declare class Sign extends MaterialData implements Attachable {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	getFacing(): BlockFace
-	isWallSign(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Sign
-	clone(): MaterialData
-}
-namespace EntityPickupItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getRemaining(): int
-	function getItem(): Item
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface FaceAttachable extends BlockData {
-	getAttachedFace(): AttachedFace
-	setAttachedFace(arg0: AttachedFace): void
-}
-declare interface TileState extends BlockState, PersistentDataHolder {
-	getPersistentDataContainer(): PersistentDataContainer
-}
-declare interface PotionMeta extends ItemMeta {
-	setBasePotionData(arg0: PotionData): void
-	getBasePotionData(): PotionData
-	hasCustomEffects(): boolean
-	getCustomEffects(): List
-	addCustomEffect(arg0: PotionEffect, arg1: boolean): boolean
-	removeCustomEffect(arg0: PotionEffectType): boolean
-	hasCustomEffect(arg0: PotionEffectType): boolean
-	clearCustomEffects(): boolean
-	setMainEffect(arg0: PotionEffectType): boolean
-	getColor(): Color
-	hasColor(): boolean
-	clone(): ItemMeta
-	clone(): PotionMeta
-	clone(): Object
-	setColor(arg0: Color): void
-}
-declare interface ZombieHorse extends AbstractHorse {
-}
-namespace SheepRegrowWoolEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): Sheep
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Sittable {
-	setSitting(arg0: boolean): void
-	isSitting(): boolean
-}
-declare interface Giant extends Monster {
-}
-namespace PlayerPickupArrowEvent {
-	function getArrow(): AbstractArrow
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRemaining(): int
-	function getItem(): Item
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface StructureBlock extends BlockData {
-	getMode(): Mode
-	setMode(arg0: Mode): void
-}
-declare interface HumanEntity extends LivingEntity, AnimalTamer, InventoryHolder {
-	getInventory(): Inventory
-	getInventory(): PlayerInventory
-	getEnderChest(): Inventory
-	getMainHand(): MainHand
-	setWindowProperty(arg0: Property, arg1: int): boolean
-	getOpenInventory(): InventoryView
-	openInventory(arg0: InventoryView): void
-	openInventory(arg0: Inventory): InventoryView
-	openWorkbench(arg0: Location, arg1: boolean): InventoryView
-	openEnchanting(arg0: Location, arg1: boolean): InventoryView
-	openMerchant(arg0: Merchant, arg1: boolean): InventoryView
-	openMerchant(arg0: Villager, arg1: boolean): InventoryView
-	closeInventory(): void
-	getItemInHand(): ItemStack
-	setItemInHand(arg0: ItemStack): void
-	getItemOnCursor(): ItemStack
-	setItemOnCursor(arg0: ItemStack): void
-	hasCooldown(arg0: Material): boolean
-	getCooldown(arg0: Material): int
-	setCooldown(arg0: Material, arg1: int): void
-	getSleepTicks(): int
-	getBedLocation(): Location
-	getGameMode(): GameMode
-	setGameMode(arg0: GameMode): void
-	isHandRaised(): boolean
-	getItemInUse(): ItemStack
-	getExpToLevel(): int
-	getAttackCooldown(): float
-	discoverRecipe(arg0: NamespacedKey): boolean
-	discoverRecipes(arg0: Collection): int
-	undiscoverRecipe(arg0: NamespacedKey): boolean
-	undiscoverRecipes(arg0: Collection): int
-	hasDiscoveredRecipe(arg0: NamespacedKey): boolean
-	getDiscoveredRecipes(): Set
-	getShoulderEntityLeft(): Entity
-	setShoulderEntityLeft(arg0: Entity): void
-	getShoulderEntityRight(): Entity
-	setShoulderEntityRight(arg0: Entity): void
-	getExhaustion(): float
-	setExhaustion(arg0: float): void
-	getSaturation(): float
-	setSaturation(arg0: float): void
-	getFoodLevel(): int
-	setFoodLevel(arg0: int): void
-	getSaturatedRegenRate(): int
-	setSaturatedRegenRate(arg0: int): void
-	getUnsaturatedRegenRate(): int
-	setUnsaturatedRegenRate(arg0: int): void
-	getStarvationRate(): int
-	setStarvationRate(arg0: int): void
-	wakeup(arg0: boolean): void
-	isBlocking(): boolean
-	dropItem(arg0: boolean): boolean
-	getName(): String
-	sleep(arg0: Location, arg1: boolean): boolean
-}
-declare interface Team {
-	allowFriendlyFire(): boolean
-	canSeeFriendlyInvisibles(): boolean
-	setAllowFriendlyFire(arg0: boolean): void
-	setNameTagVisibility(arg0: NameTagVisibility): void
-	getNameTagVisibility(): NameTagVisibility
-	setDisplayName(arg0: String): void
-	getScoreboard(): Scoreboard
-	removePlayer(arg0: OfflinePlayer): boolean
-	removeEntry(arg0: String): boolean
-	getColor(): ChatColor
-	getPrefix(): String
-	getPlayers(): Set
-	addPlayer(arg0: OfflinePlayer): void
-	hasPlayer(arg0: OfflinePlayer): boolean
-	hasEntry(arg0: String): boolean
-	getOption(arg0: Option): OptionStatus
-	setOption(arg0: Option, arg1: OptionStatus): void
-	setPrefix(arg0: String): void
-	getSuffix(): String
-	setSuffix(arg0: String): void
-	setCanSeeFriendlyInvisibles(arg0: boolean): void
-	getName(): String
-	addEntry(arg0: String): void
-	getSize(): int
-	getEntries(): Set
-	getDisplayName(): String
-	unregister(): void
-	setColor(arg0: ChatColor): void
-}
-declare class NamespacedKey {
-	getNamespace(): String
-	minecraft(arg0: String): NamespacedKey
-	randomKey(): NamespacedKey
-	fromString(arg0: String): NamespacedKey
-	fromString(arg0: String, arg1: Plugin): NamespacedKey
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	getKey(): String
-}
-declare class ManuallyAbandonedConversationCanceller implements ConversationCanceller {
-	setConversation(arg0: Conversation): void
-	cancelBasedOnInput(arg0: ConversationContext, arg1: String): boolean
-	clone(): ConversationCanceller
-	clone(): Object
-}
-declare interface GrindstoneInventory extends Inventory {
-}
-declare interface BlockState extends Metadatable {
-	getBlockData(): BlockData
-	getLightLevel(): byte
-	setBlockData(arg0: BlockData): void
-	getBlock(): Block
-	getWorld(): World
-	getX(): int
-	getY(): int
-	getZ(): int
-	getChunk(): Chunk
-	setData(arg0: MaterialData): void
-	getRawData(): byte
-	setRawData(arg0: byte): void
-	isPlaced(): boolean
-	getData(): MaterialData
-	setType(arg0: Material): void
-	update(arg0: boolean, arg1: boolean): boolean
-	update(arg0: boolean): boolean
-	update(): boolean
-	getLocation(arg0: Location): Location
-	getLocation(): Location
-	getType(): Material
-}
-namespace PlayerDropItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getItemDrop(): Item
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PolarBear extends Animals {
-}
-namespace PlayerItemHeldEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getPreviousSlot(): int
-	function getNewSlot(): int
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerBucketEmptyEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getItemStack(): ItemStack
-	function getBlockFace(): BlockFace
-	function setItemStack(arg0: ItemStack): void
-	function getBlockClicked(): Block
-	function getBlock(): Block
-	function getBucket(): Material
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Coal extends MaterialData {
-	setType(arg0: CoalType): void
-	toString(): String
-	clone(): Object
-	clone(): Coal
-	clone(): MaterialData
-	getType(): CoalType
-}
-namespace PlayerInteractAtEntityEvent {
-	function getHandlerList(): HandlerList
-	function getClickedPosition(): Vector
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getRightClicked(): Entity
-	function getHand(): EquipmentSlot
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace FoodLevelChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getFoodLevel(): int
-	function setFoodLevel(arg0: int): void
-	function getEntity(): Entity
-	function getEntity(): HumanEntity
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class MaterialChoice implements RecipeChoice {
-	getItemStack(): ItemStack
-	getChoices(): List
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	clone(): Object
-	clone(): RecipeChoice
-	clone(): MaterialChoice
-	test(arg0: Object): boolean
-	test(arg0: ItemStack): boolean
-}
-declare interface Metadatable {
-	setMetadata(arg0: String, arg1: MetadataValue): void
-	getMetadata(arg0: String): List
-	hasMetadata(arg0: String): boolean
-	removeMetadata(arg0: String, arg1: Plugin): void
-}
-namespace PlayerEvent {
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ServiceEvent {
-	function getProvider(): RegisteredServiceProvider
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface EnderPearl extends ThrowableProjectile {
-}
-namespace PlayerChangedWorldEvent {
-	function getHandlerList(): HandlerList
-	function getFrom(): World
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BrewingStand extends Container {
-	getSnapshotInventory(): BrewerInventory
-	getSnapshotInventory(): Inventory
-	getInventory(): Inventory
-	getInventory(): BrewerInventory
-	getBrewingTime(): int
-	setBrewingTime(arg0: int): void
-	getFuelLevel(): int
-	setFuelLevel(arg0: int): void
-}
-declare interface Lantern extends Waterlogged {
-	isHanging(): boolean
-	setHanging(arg0: boolean): void
-}
-declare interface ElderGuardian extends Guardian {
-}
-declare interface LoomInventory extends Inventory {
-}
-declare interface BrewerInventory extends Inventory {
-	getIngredient(): ItemStack
-	setIngredient(arg0: ItemStack): void
-	getFuel(): ItemStack
-	setFuel(arg0: ItemStack): void
-	getHolder(): BrewingStand
-	getHolder(): InventoryHolder
-}
-namespace InventoryEvent {
-	function getHandlerList(): HandlerList
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerPortalEvent {
-	function getHandlerList(): HandlerList
-	function setSearchRadius(arg0: int): void
-	function getSearchRadius(): int
-	function getCanCreatePortal(): boolean
-	function setCanCreatePortal(arg0: boolean): void
-	function setCreationRadius(arg0: int): void
-	function getCreationRadius(): int
-	function getHandlers(): HandlerList
-	function getCause(): TeleportCause
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getFrom(): Location
-	function setFrom(arg0: Location): void
-	function getTo(): Location
-	function setTo(arg0: Location): void
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Explosive extends Entity {
-	isIncendiary(): boolean
-	setIsIncendiary(arg0: boolean): void
-	getYield(): float
-	setYield(arg0: float): void
-}
-declare class EnderChest extends DirectionalContainer {
-	clone(): Object
-	clone(): MaterialData
-	clone(): DirectionalContainer
-	clone(): EnderChest
-}
-namespace PlayerMoveEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getFrom(): Location
-	function setFrom(arg0: Location): void
-	function getTo(): Location
-	function setTo(arg0: Location): void
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Drowned extends Zombie {
-}
-declare interface Enderman extends Monster {
-	getCarriedMaterial(): MaterialData
-	setCarriedMaterial(arg0: MaterialData): void
-	getCarriedBlock(): BlockData
-	setCarriedBlock(arg0: BlockData): void
-}
-declare interface Jigsaw extends BlockData {
-	getOrientation(): Orientation
-	setOrientation(arg0: Orientation): void
-}
-declare class SmoothBrick extends TexturedMaterial {
-	getTextures(): List
-	clone(): MaterialData
-	clone(): Object
-	clone(): TexturedMaterial
-	clone(): SmoothBrick
-}
-declare interface StonecutterInventory extends Inventory {
-}
-declare class Potion {
-	toItemStack(arg0: int): ItemStack
-	setHasExtendedDuration(arg0: boolean): void
-	hasExtendedDuration(): boolean
-	toDamageValue(): short
-	fromItemStack(arg0: ItemStack): Potion
-	setPotionBrewer(arg0: PotionBrewer): void
-	setType(arg0: PotionType): void
-	splash(): Potion
-	setSplash(arg0: boolean): void
-	extend(): Potion
-	getBrewer(): PotionBrewer
-	isSplash(): boolean
-	fromDamage(arg0: int): Potion
-	getNameId(): int
-	getEffects(): Collection
-	equals(arg0: Object): boolean
-	hashCode(): int
-	apply(arg0: LivingEntity): void
-	apply(arg0: ItemStack): void
-	getType(): PotionType
-	getLevel(): int
-	setLevel(arg0: int): void
-}
-namespace PlayerToggleSneakEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isSneaking(): boolean
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PluginCommandYamlParser {
-	parse(arg0: Plugin): List
-}
-declare interface BlockStateMeta extends ItemMeta {
-	hasBlockState(): boolean
-	getBlockState(): BlockState
-	setBlockState(arg0: BlockState): void
-}
-namespace EntityExhaustionEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getExhaustion(): float
-	function setExhaustion(arg0: float): void
-	function getExhaustionReason(): ExhaustionReason
-	function getEntity(): Entity
-	function getEntity(): HumanEntity
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Gate extends MaterialData implements Directional, Openable {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	setOpen(arg0: boolean): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Gate
-	clone(): Object
-	clone(): MaterialData
-	isOpen(): boolean
-}
-declare interface NPC extends Creature {
-}
-declare interface EnderSignal extends Entity {
-	getTargetLocation(): Location
-	setTargetLocation(arg0: Location): void
-	getDropItem(): boolean
-	setDropItem(arg0: boolean): void
-	getDespawnTimer(): int
-	setDespawnTimer(arg0: int): void
-	setItem(arg0: ItemStack): void
-	getItem(): ItemStack
-}
-declare interface Entity extends Metadatable, CommandSender, Nameable, PersistentDataHolder {
-	setPersistent(arg0: boolean): void
-	isCustomNameVisible(): boolean
-	getUniqueId(): UUID
-	isInsideVehicle(): boolean
-	setTicksLived(arg0: int): void
-	setFallDistance(arg0: float): void
-	setPassenger(arg0: Entity): boolean
-	getPortalCooldown(): int
-	getPassenger(): Entity
-	getPistonMoveReaction(): PistonMoveReaction
-	addPassenger(arg0: Entity): boolean
-	removeScoreboardTag(arg0: String): boolean
-	setInvulnerable(arg0: boolean): void
-	getFallDistance(): float
-	setPortalCooldown(arg0: int): void
-	setCustomNameVisible(arg0: boolean): void
-	isPersistent(): boolean
-	getScoreboardTags(): Set
-	getPassengers(): List
-	getLastDamageCause(): EntityDamageEvent
-	isInvulnerable(): boolean
-	leaveVehicle(): boolean
-	removePassenger(arg0: Entity): boolean
-	addScoreboardTag(arg0: String): boolean
-	getTicksLived(): int
-	setLastDamageCause(arg0: EntityDamageEvent): void
-	getMaxFireTicks(): int
-	getFreezeTicks(): int
-	getFireTicks(): int
-	getMaxFreezeTicks(): int
-	setVisualFire(arg0: boolean): void
-	getEntityId(): int
-	isVisualFire(): boolean
-	setVelocity(arg0: Vector): void
-	setFireTicks(arg0: int): void
-	setFreezeTicks(arg0: int): void
-	getNearbyEntities(arg0: double, arg1: double, arg2: double): List
-	getVelocity(): Vector
-	setRotation(arg0: float, arg1: float): void
-	getBoundingBox(): BoundingBox
-	getFacing(): BlockFace
-	getWorld(): World
-	getHeight(): double
-	getWidth(): double
-	isOnGround(): boolean
-	isInWater(): boolean
-	teleport(arg0: Entity, arg1: TeleportCause): boolean
-	teleport(arg0: Location, arg1: TeleportCause): boolean
-	teleport(arg0: Entity): boolean
-	teleport(arg0: Location): boolean
-	isDead(): boolean
-	isValid(): boolean
-	getServer(): Server
-	eject(): boolean
-	playEffect(arg0: EntityEffect): void
-	getVehicle(): Entity
-	setGlowing(arg0: boolean): void
-	isGlowing(): boolean
-	isSilent(): boolean
-	setSilent(arg0: boolean): void
-	hasGravity(): boolean
-	setGravity(arg0: boolean): void
-	getPose(): Pose
-	spigot(): Spigot
-	spigot(): Spigot
-	remove(): void
-	isEmpty(): boolean
-	getLocation(arg0: Location): Location
-	getLocation(): Location
-	getType(): EntityType
-	isFrozen(): boolean
-}
-namespace FurnaceExtractEvent {
-	function getItemType(): Material
-	function getItemAmount(): int
-	function getPlayer(): Player
-	function getHandlerList(): HandlerList
-	function getExpToDrop(): int
-	function setExpToDrop(arg0: int): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Lectern extends Directional, Powerable {
-	hasBook(): boolean
-}
-declare class BlockVector extends Vector {
-	deserialize(arg0: Map): BlockVector
-	equals(arg0: Object): boolean
-	hashCode(): int
-	clone(): BlockVector
-	clone(): Vector
-	clone(): Object
-}
-declare interface OfflinePlayer extends ServerOperator, AnimalTamer, ConfigurationSerializable {
-	getUniqueId(): UUID
-	isWhitelisted(): boolean
-	setWhitelisted(arg0: boolean): void
-	getFirstPlayed(): long
-	getLastPlayed(): long
-	hasPlayedBefore(): boolean
-	getBedSpawnLocation(): Location
-	incrementStatistic(arg0: Statistic): void
-	incrementStatistic(arg0: Statistic, arg1: Material): void
-	incrementStatistic(arg0: Statistic, arg1: EntityType): void
-	incrementStatistic(arg0: Statistic, arg1: int): void
-	incrementStatistic(arg0: Statistic, arg1: Material, arg2: int): void
-	incrementStatistic(arg0: Statistic, arg1: EntityType, arg2: int): void
-	decrementStatistic(arg0: Statistic, arg1: Material, arg2: int): void
-	decrementStatistic(arg0: Statistic, arg1: EntityType, arg2: int): void
-	decrementStatistic(arg0: Statistic, arg1: Material): void
-	decrementStatistic(arg0: Statistic): void
-	decrementStatistic(arg0: Statistic, arg1: EntityType): void
-	decrementStatistic(arg0: Statistic, arg1: int): void
-	setStatistic(arg0: Statistic, arg1: Material, arg2: int): void
-	setStatistic(arg0: Statistic, arg1: int): void
-	setStatistic(arg0: Statistic, arg1: EntityType, arg2: int): void
-	getStatistic(arg0: Statistic, arg1: EntityType): int
-	getStatistic(arg0: Statistic, arg1: Material): int
-	getStatistic(arg0: Statistic): int
-	getPlayer(): Player
-	isBanned(): boolean
-	isOnline(): boolean
-	getName(): String
-}
-declare class InventoryView {
-	getInventory(arg0: int): Inventory
-	getTopInventory(): Inventory
-	convertSlot(arg0: int): int
-	getSlotType(arg0: int): SlotType
-	getBottomInventory(): Inventory
-	getPlayer(): HumanEntity
-	getCursor(): ItemStack
-	setCursor(arg0: ItemStack): void
-	setItem(arg0: int, arg1: ItemStack): void
-	countSlots(): int
-	getTitle(): String
-	$SWITCH_TABLE$org$bukkit$event$inventory$InventoryType(): int[]
-	setProperty(arg0: Property, arg1: int): boolean
-	close(): void
-	getType(): InventoryType
-	getItem(arg0: int): ItemStack
-}
-namespace VehicleUpdateEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface FallingBlock extends Entity {
-	getBlockData(): BlockData
-	getMaterial(): Material
-	getDropItem(): boolean
-	setDropItem(arg0: boolean): void
-	canHurtEntities(): boolean
-	setHurtEntities(arg0: boolean): void
-}
-namespace VehicleMoveEvent {
-	function getHandlerList(): HandlerList
-	function getFrom(): Location
-	function getTo(): Location
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Panda extends Animals {
-	getMainGene(): Gene
-	setMainGene(arg0: Gene): void
-	getHiddenGene(): Gene
-	setHiddenGene(arg0: Gene): void
-}
-declare class NumericPrompt extends ValidatingPrompt {
-	isInputValid(arg0: ConversationContext, arg1: String): boolean
-	acceptValidatedInput(arg0: ConversationContext, arg1: String): Prompt
-	acceptValidatedInput(arg0: ConversationContext, arg1: Number): Prompt
-	getFailedValidationText(arg0: ConversationContext, arg1: Number): String
-	getFailedValidationText(arg0: ConversationContext, arg1: String): String
-	isNumberValid(arg0: ConversationContext, arg1: Number): boolean
-	getInputNotNumericText(arg0: ConversationContext, arg1: String): String
-}
-declare interface Mob extends LivingEntity, Lootable {
-	setAware(arg0: boolean): void
-	isAware(): boolean
-	getTarget(): LivingEntity
-	setTarget(arg0: LivingEntity): void
-}
-namespace CreeperPowerEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLightning(): LightningStrike
-	function getEntity(): Entity
-	function getEntity(): Creeper
-	function getCause(): PowerCause
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Ageable extends BlockData {
-	getMaximumAge(): int
-	getAge(): int
-	setAge(arg0: int): void
-}
-declare interface PluginMessageListener {
-	onPluginMessageReceived(arg0: String, arg1: Player, arg2: byte[]): void
-}
-declare interface Beacon extends TileState, Lockable, Nameable {
-	getEntitiesInRange(): Collection
-	getPrimaryEffect(): PotionEffect
-	setPrimaryEffect(arg0: PotionEffectType): void
-	getSecondaryEffect(): PotionEffect
-	setSecondaryEffect(arg0: PotionEffectType): void
-	getTier(): int
-}
-namespace EntityShootBowEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getConsumable(): ItemStack
-	function getProjectile(): Entity
-	function setProjectile(arg0: Entity): void
-	function setConsumeItem(arg0: boolean): void
-	function shouldConsumeItem(): boolean
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getBow(): ItemStack
-	function getForce(): float
-	function getHand(): EquipmentSlot
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Profession extends Enum implements Keyed {
-	values(): Profession[]
-	valueOf(arg0: String): Profession
-	getKey(): NamespacedKey
-}
-declare class ConfigurationOptions {
-	copyDefaults(arg0: boolean): ConfigurationOptions
-	copyDefaults(): boolean
-	configuration(): Configuration
-	pathSeparator(): char
-	pathSeparator(arg0: char): ConfigurationOptions
-}
-declare class FurnaceRecipe extends CookingRecipe {
-	setInputChoice(arg0: RecipeChoice): FurnaceRecipe
-	setInputChoice(arg0: RecipeChoice): CookingRecipe
-	setInput(arg0: Material, arg1: int): FurnaceRecipe
-	setInput(arg0: Material): CookingRecipe
-	setInput(arg0: MaterialData): FurnaceRecipe
-	setInput(arg0: Material): FurnaceRecipe
-}
-declare class SmokingRecipe extends CookingRecipe {
-}
-namespace PlayerEggThrowEvent {
-	function getHandlerList(): HandlerList
-	function setHatching(arg0: boolean): void
-	function getHatchingType(): EntityType
-	function setHatchingType(arg0: EntityType): void
-	function getNumHatches(): byte
-	function setNumHatches(arg0: byte): void
-	function getEgg(): Egg
-	function isHatching(): boolean
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Messenger {
-	isReservedChannel(arg0: String): boolean
-	getOutgoingChannels(arg0: Plugin): Set
-	getOutgoingChannels(): Set
-	getIncomingChannels(): Set
-	getIncomingChannels(arg0: Plugin): Set
-	isRegistrationValid(arg0: PluginMessageListenerRegistration): boolean
-	dispatchIncomingMessage(arg0: Player, arg1: String, arg2: byte[]): void
-	registerOutgoingPluginChannel(arg0: Plugin, arg1: String): void
-	unregisterOutgoingPluginChannel(arg0: Plugin): void
-	unregisterOutgoingPluginChannel(arg0: Plugin, arg1: String): void
-	registerIncomingPluginChannel(arg0: Plugin, arg1: String, arg2: PluginMessageListener): PluginMessageListenerRegistration
-	unregisterIncomingPluginChannel(arg0: Plugin): void
-	unregisterIncomingPluginChannel(arg0: Plugin, arg1: String): void
-	unregisterIncomingPluginChannel(arg0: Plugin, arg1: String, arg2: PluginMessageListener): void
-	getIncomingChannelRegistrations(arg0: Plugin): Set
-	getIncomingChannelRegistrations(arg0: String): Set
-	getIncomingChannelRegistrations(arg0: Plugin, arg1: String): Set
-	isIncomingChannelRegistered(arg0: Plugin, arg1: String): boolean
-	isOutgoingChannelRegistered(arg0: Plugin, arg1: String): boolean
-}
-namespace StructureGrowEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isFromBonemeal(): boolean
-	function getPlayer(): Player
-	function getSpecies(): TreeType
-	function getBlocks(): List
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PluginBase implements Plugin {
-	getName(): String
-	equals(arg0: Object): boolean
-	hashCode(): int
-}
-namespace RaidTriggerEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getRaid(): Raid
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerPickupItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRemaining(): int
-	function getItem(): Item
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface InventoryHolder {
-	getInventory(): Inventory
-}
-declare interface BossBar {
-	removePlayer(arg0: Player): void
-	setProgress(arg0: double): void
-	getProgress(): double
-	setVisible(arg0: boolean): void
-	isVisible(): boolean
-	getColor(): BarColor
-	getPlayers(): List
-	addPlayer(arg0: Player): void
-	getTitle(): String
-	setTitle(arg0: String): void
-	getStyle(): BarStyle
-	setStyle(arg0: BarStyle): void
-	removeFlag(arg0: BarFlag): void
-	hasFlag(arg0: BarFlag): boolean
-	show(): void
-	hide(): void
-	removeAll(): void
-	addFlag(arg0: BarFlag): void
-	setColor(arg0: BarColor): void
-}
-namespace PlayerPreLoginEvent {
-	function getUniqueId(): UUID
-	function getHandlerList(): HandlerList
-	function getKickMessage(): String
-	function setKickMessage(arg0: String): void
-	function getName(): String
-	function disallow(arg0: Result, arg1: String): void
-	function allow(): void
-	function getAddress(): InetAddress
-	function setResult(arg0: Result): void
-	function getHandlers(): HandlerList
-	function getResult(): Result
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace RaidStopEvent {
-	function getHandlerList(): HandlerList
-	function getReason(): Reason
-	function getHandlers(): HandlerList
-	function getRaid(): Raid
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BundleMeta extends ItemMeta {
-	addItem(arg0: ItemStack): void
-	hasItems(): boolean
-	getItems(): List
-	setItems(arg0: List): void
-}
-declare interface Plugin extends TabExecutor {
-	getDescription(): PluginDescriptionFile
-	getDataFolder(): File
-	saveDefaultConfig(): void
-	saveResource(arg0: String, arg1: boolean): void
-	reloadConfig(): void
-	getPluginLoader(): PluginLoader
-	setNaggable(arg0: boolean): void
-	getDefaultWorldGenerator(arg0: String, arg1: String): ChunkGenerator
-	getConfig(): FileConfiguration
-	getServer(): Server
-	saveConfig(): void
-	onDisable(): void
-	onLoad(): void
-	onEnable(): void
-	isNaggable(): boolean
-	isEnabled(): boolean
-	getName(): String
-	getResource(arg0: String): InputStream
-	getLogger(): Logger
-}
-declare interface LlamaSpit extends Projectile {
-}
-namespace BlockReceiveGameEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEvent(): GameEvent
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Salmon extends Fish {
-}
-declare interface Turtle extends Animals {
-}
-declare interface Cocoa extends Ageable, Directional {
-}
-declare interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginMessageRecipient {
-	setDisplayName(arg0: String): void
-	sendRawMessage(arg0: String): void
-	getAllowFlight(): boolean
-	isSprinting(): boolean
-	getScoreboard(): Scoreboard
-	getBedSpawnLocation(): Location
-	getPlayerListName(): String
-	setPlayerListName(arg0: String): void
-	getPlayerListHeader(): String
-	getPlayerListFooter(): String
-	setPlayerListHeader(arg0: String): void
-	setPlayerListFooter(arg0: String): void
-	setPlayerListHeaderFooter(arg0: String, arg1: String): void
-	setCompassTarget(arg0: Location): void
-	getCompassTarget(): Location
-	performCommand(arg0: String): boolean
-	setSneaking(arg0: boolean): void
-	setSprinting(arg0: boolean): void
-	setSleepingIgnored(arg0: boolean): void
-	isSleepingIgnored(): boolean
-	setBedSpawnLocation(arg0: Location): void
-	setBedSpawnLocation(arg0: Location, arg1: boolean): void
-	sendBlockChange(arg0: Location, arg1: BlockData): void
-	sendBlockChange(arg0: Location, arg1: Material, arg2: byte): void
-	sendBlockDamage(arg0: Location, arg1: float): void
-	sendChunkChange(arg0: Location, arg1: int, arg2: int, arg3: int, arg4: byte[]): boolean
-	sendSignChange(arg0: Location, arg1: String[]): void
-	sendSignChange(arg0: Location, arg1: String[], arg2: DyeColor): void
-	updateInventory(): void
-	setPlayerTime(arg0: long, arg1: boolean): void
-	getPlayerTime(): long
-	getPlayerTimeOffset(): long
-	isPlayerTimeRelative(): boolean
-	resetPlayerTime(): void
-	setPlayerWeather(arg0: WeatherType): void
-	getPlayerWeather(): WeatherType
-	resetPlayerWeather(): void
-	giveExpLevels(arg0: int): void
-	getTotalExperience(): int
-	setTotalExperience(arg0: int): void
-	sendExperienceChange(arg0: float, arg1: int): void
-	sendExperienceChange(arg0: float): void
-	setAllowFlight(arg0: boolean): void
-	setFlySpeed(arg0: float): void
-	setWalkSpeed(arg0: float): void
-	getFlySpeed(): float
-	getWalkSpeed(): float
-	setTexturePack(arg0: String): void
-	setResourcePack(arg0: String, arg1: byte[]): void
-	setResourcePack(arg0: String): void
-	setScoreboard(arg0: Scoreboard): void
-	isHealthScaled(): boolean
-	setHealthScaled(arg0: boolean): void
-	setHealthScale(arg0: double): void
-	getHealthScale(): double
-	getSpectatorTarget(): Entity
-	setSpectatorTarget(arg0: Entity): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: double, arg9: Object): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: Object): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: double): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: Object): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: Object): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: double): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: double, arg7: Object): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: Object): void
-	getAdvancementProgress(arg0: Advancement): AdvancementProgress
-	getClientViewDistance(): int
-	updateCommands(): void
-	isOnGround(): boolean
-	playEffect(arg0: Location, arg1: Effect, arg2: Object): void
-	playEffect(arg0: Location, arg1: Effect, arg2: int): void
-	spigot(): Spigot
-	spigot(): Spigot
-	spigot(): Spigot
-	getLocale(): String
-	canSee(arg0: Player): boolean
-	isSneaking(): boolean
-	kickPlayer(arg0: String): void
-	chat(arg0: String): void
-	saveData(): void
-	loadData(): void
-	playNote(arg0: Location, arg1: byte, arg2: byte): void
-	playNote(arg0: Location, arg1: Instrument, arg2: Note): void
-	playSound(arg0: Location, arg1: Sound, arg2: SoundCategory, arg3: float, arg4: float): void
-	playSound(arg0: Location, arg1: String, arg2: SoundCategory, arg3: float, arg4: float): void
-	playSound(arg0: Location, arg1: Sound, arg2: float, arg3: float): void
-	playSound(arg0: Location, arg1: String, arg2: float, arg3: float): void
-	stopSound(arg0: String, arg1: SoundCategory): void
-	stopSound(arg0: Sound, arg1: SoundCategory): void
-	stopSound(arg0: String): void
-	stopSound(arg0: Sound): void
-	breakBlock(arg0: Block): boolean
-	sendMap(arg0: MapView): void
-	giveExp(arg0: int): void
-	getExp(): float
-	setExp(arg0: float): void
-	hidePlayer(arg0: Plugin, arg1: Player): void
-	hidePlayer(arg0: Player): void
-	showPlayer(arg0: Plugin, arg1: Player): void
-	showPlayer(arg0: Player): void
-	setFlying(arg0: boolean): void
-	sendTitle(arg0: String, arg1: String, arg2: int, arg3: int, arg4: int): void
-	sendTitle(arg0: String, arg1: String): void
-	resetTitle(): void
-	getPing(): int
-	openBook(arg0: ItemStack): void
-	isFlying(): boolean
-	getAddress(): InetSocketAddress
-	getDisplayName(): String
-	getLevel(): int
-	setLevel(arg0: int): void
-}
-declare class NoiseGenerator {
-	noise(arg0: double, arg1: int, arg2: double, arg3: double, arg4: boolean): double
-	noise(arg0: double, arg1: int, arg2: double, arg3: double): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: int, arg4: double, arg5: double, arg6: boolean): double
-	noise(arg0: double, arg1: double): double
-	noise(arg0: double, arg1: double, arg2: int, arg3: double, arg4: double): double
-	noise(arg0: double, arg1: double, arg2: int, arg3: double, arg4: double, arg5: boolean): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: int, arg4: double, arg5: double): double
-	noise(arg0: double): double
-	noise(arg0: double, arg1: double, arg2: double): double
-	fade(arg0: double): double
-	grad(arg0: int, arg1: double, arg2: double, arg3: double): double
-	lerp(arg0: double, arg1: double, arg2: double): double
-	floor(arg0: double): int
-}
-declare interface Scoreboard {
-	registerNewObjective(arg0: String, arg1: String, arg2: String, arg3: RenderType): Objective
-	registerNewObjective(arg0: String, arg1: String, arg2: String): Objective
-	registerNewObjective(arg0: String, arg1: String): Objective
-	getObjective(arg0: String): Objective
-	getObjective(arg0: DisplaySlot): Objective
-	getObjectivesByCriteria(arg0: String): Set
-	getObjectives(): Set
-	resetScores(arg0: OfflinePlayer): void
-	resetScores(arg0: String): void
-	getPlayerTeam(arg0: OfflinePlayer): Team
-	getEntryTeam(arg0: String): Team
-	registerNewTeam(arg0: String): Team
-	getPlayers(): Set
-	getScores(arg0: String): Set
-	getScores(arg0: OfflinePlayer): Set
-	getTeam(arg0: String): Team
-	getTeams(): Set
-	clearSlot(arg0: DisplaySlot): void
-	getEntries(): Set
-}
-declare interface UnsafeValues {
-	getDataVersion(): int
-	getMaterial(arg0: String, arg1: int): Material
-	modifyItemStack(arg0: ItemStack, arg1: String): ItemStack
-	checkSupported(arg0: PluginDescriptionFile): void
-	processClass(arg0: PluginDescriptionFile, arg1: String, arg2: byte[]): byte[]
-	loadAdvancement(arg0: NamespacedKey, arg1: String): Advancement
-	removeAdvancement(arg0: NamespacedKey): boolean
-	toLegacy(arg0: Material): Material
-	fromLegacy(arg0: Material, arg1: byte): BlockData
-	fromLegacy(arg0: Material): Material
-	fromLegacy(arg0: MaterialData): Material
-	fromLegacy(arg0: MaterialData, arg1: boolean): Material
-}
-declare class MessagePrompt implements Prompt {
-	blocksForInput(arg0: ConversationContext): boolean
-	acceptInput(arg0: ConversationContext, arg1: String): Prompt
-	getNextPrompt(arg0: ConversationContext): Prompt
-}
-declare class MapRenderer {
-	isContextual(): boolean
-	render(arg0: MapView, arg1: MapCanvas, arg2: Player): void
-	initialize(arg0: MapView): void
-}
-declare interface Boat extends Vehicle {
-	getMaxSpeed(): double
-	setMaxSpeed(arg0: double): void
-	getWoodType(): TreeSpecies
-	setWoodType(arg0: TreeSpecies): void
-	getOccupiedDeceleration(): double
-	setOccupiedDeceleration(arg0: double): void
-	getUnoccupiedDeceleration(): double
-	setUnoccupiedDeceleration(arg0: double): void
-	getWorkOnLand(): boolean
-	setWorkOnLand(arg0: boolean): void
-}
-declare interface BlastFurnace extends Furnace {
-}
-declare interface ItemFactory {
-	getItemMeta(arg0: Material): ItemMeta
-	isApplicable(arg0: ItemMeta, arg1: Material): boolean
-	isApplicable(arg0: ItemMeta, arg1: ItemStack): boolean
-	updateMaterial(arg0: ItemMeta, arg1: Material): Material
-	getDefaultLeatherColor(): Color
-	asMetaFor(arg0: ItemMeta, arg1: ItemStack): ItemMeta
-	asMetaFor(arg0: ItemMeta, arg1: Material): ItemMeta
-	equals(arg0: ItemMeta, arg1: ItemMeta): boolean
-}
-namespace InventoryInteractEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getHandlerList(): HandlerList
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Stray extends AbstractSkeleton {
-}
-declare interface LargeFireball extends SizedFireball {
-}
-declare interface Villager extends AbstractVillager {
-	getProfession(): Profession
-	setProfession(arg0: Profession): void
-	getVillagerType(): Type
-	setVillagerType(arg0: Type): void
-	getVillagerLevel(): int
-	setVillagerLevel(arg0: int): void
-	getVillagerExperience(): int
-	setVillagerExperience(arg0: int): void
-	shakeHead(): void
-	wakeup(): void
-	sleep(arg0: Location): boolean
-}
-namespace FluidLevelChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getNewData(): BlockData
-	function setNewData(arg0: BlockData): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PluginMessageRecipient {
-	sendPluginMessage(arg0: Plugin, arg1: String, arg2: byte[]): void
-	getListeningPluginChannels(): Set
-}
-declare class Crops extends MaterialData {
-	$SWITCH_TABLE$org$bukkit$Material(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Crops
-	clone(): MaterialData
-	getState(): CropState
-	setState(arg0: CropState): void
-}
-namespace BrewEvent {
-	function getContents(): BrewerInventory
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getFuelLevel(): int
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerArmorStandManipulateEvent {
-	function getHandlerList(): HandlerList
-	function getPlayerItem(): ItemStack
-	function getArmorStandItem(): ItemStack
-	function getRightClicked(): ArmorStand
-	function getRightClicked(): Entity
-	function getSlot(): EquipmentSlot
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHand(): EquipmentSlot
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerExpChangeEvent {
-	function getHandlerList(): HandlerList
-	function getAmount(): int
-	function setAmount(arg0: int): void
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Vibration {
-	getDestination(): Destination
-	getArrivalTime(): int
-	getOrigin(): Location
-}
-namespace BlockDropItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlockState(): BlockState
-	function getPlayer(): Player
-	function getItems(): List
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BukkitTask {
-	isCancelled(): boolean
-	cancel(): void
-	getTaskId(): int
-	getOwner(): Plugin
-	isSync(): boolean
-}
-declare interface Smoker extends Furnace {
-}
-declare class Command {
-	tabComplete0(arg0: CommandSender, arg1: String, arg2: String[], arg3: Location): List
-	testPermissionSilent(arg0: CommandSender): boolean
-	allowChangesFrom(arg0: CommandMap): boolean
-	getPermissionMessage(): String
-	getDescription(): String
-	setDescription(arg0: String): Command
-	setPermissionMessage(arg0: String): Command
-	broadcastCommandMessage(arg0: CommandSender, arg1: String, arg2: boolean): void
-	broadcastCommandMessage(arg0: CommandSender, arg1: String): void
-	testPermission(arg0: CommandSender): boolean
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[], arg3: Location): List
-	getLabel(): String
-	setLabel(arg0: String): boolean
-	getAliases(): List
-	getUsage(): String
-	setAliases(arg0: List): Command
-	setUsage(arg0: String): Command
-	getName(): String
-	toString(): String
-	isRegistered(): boolean
-	register(arg0: CommandMap): boolean
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-	setName(arg0: String): boolean
-	setPermission(arg0: String): void
-	unregister(arg0: CommandMap): boolean
-	getPermission(): String
-}
-declare class ExtendedRails extends Rails {
-	setDirection(arg0: BlockFace, arg1: boolean): void
-	getConvertedData(): byte
-	isCurve(): boolean
-	clone(): MaterialData
-	clone(): Object
-	clone(): Rails
-	clone(): ExtendedRails
-}
-declare interface Parrot extends Tameable, Sittable {
-	setVariant(arg0: Variant): void
-	getVariant(): Variant
-}
-namespace PrepareItemEnchantEvent {
-	function getEnchanter(): Player
-	function getEnchantBlock(): Block
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getExpLevelCostsOffered(): int[]
-	function getEnchantmentBonus(): int
-	function getOffers(): EnchantmentOffer[]
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface AnaloguePowerable extends BlockData {
-	getMaximumPower(): int
-	getPower(): int
-	setPower(arg0: int): void
-}
-declare class MapCursorCollection {
-	removeCursor(arg0: MapCursor): boolean
-	getCursor(arg0: int): MapCursor
-	addCursor(arg0: int, arg1: int, arg2: byte): MapCursor
-	addCursor(arg0: int, arg1: int, arg2: byte, arg3: byte, arg4: boolean): MapCursor
-	addCursor(arg0: int, arg1: int, arg2: byte, arg3: byte): MapCursor
-	addCursor(arg0: MapCursor): MapCursor
-	addCursor(arg0: int, arg1: int, arg2: byte, arg3: byte, arg4: boolean, arg5: String): MapCursor
-	size(): int
-}
-declare interface Orientable extends BlockData {
-	getAxis(): Axis
-	setAxis(arg0: Axis): void
-	getAxes(): Set
-}
-declare class FireworkEffect implements ConfigurationSerializable {
-	deserialize(arg0: Map): ConfigurationSerializable
-	getFadeColors(): List
-	serialize(): Map
-	hasFlicker(): boolean
-	hasTrail(): boolean
-	getColors(): List
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	builder(): Builder
-	getType(): Type
-}
-declare interface ItemMeta extends Cloneable, ConfigurationSerializable, PersistentDataHolder {
-	setDisplayName(arg0: String): void
-	hasDisplayName(): boolean
-	hasLocalizedName(): boolean
-	getLocalizedName(): String
-	setLocalizedName(arg0: String): void
-	hasCustomModelData(): boolean
-	getCustomModelData(): int
-	setCustomModelData(arg0: Integer): void
-	hasEnchants(): boolean
-	getEnchantLevel(arg0: Enchantment): int
-	getEnchants(): Map
-	removeEnchant(arg0: Enchantment): boolean
-	hasConflictingEnchant(arg0: Enchantment): boolean
-	addItemFlags(arg0: ItemFlag[]): void
-	removeItemFlags(arg0: ItemFlag[]): void
-	getItemFlags(): Set
-	hasItemFlag(arg0: ItemFlag): boolean
-	isUnbreakable(): boolean
-	setUnbreakable(arg0: boolean): void
-	hasAttributeModifiers(): boolean
-	getAttributeModifiers(): Multimap
-	getAttributeModifiers(arg0: Attribute): Collection
-	getAttributeModifiers(arg0: EquipmentSlot): Multimap
-	addAttributeModifier(arg0: Attribute, arg1: AttributeModifier): boolean
-	setAttributeModifiers(arg0: Multimap): void
-	removeAttributeModifier(arg0: EquipmentSlot): boolean
-	removeAttributeModifier(arg0: Attribute): boolean
-	removeAttributeModifier(arg0: Attribute, arg1: AttributeModifier): boolean
-	getCustomTagContainer(): CustomItemTagContainer
-	hasLore(): boolean
-	getLore(): List
-	setLore(arg0: List): void
-	hasEnchant(arg0: Enchantment): boolean
-	addEnchant(arg0: Enchantment, arg1: int, arg2: boolean): boolean
-	setVersion(arg0: int): void
-	clone(): ItemMeta
-	clone(): Object
-	getDisplayName(): String
-}
-declare class Bed extends MaterialData implements Directional {
-	setFacingDirection(arg0: BlockFace): void
-	isHeadOfBed(): boolean
-	setHeadOfBed(arg0: boolean): void
-	getFacing(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Bed
-	clone(): MaterialData
-}
-declare interface PistonHead extends TechnicalPiston {
-	isShort(): boolean
-	setShort(arg0: boolean): void
-}
-declare class FixedMetadataValue extends LazyMetadataValue {
-	value(): Object
-	invalidate(): void
-}
-declare class WorldCreator {
-	getGeneratorForName(arg0: String, arg1: String, arg2: CommandSender): ChunkGenerator
-	generatorSettings(): String
-	generatorSettings(arg0: String): WorldCreator
-	generateStructures(arg0: boolean): WorldCreator
-	generateStructures(): boolean
-	createWorld(): World
-	hardcore(arg0: boolean): WorldCreator
-	hardcore(): boolean
-	name(): String
-	name(arg0: String): WorldCreator
-	type(): WorldType
-	type(arg0: WorldType): WorldCreator
-	copy(arg0: WorldCreator): WorldCreator
-	copy(arg0: World): WorldCreator
-	generator(arg0: ChunkGenerator): WorldCreator
-	generator(arg0: String): WorldCreator
-	generator(): ChunkGenerator
-	generator(arg0: String, arg1: CommandSender): WorldCreator
-	seed(arg0: long): WorldCreator
-	seed(): long
-	environment(arg0: Environment): WorldCreator
-	environment(): Environment
-}
-declare interface PiglinBrute extends PiglinAbstract {
-}
-declare class PermissionAttachment {
-	getRemovalCallback(): PermissionRemovedExecutor
-	unsetPermission(arg0: Permission): void
-	unsetPermission(arg0: String): void
-	getPermissible(): Permissible
-	setRemovalCallback(arg0: PermissionRemovedExecutor): void
-	getPlugin(): Plugin
-	remove(): boolean
-	getPermissions(): Map
-	setPermission(arg0: String, arg1: boolean): void
-	setPermission(arg0: Permission, arg1: boolean): void
-}
-namespace WorldUnloadEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ChunkEvent {
-	function getChunk(): Chunk
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockBurnEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getIgnitingBlock(): Block
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class SimpleRegistry implements Registry {
-	get(arg0: NamespacedKey): Keyed
-	get(arg0: NamespacedKey): Enum
-	iterator(): Iterator
-}
-declare class BlockDestination implements Destination {
-	getBlock(): Block
-	getLocation(): Location
-}
-namespace EntityCombustEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getDuration(): int
-	function setDuration(arg0: int): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Door extends Bisected, Directional, Openable, Powerable {
-	getHinge(): Hinge
-	setHinge(arg0: Hinge): void
-}
-declare interface PluginIdentifiableCommand {
-	getPlugin(): Plugin
-}
-declare interface LecternInventory extends Inventory {
-	getHolder(): Lectern
-	getHolder(): InventoryHolder
-}
-declare interface ShulkerBullet extends Projectile {
-	getTarget(): Entity
-	setTarget(arg0: Entity): void
-}
-declare interface ConversationPrefix {
-	getPrefix(arg0: ConversationContext): String
-}
-declare interface BigDripleaf extends Dripleaf {
-	getTilt(): Tilt
-	setTilt(arg0: Tilt): void
-}
-declare interface Mule extends ChestedHorse {
-}
-declare interface EntityEquipment {
-	getArmorContents(): ItemStack[]
-	getLeggingsDropChance(): float
-	setItemInOffHand(arg0: ItemStack): void
-	setItemInOffHand(arg0: ItemStack, arg1: boolean): void
-	getBootsDropChance(): float
-	getChestplateDropChance(): float
-	setItemInOffHandDropChance(arg0: float): void
-	setArmorContents(arg0: ItemStack[]): void
-	getLeggings(): ItemStack
-	setChestplate(arg0: ItemStack, arg1: boolean): void
-	setChestplate(arg0: ItemStack): void
-	getItemInOffHand(): ItemStack
-	setBootsDropChance(arg0: float): void
-	setLeggingsDropChance(arg0: float): void
-	setLeggings(arg0: ItemStack, arg1: boolean): void
-	setLeggings(arg0: ItemStack): void
-	setItemInMainHand(arg0: ItemStack, arg1: boolean): void
-	setItemInMainHand(arg0: ItemStack): void
-	getItemInOffHandDropChance(): float
-	getItemInHandDropChance(): float
-	setChestplateDropChance(arg0: float): void
-	getItemInMainHand(): ItemStack
-	getChestplate(): ItemStack
-	setHelmetDropChance(arg0: float): void
-	getHelmetDropChance(): float
-	setItemInHandDropChance(arg0: float): void
-	getItemInHand(): ItemStack
-	setItemInHand(arg0: ItemStack): void
-	getHolder(): Entity
-	getHelmet(): ItemStack
-	setHelmet(arg0: ItemStack, arg1: boolean): void
-	setHelmet(arg0: ItemStack): void
-	getBoots(): ItemStack
-	setBoots(arg0: ItemStack, arg1: boolean): void
-	setBoots(arg0: ItemStack): void
-	setItem(arg0: EquipmentSlot, arg1: ItemStack, arg2: boolean): void
-	setItem(arg0: EquipmentSlot, arg1: ItemStack): void
-	getItemInMainHandDropChance(): float
-	setItemInMainHandDropChance(arg0: float): void
-	clear(): void
-	getItem(arg0: EquipmentSlot): ItemStack
-}
-namespace ProjectileHitEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHitBlock(): Block
-	function getHitBlockFace(): BlockFace
-	function getHitEntity(): Entity
-	function getEntity(): Entity
-	function getEntity(): Projectile
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface GlowLichen extends MultipleFacing, Waterlogged {
-}
-declare interface ServerOperator {
-	isOp(): boolean
-	setOp(arg0: boolean): void
-}
-declare class MetadataValueAdapter implements MetadataValue {
-	getOwningPlugin(): Plugin
-	asInt(): int
-	asFloat(): float
-	asDouble(): double
-	asLong(): long
-	asShort(): short
-	asByte(): byte
-	asBoolean(): boolean
-	asString(): String
-}
-declare interface TrapDoor extends Bisected, Directional, Openable, Powerable, Waterlogged {
-}
-namespace PlayerBedLeaveEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function shouldSetSpawnLocation(): boolean
-	function setSpawnLocation(arg0: boolean): void
-	function getBed(): Block
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface World extends PluginMessageRecipient, Metadatable {
-	getNearbyEntities(arg0: Location, arg1: double, arg2: double, arg3: double): Collection
-	getNearbyEntities(arg0: Location, arg1: double, arg2: double, arg3: double, arg4: Predicate): Collection
-	getNearbyEntities(arg0: BoundingBox): Collection
-	getNearbyEntities(arg0: BoundingBox, arg1: Predicate): Collection
-	getGameRuleValue(arg0: String): String
-	getGameRuleValue(arg0: GameRule): Object
-	getEntities(): List
-	addPluginChunkTicket(arg0: int, arg1: int, arg2: Plugin): boolean
-	removePluginChunkTicket(arg0: int, arg1: int, arg2: Plugin): boolean
-	getPluginChunkTickets(): Map
-	getPluginChunkTickets(arg0: int, arg1: int): Collection
-	rayTraceBlocks(arg0: Location, arg1: Vector, arg2: double): RayTraceResult
-	rayTraceBlocks(arg0: Location, arg1: Vector, arg2: double, arg3: FluidCollisionMode, arg4: boolean): RayTraceResult
-	rayTraceBlocks(arg0: Location, arg1: Vector, arg2: double, arg3: FluidCollisionMode): RayTraceResult
-	setDifficulty(arg0: Difficulty): void
-	getClearWeatherDuration(): int
-	createExplosion(arg0: Location, arg1: float, arg2: boolean): boolean
-	createExplosion(arg0: Location, arg1: float, arg2: boolean, arg3: boolean, arg4: Entity): boolean
-	createExplosion(arg0: double, arg1: double, arg2: double, arg3: float, arg4: boolean, arg5: boolean, arg6: Entity): boolean
-	createExplosion(arg0: Location, arg1: float, arg2: boolean, arg3: boolean): boolean
-	createExplosion(arg0: double, arg1: double, arg2: double, arg3: float): boolean
-	createExplosion(arg0: double, arg1: double, arg2: double, arg3: float, arg4: boolean): boolean
-	createExplosion(arg0: Location, arg1: float): boolean
-	createExplosion(arg0: double, arg1: double, arg2: double, arg3: float, arg4: boolean, arg5: boolean): boolean
-	setThundering(arg0: boolean): void
-	getAllowAnimals(): boolean
-	isClearWeather(): boolean
-	getMaxHeight(): int
-	setWeatherDuration(arg0: int): void
-	spawnFallingBlock(arg0: Location, arg1: Material, arg2: byte): FallingBlock
-	spawnFallingBlock(arg0: Location, arg1: BlockData): FallingBlock
-	spawnFallingBlock(arg0: Location, arg1: MaterialData): FallingBlock
-	getThunderDuration(): int
-	getEmptyChunkSnapshot(arg0: int, arg1: int, arg2: boolean, arg3: boolean): ChunkSnapshot
-	setThunderDuration(arg0: int): void
-	isThundering(): boolean
-	setAutoSave(arg0: boolean): void
-	getAllowMonsters(): boolean
-	getPopulators(): List
-	setSpawnFlags(arg0: boolean, arg1: boolean): void
-	getMinHeight(): int
-	getSeaLevel(): int
-	getKeepSpawnInMemory(): boolean
-	setClearWeatherDuration(arg0: int): void
-	setKeepSpawnInMemory(arg0: boolean): void
-	getDifficulty(): Difficulty
-	getEntitiesByClass(arg0: Class[]): Collection
-	getEntitiesByClass(arg0: Class): Collection
-	getLivingEntities(): List
-	getWeatherDuration(): int
-	strikeLightning(arg0: Location): LightningStrike
-	strikeLightningEffect(arg0: Location): LightningStrike
-	getHighestBlockAt(arg0: Location): Block
-	getHighestBlockAt(arg0: Location, arg1: HeightMap): Block
-	getHighestBlockAt(arg0: int, arg1: int): Block
-	getHighestBlockAt(arg0: int, arg1: int, arg2: HeightMap): Block
-	getGameTime(): long
-	setFullTime(arg0: long): void
-	getFullTime(): long
-	getSpawnLocation(): Location
-	rayTraceEntities(arg0: Location, arg1: Vector, arg2: double, arg3: Predicate): RayTraceResult
-	rayTraceEntities(arg0: Location, arg1: Vector, arg2: double): RayTraceResult
-	rayTraceEntities(arg0: Location, arg1: Vector, arg2: double, arg3: double): RayTraceResult
-	rayTraceEntities(arg0: Location, arg1: Vector, arg2: double, arg3: double, arg4: Predicate): RayTraceResult
-	getEntitiesByClasses(arg0: Class[]): Collection
-	setAmbientSpawnLimit(arg0: int): void
-	spawnEntity(arg0: Location, arg1: EntityType): Entity
-	removePluginChunkTickets(arg0: Plugin): void
-	setWaterAnimalSpawnLimit(arg0: int): void
-	getForceLoadedChunks(): Collection
-	setTicksPerWaterSpawns(arg0: int): void
-	refreshChunk(arg0: int, arg1: int): boolean
-	unloadChunkRequest(arg0: int, arg1: int): boolean
-	isChunkInUse(arg0: int, arg1: int): boolean
-	locateNearestRaid(arg0: Location, arg1: int): Raid
-	setGameRuleValue(arg0: String, arg1: String): boolean
-	setSpawnLocation(arg0: int, arg1: int, arg2: int, arg3: float): boolean
-	setSpawnLocation(arg0: int, arg1: int, arg2: int): boolean
-	setSpawnLocation(arg0: Location): boolean
-	getEnderDragonBattle(): DragonBattle
-	setMonsterSpawnLimit(arg0: int): void
-	setTicksPerAnimalSpawns(arg0: int): void
-	setHardcore(arg0: boolean): void
-	getGameRules(): String[]
-	setWaterAmbientSpawnLimit(arg0: int): void
-	getWorldBorder(): WorldBorder
-	getGenerator(): ChunkGenerator
-	canGenerateStructures(): boolean
-	setTicksPerMonsterSpawns(arg0: int): void
-	getGameRuleDefault(arg0: GameRule): Object
-	setTicksPerAmbientSpawns(arg0: int): void
-	locateNearestStructure(arg0: Location, arg1: StructureType, arg2: int, arg3: boolean): Location
-	setGameRule(arg0: GameRule, arg1: Object): boolean
-	setAnimalSpawnLimit(arg0: int): void
-	getWorldFolder(): File
-	isChunkLoaded(arg0: Chunk): boolean
-	isChunkLoaded(arg0: int, arg1: int): boolean
-	setChunkForceLoaded(arg0: int, arg1: int, arg2: boolean): void
-	regenerateChunk(arg0: int, arg1: int): boolean
-	unloadChunk(arg0: int, arg1: int): boolean
-	unloadChunk(arg0: Chunk): boolean
-	unloadChunk(arg0: int, arg1: int, arg2: boolean): boolean
-	getLoadedChunks(): Chunk[]
-	generateTree(arg0: Location, arg1: TreeType, arg2: BlockChangeDelegate): boolean
-	generateTree(arg0: Location, arg1: TreeType): boolean
-	isChunkGenerated(arg0: int, arg1: int): boolean
-	isChunkForceLoaded(arg0: int, arg1: int): boolean
-	getHighestBlockYAt(arg0: int, arg1: int, arg2: HeightMap): int
-	getHighestBlockYAt(arg0: int, arg1: int): int
-	getHighestBlockYAt(arg0: Location): int
-	getHighestBlockYAt(arg0: Location, arg1: HeightMap): int
-	getEnvironment(): Environment
-	getViewDistance(): int
-	getWorldType(): WorldType
-	getTicksPerAnimalSpawns(): long
-	getTicksPerMonsterSpawns(): long
-	getTicksPerWaterSpawns(): long
-	getTicksPerAmbientSpawns(): long
-	getMonsterSpawnLimit(): int
-	getAnimalSpawnLimit(): int
-	getWaterAnimalSpawnLimit(): int
-	getWaterAmbientSpawnLimit(): int
-	getAmbientSpawnLimit(): int
-	getTemperature(arg0: int, arg1: int): double
-	getTemperature(arg0: int, arg1: int, arg2: int): double
-	getHumidity(arg0: int, arg1: int, arg2: int): double
-	getHumidity(arg0: int, arg1: int): double
-	dropItemNaturally(arg0: Location, arg1: ItemStack): Item
-	dropItemNaturally(arg0: Location, arg1: ItemStack, arg2: Consumer): Item
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: double, arg9: Object): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: double): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: double): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: double, arg9: Object, arg10: boolean): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: double, arg7: Object, arg8: boolean): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: double, arg7: Object): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: Object): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double, arg6: Object): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: Object): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int, arg3: double, arg4: double, arg5: double): void
-	spawnParticle(arg0: Particle, arg1: Location, arg2: int): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int): void
-	spawnParticle(arg0: Particle, arg1: double, arg2: double, arg3: double, arg4: int, arg5: double, arg6: double, arg7: double, arg8: Object): void
-	spawnArrow(arg0: Location, arg1: Vector, arg2: float, arg3: float): Arrow
-	spawnArrow(arg0: Location, arg1: Vector, arg2: float, arg3: float, arg4: Class): AbstractArrow
-	getUID(): UUID
-	getChunkAt(arg0: Location): Chunk
-	getChunkAt(arg0: Block): Chunk
-	getChunkAt(arg0: int, arg1: int): Chunk
-	getBlockAt(arg0: Location): Block
-	getBlockAt(arg0: int, arg1: int, arg2: int): Block
-	getSeed(): long
-	playEffect(arg0: Location, arg1: Effect, arg2: Object, arg3: int): void
-	playEffect(arg0: Location, arg1: Effect, arg2: int): void
-	playEffect(arg0: Location, arg1: Effect, arg2: int, arg3: int): void
-	playEffect(arg0: Location, arg1: Effect, arg2: Object): void
-	spigot(): Spigot
-	loadChunk(arg0: int, arg1: int, arg2: boolean): boolean
-	loadChunk(arg0: Chunk): void
-	loadChunk(arg0: int, arg1: int): void
-	getPlayers(): List
-	playSound(arg0: Location, arg1: Sound, arg2: float, arg3: float): void
-	playSound(arg0: Location, arg1: Sound, arg2: SoundCategory, arg3: float, arg4: float): void
-	playSound(arg0: Location, arg1: String, arg2: SoundCategory, arg3: float, arg4: float): void
-	playSound(arg0: Location, arg1: String, arg2: float, arg3: float): void
-	isHardcore(): boolean
-	getBiome(arg0: int, arg1: int, arg2: int): Biome
-	getBiome(arg0: int, arg1: int): Biome
-	setBiome(arg0: int, arg1: int, arg2: Biome): void
-	setBiome(arg0: int, arg1: int, arg2: int, arg3: Biome): void
-	rayTrace(arg0: Location, arg1: Vector, arg2: double, arg3: FluidCollisionMode, arg4: boolean, arg5: double, arg6: Predicate): RayTraceResult
-	dropItem(arg0: Location, arg1: ItemStack, arg2: Consumer): Item
-	dropItem(arg0: Location, arg1: ItemStack): Item
-	hasStorm(): boolean
-	setStorm(arg0: boolean): void
-	getPVP(): boolean
-	setPVP(arg0: boolean): void
-	spawn(arg0: Location, arg1: Class): Entity
-	spawn(arg0: Location, arg1: Class, arg2: Consumer): Entity
-	isAutoSave(): boolean
-	isGameRule(arg0: String): boolean
-	getRaids(): List
-	setTicksPerWaterAmbientSpawns(arg0: int): void
-	getTicksPerWaterAmbientSpawns(): long
-	getName(): String
-	save(): void
-	getTime(): long
-	setTime(arg0: long): void
-}
-declare interface SerializableAs extends Annotation {
-	value(): String
-}
-namespace LootGenerateEvent {
-	function getLootTable(): LootTable
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getInventoryHolder(): InventoryHolder
-	function getLootContext(): LootContext
-	function getEntity(): Entity
-	function setLoot(arg0: Collection): void
-	function getLoot(): List
-	function isPlugin(): boolean
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockPlaceEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlockPlaced(): Block
-	function getBlockReplacedState(): BlockState
-	function getBlockAgainst(): Block
-	function getItemInHand(): ItemStack
-	function getPlayer(): Player
-	function getHand(): EquipmentSlot
-	function canBuild(): boolean
-	function setBuild(arg0: boolean): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Material extends Enum implements Keyed {
-	getMaxStackSize(): int
-	getMaxDurability(): short
-	matchMaterial(arg0: String, arg1: boolean): Material
-	matchMaterial(arg0: String): Material
-	isTransparent(): boolean
-	isFlammable(): boolean
-	isOccluding(): boolean
-	isInteractable(): boolean
-	getHardness(): float
-	getBlastResistance(): float
-	getSlipperiness(): float
-	getCraftingRemainingItem(): Material
-	getEquipmentSlot(): EquipmentSlot
-	getMaterial(arg0: String): Material
-	getMaterial(arg0: String, arg1: boolean): Material
-	createBlockData(arg0: Consumer): BlockData
-	createBlockData(arg0: String): BlockData
-	createBlockData(): BlockData
-	hasGravity(): boolean
-	getData(): Class
-	isLegacy(): boolean
-	getNewData(arg0: byte): MaterialData
-	isBlock(): boolean
-	isEdible(): boolean
-	isSolid(): boolean
-	isAir(): boolean
-	isBurnable(): boolean
-	isFuel(): boolean
-	isItem(): boolean
-	$SWITCH_TABLE$org$bukkit$Material(): int[]
-	values(): Material[]
-	valueOf(arg0: String): Material
-	isRecord(): boolean
-	getKey(): NamespacedKey
-	getId(): int
-}
-declare interface BrewingStand extends BlockData {
-	getMaximumBottles(): int
-	hasBottle(arg0: int): boolean
-	setBottle(arg0: int, arg1: boolean): void
-	getBottles(): Set
-}
-namespace BlockPhysicsEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getSourceBlock(): Block
-	function getChangedType(): Material
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Conduit extends TileState {
-}
-declare interface Rabbit extends Animals {
-	getRabbitType(): Type
-	setRabbitType(arg0: Type): void
-}
-declare interface Vex extends Monster {
-	setCharging(arg0: boolean): void
-	isCharging(): boolean
-}
-namespace PlayerLoginEvent {
-	function getHandlerList(): HandlerList
-	function getRealAddress(): InetAddress
-	function getHostname(): String
-	function getKickMessage(): String
-	function setKickMessage(arg0: String): void
-	function disallow(arg0: Result, arg1: String): void
-	function allow(): void
-	function getAddress(): InetAddress
-	function setResult(arg0: Result): void
-	function getHandlers(): HandlerList
-	function getResult(): Result
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface ComplexEntityPart extends Entity {
-	getParent(): ComplexLivingEntity
-}
-declare interface Dropper extends Container, Lootable {
-	drop(): void
-}
-declare class TexturedMaterial extends MaterialData {
-	setMaterial(arg0: Material): void
-	getTextures(): List
-	getTextureIndex(): int
-	setTextureIndex(arg0: int): void
-	getMaterial(): Material
-	toString(): String
-	clone(): MaterialData
-	clone(): Object
-	clone(): TexturedMaterial
-}
-declare interface Cat extends Tameable, Sittable {
-	getCollarColor(): DyeColor
-	setCollarColor(arg0: DyeColor): void
-	getCatType(): Type
-	setCatType(arg0: Type): void
-}
-declare interface CustomItemTagContainer {
-	setCustomTag(arg0: NamespacedKey, arg1: ItemTagType, arg2: Object): void
-	hasCustomTag(arg0: NamespacedKey, arg1: ItemTagType): boolean
-	getCustomTag(arg0: NamespacedKey, arg1: ItemTagType): Object
-	removeCustomTag(arg0: NamespacedKey): void
-	getAdapterContext(): ItemTagAdapterContext
-	isEmpty(): boolean
-}
-namespace ChunkPopulateEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getChunk(): Chunk
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class BlastingRecipe extends CookingRecipe {
-}
-namespace PrepareItemCraftEvent {
-	function getHandlerList(): HandlerList
-	function getInventory(): Inventory
-	function getInventory(): CraftingInventory
-	function getRecipe(): Recipe
-	function isRepair(): boolean
-	function getHandlers(): HandlerList
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface FishHook extends Projectile {
-	getMinWaitTime(): int
-	setMinWaitTime(arg0: int): void
-	getMaxWaitTime(): int
-	setMaxWaitTime(arg0: int): void
-	getApplyLure(): boolean
-	setApplyLure(arg0: boolean): void
-	getBiteChance(): double
-	setBiteChance(arg0: double): void
-	isInOpenWater(): boolean
-	getHookedEntity(): Entity
-	setHookedEntity(arg0: Entity): void
-	pullHookedEntity(): boolean
-	getState(): HookState
-}
-declare interface Silverfish extends Monster {
-}
-namespace EntityExplodeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getYield(): float
-	function blockList(): List
-	function setYield(arg0: float): void
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class FlowerPot extends MaterialData {
-	getContents(): MaterialData
-	setContents(arg0: MaterialData): void
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): FlowerPot
-}
-declare interface Registry extends Iterable {
-	lambda$0(arg0: EntityType): boolean
-	lambda$1(arg0: Material): boolean
-	get(arg0: NamespacedKey): Keyed
-}
-declare interface Phantom extends Flying {
-	getSize(): int
-	setSize(arg0: int): void
-}
-namespace PiglinBarterEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): Piglin
-	function getOutcome(): List
-	function getInput(): ItemStack
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class LootContext {
-	getLootingModifier(): int
-	getLootedEntity(): Entity
-	getKiller(): HumanEntity
-	getLuck(): float
-	getLocation(): Location
-}
-declare class PoweredRail extends ExtendedRails implements Redstone {
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-	clone(): MaterialData
-	clone(): Object
-	clone(): Rails
-	clone(): ExtendedRails
-	clone(): PoweredRail
-}
-declare class GenericCommandHelpTopic extends HelpTopic {
-	canSee(arg0: CommandSender): boolean
-}
-namespace VehicleEvent {
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class MemoryKey implements Keyed {
-	getMemoryClass(): Class
-	getByKey(arg0: NamespacedKey): MemoryKey
-	values(): Set
-	getKey(): NamespacedKey
-}
-declare interface CartographyInventory extends Inventory {
-}
-declare interface Flying extends Mob {
-}
-namespace BlockShearEntityEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getTool(): ItemStack
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Golem extends Creature {
-}
-declare interface SoundGroup {
-	getBreakSound(): Sound
-	getStepSound(): Sound
-	getPlaceSound(): Sound
-	getHitSound(): Sound
-	getFallSound(): Sound
-	getPitch(): float
-	getVolume(): float
-}
-declare class Spigot {
-	strikeLightning(arg0: Location, arg1: boolean): LightningStrike
-	strikeLightningEffect(arg0: Location, arg1: boolean): LightningStrike
-}
-declare interface SmallFireball extends SizedFireball {
-}
-declare interface Egg extends ThrowableProjectile {
-}
-namespace ChunkUnloadEvent {
-	function getHandlerList(): HandlerList
-	function isSaveChunk(): boolean
-	function setSaveChunk(arg0: boolean): void
-	function getHandlers(): HandlerList
-	function getChunk(): Chunk
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface ChunkSnapshot {
-	getBlockData(arg0: int, arg1: int, arg2: int): BlockData
-	getHighestBlockYAt(arg0: int, arg1: int): int
-	getWorldName(): String
-	getBlockType(arg0: int, arg1: int, arg2: int): Material
-	getBlockSkyLight(arg0: int, arg1: int, arg2: int): int
-	getBlockEmittedLight(arg0: int, arg1: int, arg2: int): int
-	getRawBiomeTemperature(arg0: int, arg1: int, arg2: int): double
-	getRawBiomeTemperature(arg0: int, arg1: int): double
-	getCaptureFullTime(): long
-	isSectionEmpty(arg0: int): boolean
-	getX(): int
-	getZ(): int
-	getData(arg0: int, arg1: int, arg2: int): int
-	getBiome(arg0: int, arg1: int, arg2: int): Biome
-	getBiome(arg0: int, arg1: int): Biome
-	contains(arg0: BlockData): boolean
-}
-declare class Statistic extends Enum implements Keyed {
-	isSubstatistic(): boolean
-	isBlock(): boolean
-	values(): Statistic[]
-	valueOf(arg0: String): Statistic
-	getKey(): NamespacedKey
-	getType(): Type
-}
-declare interface ConfigurationSection {
-	createSection(arg0: String): ConfigurationSection
-	createSection(arg0: String, arg1: Map): ConfigurationSection
-	getCurrentPath(): String
-	getStringList(arg0: String): List
-	getIntegerList(arg0: String): List
-	getBooleanList(arg0: String): List
-	getDoubleList(arg0: String): List
-	getFloatList(arg0: String): List
-	getLongList(arg0: String): List
-	getByteList(arg0: String): List
-	getCharacterList(arg0: String): List
-	getShortList(arg0: String): List
-	getSerializable(arg0: String, arg1: Class, arg2: ConfigurationSerializable): ConfigurationSerializable
-	getSerializable(arg0: String, arg1: Class): ConfigurationSerializable
-	getOfflinePlayer(arg0: String, arg1: OfflinePlayer): OfflinePlayer
-	getOfflinePlayer(arg0: String): OfflinePlayer
-	isOfflinePlayer(arg0: String): boolean
-	getItemStack(arg0: String): ItemStack
-	getItemStack(arg0: String, arg1: ItemStack): ItemStack
-	isItemStack(arg0: String): boolean
-	getConfigurationSection(arg0: String): ConfigurationSection
-	isConfigurationSection(arg0: String): boolean
-	getDefaultSection(): ConfigurationSection
-	getColor(arg0: String, arg1: Color): Color
-	getColor(arg0: String): Color
-	getValues(arg0: boolean): Map
-	addDefault(arg0: String, arg1: Object): void
-	isString(arg0: String): boolean
-	isInt(arg0: String): boolean
-	isBoolean(arg0: String): boolean
-	isDouble(arg0: String): boolean
-	isLong(arg0: String): boolean
-	getList(arg0: String, arg1: List): List
-	getList(arg0: String): List
-	isList(arg0: String): boolean
-	getMapList(arg0: String): List
-	getVector(arg0: String, arg1: Vector): Vector
-	getVector(arg0: String): Vector
-	isVector(arg0: String): boolean
-	isColor(arg0: String): boolean
-	isLocation(arg0: String): boolean
-	getName(): String
-	get(arg0: String, arg1: Object): Object
-	get(arg0: String): Object
-	getBoolean(arg0: String): boolean
-	getBoolean(arg0: String, arg1: boolean): boolean
-	getInt(arg0: String): int
-	getInt(arg0: String, arg1: int): int
-	getLong(arg0: String, arg1: long): long
-	getLong(arg0: String): long
-	getDouble(arg0: String): double
-	getDouble(arg0: String, arg1: double): double
-	contains(arg0: String, arg1: boolean): boolean
-	contains(arg0: String): boolean
-	getLocation(arg0: String, arg1: Location): Location
-	getLocation(arg0: String): Location
-	getParent(): ConfigurationSection
-	set(arg0: String, arg1: Object): void
-	isSet(arg0: String): boolean
-	getRoot(): Configuration
-	getObject(arg0: String, arg1: Class): Object
-	getObject(arg0: String, arg1: Class, arg2: Object): Object
-	getString(arg0: String): String
-	getString(arg0: String, arg1: String): String
-	getKeys(arg0: boolean): Set
-}
-declare interface BlockChangeDelegate {
-	getBlockData(arg0: int, arg1: int, arg2: int): BlockData
-	setBlockData(arg0: int, arg1: int, arg2: int, arg3: BlockData): boolean
-	getHeight(): int
-	isEmpty(arg0: int, arg1: int, arg2: int): boolean
-}
-declare class IndexHelpTopic extends HelpTopic {
-	amendCanSee(arg0: String): void
-	getFullText(arg0: CommandSender): String
-	setTopicsCollection(arg0: Collection): void
-	buildPreamble(arg0: CommandSender): String
-	buildIndexLine(arg0: CommandSender, arg1: HelpTopic): String
-	canSee(arg0: CommandSender): boolean
-}
-declare class Chest extends DirectionalContainer {
-	clone(): Object
-	clone(): MaterialData
-	clone(): DirectionalContainer
-	clone(): Chest
-}
-namespace WorldInitEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Objective {
-	setDisplayName(arg0: String): void
-	getScoreboard(): Scoreboard
-	getCriteria(): String
-	isModifiable(): boolean
-	setDisplaySlot(arg0: DisplaySlot): void
-	getDisplaySlot(): DisplaySlot
-	setRenderType(arg0: RenderType): void
-	getRenderType(): RenderType
-	getScore(arg0: String): Score
-	getScore(arg0: OfflinePlayer): Score
-	getName(): String
-	getDisplayName(): String
-	unregister(): void
-}
-declare class Conversation {
-	acceptInput(arg0: String): void
-	isLocalEchoEnabled(): boolean
-	setLocalEchoEnabled(arg0: boolean): void
-	addConversationCanceller(arg0: ConversationCanceller): void
-	getCancellers(): List
-	outputNextPrompt(): void
-	getForWhom(): Conversable
-	getPrefix(): ConversationPrefix
-	setPrefix(arg0: ConversationPrefix): void
-	isModal(): boolean
-	setModal(arg0: boolean): void
-	abandon(arg0: ConversationAbandonedEvent): void
-	abandon(): void
-	addConversationAbandonedListener(arg0: ConversationAbandonedListener): void
-	removeConversationAbandonedListener(arg0: ConversationAbandonedListener): void
-	begin(): void
-	getContext(): ConversationContext
-	getState(): ConversationState
-}
-declare class Furnace extends FurnaceAndDispenser {
-	clone(): MaterialData
-	clone(): Object
-	clone(): DirectionalContainer
-	clone(): FurnaceAndDispenser
-	clone(): Furnace
-}
-namespace EntityDamageByEntityEvent {
-	function getDamager(): Entity
-	function isApplicable(arg0: DamageModifier): boolean
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getOriginalDamage(arg0: DamageModifier): double
-	function getFinalDamage(): double
-	function setDamage(arg0: double): void
-	function setDamage(arg0: DamageModifier, arg1: double): void
-	function getDamage(): double
-	function getDamage(arg0: DamageModifier): double
-	function getCause(): DamageCause
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Bukkit {
-	getLootTable(arg0: NamespacedKey): LootTable
-	getOnlinePlayers(): Collection
-	getConsoleSender(): ConsoleCommandSender
-	getItemFactory(): ItemFactory
-	getPluginManager(): PluginManager
-	getOfflinePlayer(arg0: String): OfflinePlayer
-	getOfflinePlayer(arg0: UUID): OfflinePlayer
-	createChunkData(arg0: World): ChunkData
-	dispatchCommand(arg0: CommandSender, arg1: String): boolean
-	getMaxPlayers(): int
-	getBukkitVersion(): String
-	getViewDistance(): int
-	getWorldType(): String
-	getGenerateStructures(): boolean
-	getMaxWorldSize(): int
-	getAllowEnd(): boolean
-	getAllowNether(): boolean
-	hasWhitelist(): boolean
-	setWhitelist(arg0: boolean): void
-	isWhitelistEnforced(): boolean
-	setWhitelistEnforced(arg0: boolean): void
-	getWhitelistedPlayers(): Set
-	reloadWhitelist(): void
-	broadcastMessage(arg0: String): int
-	getUpdateFolder(): String
-	getUpdateFolderFile(): File
-	getConnectionThrottle(): long
-	getTicksPerAnimalSpawns(): int
-	getTicksPerMonsterSpawns(): int
-	getTicksPerWaterSpawns(): int
-	getTicksPerAmbientSpawns(): int
-	getPlayerExact(arg0: String): Player
-	matchPlayer(arg0: String): List
-	getScheduler(): BukkitScheduler
-	getServicesManager(): ServicesManager
-	createWorld(arg0: WorldCreator): World
-	unloadWorld(arg0: World, arg1: boolean): boolean
-	unloadWorld(arg0: String, arg1: boolean): boolean
-	createExplorerMap(arg0: World, arg1: Location, arg2: StructureType): ItemStack
-	createExplorerMap(arg0: World, arg1: Location, arg2: StructureType, arg3: int, arg4: boolean): ItemStack
-	getPluginCommand(arg0: String): PluginCommand
-	savePlayers(): void
-	getRecipesFor(arg0: ItemStack): List
-	recipeIterator(): Iterator
-	clearRecipes(): void
-	resetRecipes(): void
-	removeRecipe(arg0: NamespacedKey): boolean
-	getCommandAliases(): Map
-	getSpawnRadius(): int
-	setSpawnRadius(arg0: int): void
-	getOnlineMode(): boolean
-	getAllowFlight(): boolean
-	getBannedPlayers(): Set
-	getOperators(): Set
-	getDefaultGameMode(): GameMode
-	setDefaultGameMode(arg0: GameMode): void
-	getWorldContainer(): File
-	getOfflinePlayers(): OfflinePlayer[]
-	getMessenger(): Messenger
-	createInventory(arg0: InventoryHolder, arg1: InventoryType): Inventory
-	createInventory(arg0: InventoryHolder, arg1: int, arg2: String): Inventory
-	createInventory(arg0: InventoryHolder, arg1: InventoryType, arg2: String): Inventory
-	createInventory(arg0: InventoryHolder, arg1: int): Inventory
-	createMerchant(arg0: String): Merchant
-	getMonsterSpawnLimit(): int
-	getAnimalSpawnLimit(): int
-	getWaterAnimalSpawnLimit(): int
-	getWaterAmbientSpawnLimit(): int
-	getAmbientSpawnLimit(): int
-	isPrimaryThread(): boolean
-	getShutdownMessage(): String
-	getWarningState(): WarningState
-	getScoreboardManager(): ScoreboardManager
-	getServerIcon(): CachedServerIcon
-	loadServerIcon(arg0: File): CachedServerIcon
-	loadServerIcon(arg0: BufferedImage): CachedServerIcon
-	setIdleTimeout(arg0: int): void
-	getIdleTimeout(): int
-	createBossBar(arg0: String, arg1: BarColor, arg2: BarStyle, arg3: BarFlag[]): BossBar
-	createBossBar(arg0: NamespacedKey, arg1: String, arg2: BarColor, arg3: BarStyle, arg4: BarFlag[]): KeyedBossBar
-	getBossBars(): Iterator
-	removeBossBar(arg0: NamespacedKey): boolean
-	getAdvancement(arg0: NamespacedKey): Advancement
-	advancementIterator(): Iterator
-	createBlockData(arg0: Material, arg1: Consumer): BlockData
-	createBlockData(arg0: Material, arg1: String): BlockData
-	createBlockData(arg0: String): BlockData
-	createBlockData(arg0: Material): BlockData
-	selectEntities(arg0: CommandSender, arg1: String): List
-	reload(): void
-	getWorld(arg0: UUID): World
-	getWorld(arg0: String): World
-	getEntity(arg0: UUID): Entity
-	getServer(): Server
-	spigot(): Spigot
-	getPlayer(arg0: UUID): Player
-	getPlayer(arg0: String): Player
-	getBossBar(arg0: NamespacedKey): KeyedBossBar
-	getRecipe(arg0: NamespacedKey): Recipe
-	getMotd(): String
-	getIp(): String
-	getWorlds(): List
-	reloadData(): void
-	addRecipe(arg0: Recipe): boolean
-	isHardcore(): boolean
-	getIPBans(): Set
-	banIP(arg0: String): void
-	unbanIP(arg0: String): void
-	getBanList(arg0: Type): BanList
-	getHelpMap(): HelpMap
-	getTags(arg0: String, arg1: Class): Iterable
-	setServer(arg0: Server): void
-	getTicksPerWaterAmbientSpawns(): int
-	getName(): String
-	shutdown(): void
-	getUnsafe(): UnsafeValues
-	getLogger(): Logger
-	getPort(): int
-	broadcast(arg0: String, arg1: String): int
-	getMap(arg0: int): MapView
-	createMap(arg0: World): MapView
-	getTag(arg0: String, arg1: NamespacedKey, arg2: Class): Tag
-	getVersion(): String
-}
-declare interface Attributable {
-	getAttribute(arg0: Attribute): AttributeInstance
-}
-namespace PlayerJoinEvent {
-	function getHandlerList(): HandlerList
-	function getJoinMessage(): String
-	function setJoinMessage(arg0: String): void
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface HopperMinecart extends Minecart, InventoryHolder, Lootable {
-	isEnabled(): boolean
-	setEnabled(arg0: boolean): void
-}
-namespace CreatureSpawnEvent {
-	function getSpawnReason(): SpawnReason
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Leaves extends BlockData {
-	setPersistent(arg0: boolean): void
-	isPersistent(): boolean
-	getDistance(): int
-	setDistance(arg0: int): void
-}
-declare interface FireworkMeta extends ItemMeta {
-	getEffectsSize(): int
-	removeEffect(arg0: int): void
-	clearEffects(): void
-	getPower(): int
-	setPower(arg0: int): void
-	getEffects(): List
-	addEffect(arg0: FireworkEffect): void
-	addEffects(arg0: FireworkEffect[]): void
-	addEffects(arg0: Iterable): void
-	hasEffects(): boolean
-	clone(): Object
-	clone(): ItemMeta
-	clone(): FireworkMeta
-}
-declare class RedstoneWire extends MaterialData implements Redstone {
-	isPowered(): boolean
-	toString(): String
-	clone(): RedstoneWire
-	clone(): MaterialData
-	clone(): Object
-}
-declare interface SpectralArrow extends AbstractArrow {
-	getGlowingTicks(): int
-	setGlowingTicks(arg0: int): void
-}
-declare interface Horse extends AbstractHorse {
-	isCarryingChest(): boolean
-	setCarryingChest(arg0: boolean): void
-	getInventory(): AbstractHorseInventory
-	getInventory(): HorseInventory
-	getInventory(): Inventory
-	getColor(): Color
-	getStyle(): Style
-	setStyle(arg0: Style): void
-	setColor(arg0: Color): void
-}
-declare interface WitherSkeleton extends AbstractSkeleton {
-}
-declare interface Piston extends Directional {
-	setExtended(arg0: boolean): void
-	isExtended(): boolean
-}
-declare class ConfigurationSerialization {
-	deserialize(arg0: Map): ConfigurationSerializable
-	registerClass(arg0: Class): void
-	registerClass(arg0: Class, arg1: String): void
-	deserializeViaMethod(arg0: Method, arg1: Map): ConfigurationSerializable
-	deserializeViaCtor(arg0: Constructor, arg1: Map): ConfigurationSerializable
-	deserializeObject(arg0: Map, arg1: Class): ConfigurationSerializable
-	deserializeObject(arg0: Map): ConfigurationSerializable
-	getClassByAlias(arg0: String): Class
-	unregisterClass(arg0: Class): void
-	unregisterClass(arg0: String): void
-	getAlias(arg0: Class): String
-	getMethod(arg0: String, arg1: boolean): Method
-	getConstructor(): Constructor
-}
-declare class Door extends MaterialData implements Directional, Openable {
-	setFacingDirection(arg0: BlockFace): void
-	getWoodDoorOfSpecies(arg0: TreeSpecies): Material
-	getHingeCorner(): BlockFace
-	getFacing(): BlockFace
-	setOpen(arg0: boolean): void
-	getHinge(): boolean
-	setHinge(arg0: boolean): void
-	setTopHalf(arg0: boolean): void
-	isTopHalf(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	$SWITCH_TABLE$org$bukkit$TreeSpecies(): int[]
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): Door
-	isOpen(): boolean
-}
-declare interface Gate extends Directional, Openable, Powerable {
-	isInWall(): boolean
-	setInWall(arg0: boolean): void
-}
-declare class Leaves extends Wood {
-	isDecayable(): boolean
-	setDecayable(arg0: boolean): void
-	setDecaying(arg0: boolean): void
-	isDecaying(): boolean
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): Wood
-	clone(): Leaves
-}
-declare interface Waterlogged extends BlockData {
-	isWaterlogged(): boolean
-	setWaterlogged(arg0: boolean): void
-}
-declare interface WallSign extends Directional, Waterlogged {
-}
-namespace WorldLoadEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class MultipleCommandAlias extends Command {
-	getCommands(): Command[]
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-declare interface Arrow extends AbstractArrow {
-	setBasePotionData(arg0: PotionData): void
-	getBasePotionData(): PotionData
-	hasCustomEffects(): boolean
-	getCustomEffects(): List
-	addCustomEffect(arg0: PotionEffect, arg1: boolean): boolean
-	removeCustomEffect(arg0: PotionEffectType): boolean
-	hasCustomEffect(arg0: PotionEffectType): boolean
-	clearCustomEffects(): void
-	getColor(): Color
-	setColor(arg0: Color): void
-}
-declare interface Illusioner extends Spellcaster {
-}
-namespace EntityDeathEvent {
-	function getHandlerList(): HandlerList
-	function getDroppedExp(): int
-	function setDroppedExp(arg0: int): void
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getDrops(): List
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class ExactMatchConversationCanceller implements ConversationCanceller {
-	setConversation(arg0: Conversation): void
-	cancelBasedOnInput(arg0: ConversationContext, arg1: String): boolean
-	clone(): ConversationCanceller
-	clone(): Object
-}
-declare interface WitherSkull extends Fireball {
-	setCharged(arg0: boolean): void
-	isCharged(): boolean
-}
-declare interface Dispenser extends Container, Nameable, Lootable {
-	getBlockProjectileSource(): BlockProjectileSource
-	dispense(): boolean
-}
-declare class Vine extends MaterialData {
-	removeFromFace(arg0: BlockFace): void
-	isOnFace(arg0: BlockFace): boolean
-	putOnFace(arg0: BlockFace): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Vine
-	clone(): Object
-	clone(): MaterialData
-}
-declare interface Minecart extends Vehicle {
-	getMaxSpeed(): double
-	setMaxSpeed(arg0: double): void
-	isSlowWhenEmpty(): boolean
-	setSlowWhenEmpty(arg0: boolean): void
-	getFlyingVelocityMod(): Vector
-	setFlyingVelocityMod(arg0: Vector): void
-	getDerailedVelocityMod(): Vector
-	setDerailedVelocityMod(arg0: Vector): void
-	setDisplayBlock(arg0: MaterialData): void
-	getDisplayBlock(): MaterialData
-	setDisplayBlockData(arg0: BlockData): void
-	getDisplayBlockData(): BlockData
-	setDisplayBlockOffset(arg0: int): void
-	getDisplayBlockOffset(): int
-	setDamage(arg0: double): void
-	getDamage(): double
-}
-declare class ReloadCommand extends BukkitCommand {
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-declare interface Donkey extends ChestedHorse {
-}
-declare class StandardMessenger implements Messenger {
-	isReservedChannel(arg0: String): boolean
-	getOutgoingChannels(arg0: Plugin): Set
-	getOutgoingChannels(): Set
-	getIncomingChannels(arg0: Plugin): Set
-	getIncomingChannels(): Set
-	isRegistrationValid(arg0: PluginMessageListenerRegistration): boolean
-	dispatchIncomingMessage(arg0: Player, arg1: String, arg2: byte[]): void
-	addToOutgoing(arg0: Plugin, arg1: String): void
-	removeFromOutgoing(arg0: Plugin): void
-	removeFromOutgoing(arg0: Plugin, arg1: String): void
-	addToIncoming(arg0: PluginMessageListenerRegistration): void
-	removeFromIncoming(arg0: Plugin, arg1: String): void
-	removeFromIncoming(arg0: Plugin): void
-	removeFromIncoming(arg0: PluginMessageListenerRegistration): void
-	validateAndCorrectChannel(arg0: String): String
-	validateChannel(arg0: String): void
-	validatePluginMessage(arg0: Messenger, arg1: Plugin, arg2: String, arg3: byte[]): void
-	registerOutgoingPluginChannel(arg0: Plugin, arg1: String): void
-	unregisterOutgoingPluginChannel(arg0: Plugin, arg1: String): void
-	unregisterOutgoingPluginChannel(arg0: Plugin): void
-	registerIncomingPluginChannel(arg0: Plugin, arg1: String, arg2: PluginMessageListener): PluginMessageListenerRegistration
-	unregisterIncomingPluginChannel(arg0: Plugin, arg1: String, arg2: PluginMessageListener): void
-	unregisterIncomingPluginChannel(arg0: Plugin): void
-	unregisterIncomingPluginChannel(arg0: Plugin, arg1: String): void
-	getIncomingChannelRegistrations(arg0: String): Set
-	getIncomingChannelRegistrations(arg0: Plugin): Set
-	getIncomingChannelRegistrations(arg0: Plugin, arg1: String): Set
-	isIncomingChannelRegistered(arg0: Plugin, arg1: String): boolean
-	isOutgoingChannelRegistered(arg0: Plugin, arg1: String): boolean
-}
-declare interface CreatureSpawner extends TileState {
-	getSpawnedType(): EntityType
-	setSpawnedType(arg0: EntityType): void
-	setCreatureTypeByName(arg0: String): void
-	getCreatureTypeName(): String
-	getMinSpawnDelay(): int
-	setMinSpawnDelay(arg0: int): void
-	getMaxSpawnDelay(): int
-	setMaxSpawnDelay(arg0: int): void
-	getSpawnCount(): int
-	setSpawnCount(arg0: int): void
-	getMaxNearbyEntities(): int
-	setMaxNearbyEntities(arg0: int): void
-	getRequiredPlayerRange(): int
-	setRequiredPlayerRange(arg0: int): void
-	getSpawnRange(): int
-	setSpawnRange(arg0: int): void
-	setDelay(arg0: int): void
-	getDelay(): int
-}
-namespace PlayerCommandSendEvent {
-	function getHandlerList(): HandlerList
-	function getCommands(): Collection
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockBreakEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function setDropItems(arg0: boolean): void
-	function isDropItems(): boolean
-	function getPlayer(): Player
-	function getHandlerList(): HandlerList
-	function getExpToDrop(): int
-	function setExpToDrop(arg0: int): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Tree extends Wood {
-	getDirection(): BlockFace
-	setDirection(arg0: BlockFace): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Tree
-	clone(): MaterialData
-	clone(): Object
-	clone(): Wood
-}
-namespace EntityPotionEffectEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getOldEffect(): PotionEffect
-	function getNewEffect(): PotionEffect
-	function getModifiedType(): PotionEffectType
-	function setOverride(arg0: boolean): void
-	function getAction(): Action
-	function isOverride(): boolean
-	function getCause(): Cause
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CommandExecutor {
-	onCommand(arg0: CommandSender, arg1: Command, arg2: String, arg3: String[]): boolean
-}
-declare class RayTraceResult {
-	getHitBlock(): Block
-	getHitBlockFace(): BlockFace
-	getHitEntity(): Entity
-	getHitPosition(): Vector
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-}
-declare interface Chicken extends Animals {
-}
-namespace PlayerTeleportEvent {
-	function getHandlerList(): HandlerList
-	function getCause(): TeleportCause
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getFrom(): Location
-	function setFrom(arg0: Location): void
-	function getTo(): Location
-	function setTo(arg0: Location): void
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockDispenseArmorEvent {
-	function getTargetEntity(): LivingEntity
-	function setVelocity(arg0: Vector): void
-	function getVelocity(): Vector
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setItem(arg0: ItemStack): void
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerRecipeDiscoverEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRecipe(): NamespacedKey
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface EnderDragon extends ComplexLivingEntity, Boss {
-	getDragonBattle(): DragonBattle
-	getDeathAnimationTicks(): int
-	getPhase(): Phase
-	setPhase(arg0: Phase): void
-}
-declare class MapPalette {
-	getDistance(arg0: Color, arg1: Color): double
-	resizeImage(arg0: Image): BufferedImage
-	imageToBytes(arg0: Image): byte[]
-	getColor(arg0: byte): Color
-	matchColor(arg0: int, arg1: int, arg2: int): byte
-	matchColor(arg0: Color): byte
-	c(arg0: int, arg1: int, arg2: int): Color
-}
-namespace RaidFinishEvent {
-	function getHandlerList(): HandlerList
-	function getWinners(): List
-	function getHandlers(): HandlerList
-	function getRaid(): Raid
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Tameable extends Animals {
-	isTamed(): boolean
-	setTamed(arg0: boolean): void
-	getOwner(): AnimalTamer
-	setOwner(arg0: AnimalTamer): void
-}
-declare interface GlowItemFrame extends ItemFrame {
-}
-declare interface EndPortalFrame extends Directional {
-	hasEye(): boolean
-	setEye(arg0: boolean): void
-}
-declare interface Bell extends Directional, Powerable {
-	getAttachment(): Attachment
-	setAttachment(arg0: Attachment): void
-}
-declare interface Dripleaf extends Directional, Waterlogged {
-}
-namespace PlayerStatisticIncrementEvent {
-	function getEntityType(): EntityType
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getMaterial(): Material
-	function getStatistic(): Statistic
-	function getPreviousValue(): int
-	function getNewValue(): int
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Event {
-	getEventName(): String
-	isAsynchronous(): boolean
-	getHandlers(): HandlerList
-}
-namespace BlockFormEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getNewState(): BlockState
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PluginAwareness {
-}
-declare interface BubbleColumn extends BlockData {
-	isDrag(): boolean
-	setDrag(arg0: boolean): void
-}
-declare class Spigot {
-	sendMessage(arg0: UUID, arg1: BaseComponent): void
-	sendMessage(arg0: UUID, arg1: BaseComponent[]): void
-	sendMessage(arg0: BaseComponent): void
-	sendMessage(arg0: BaseComponent[]): void
-}
-declare class PluginNameConversationPrefix implements ConversationPrefix {
-	getPrefix(arg0: ConversationContext): String
-}
-declare interface Monster extends Creature {
-}
-declare interface EndGateway extends TileState {
-	getExitLocation(): Location
-	setExitLocation(arg0: Location): void
-	isExactTeleport(): boolean
-	setExactTeleport(arg0: boolean): void
-	getAge(): long
-	setAge(arg0: long): void
-}
-declare class PistonExtensionMaterial extends MaterialData implements Attachable {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	getFacing(): BlockFace
-	isSticky(): boolean
-	setSticky(arg0: boolean): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	clone(): MaterialData
-	clone(): Object
-	clone(): PistonExtensionMaterial
-}
-declare interface Directional {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-}
-namespace CauldronLevelChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getNewState(): BlockState
-	function getOldLevel(): int
-	function getNewLevel(): int
-	function setNewLevel(arg0: int): void
-	function getEntity(): Entity
-	function getReason(): ChangeReason
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityBreakDoorEvent {
-	function getEntity(): LivingEntity
-	function getEntity(): Entity
-	function getBlockData(): BlockData
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlock(): Block
-	function getTo(): Material
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface WanderingTrader extends AbstractVillager {
-	getDespawnDelay(): int
-	setDespawnDelay(arg0: int): void
-}
-declare interface Ageable extends Creature {
-	setBaby(): void
-	getAge(): int
-	setAge(arg0: int): void
-	setAgeLock(arg0: boolean): void
-	getAgeLock(): boolean
-	setAdult(): void
-	isAdult(): boolean
-	canBreed(): boolean
-	setBreed(arg0: boolean): void
-}
-namespace LightningStrikeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLightning(): LightningStrike
-	function getCause(): Cause
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockSpreadEvent {
-	function getHandlerList(): HandlerList
-	function getSource(): Block
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getNewState(): BlockState
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityEvent {
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Advancement extends Keyed {
-	getCriteria(): Collection
-}
-namespace EntityResurrectEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class VersionCommand extends BukkitCommand {
-	getDistance(arg0: String, arg1: String): int
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	sendVersion(arg0: CommandSender): void
-	describeToSender(arg0: Plugin, arg1: CommandSender): void
-	getNameList(arg0: List): String
-	obtainVersion(): void
-	setVersionMessage(arg0: String): void
-	access$0(arg0: VersionCommand): void
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-namespace LingeringPotionSplashEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getAreaEffectCloud(): AreaEffectCloud
-	function getEntity(): Projectile
-	function getEntity(): Entity
-	function getEntity(): ThrownPotion
-	function getHandlers(): HandlerList
-	function getHitBlock(): Block
-	function getHitBlockFace(): BlockFace
-	function getHitEntity(): Entity
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Fox extends Animals, Sittable {
-	isCrouching(): boolean
-	setCrouching(arg0: boolean): void
-	setSleeping(arg0: boolean): void
-	getFirstTrustedPlayer(): AnimalTamer
-	setFirstTrustedPlayer(arg0: AnimalTamer): void
-	getSecondTrustedPlayer(): AnimalTamer
-	setSecondTrustedPlayer(arg0: AnimalTamer): void
-	getFoxType(): Type
-	setFoxType(arg0: Type): void
-}
-namespace PlayerItemMendEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getExperienceOrb(): ExperienceOrb
-	function getRepairAmount(): int
-	function setRepairAmount(arg0: int): void
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerChatTabCompleteEvent {
-	function getHandlerList(): HandlerList
-	function getChatMessage(): String
-	function getLastToken(): String
-	function getTabCompletions(): Collection
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerQuitEvent {
-	function getHandlerList(): HandlerList
-	function getQuitMessage(): String
-	function setQuitMessage(arg0: String): void
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Beehive extends Directional {
-	getHoneyLevel(): int
-	setHoneyLevel(arg0: int): void
-	getMaximumHoneyLevel(): int
-}
-declare class NumberConversions {
-	checkFinite(arg0: float, arg1: String): void
-	checkFinite(arg0: double, arg1: String): void
-	square(arg0: double): double
-	toDouble(arg0: Object): double
-	toFloat(arg0: Object): float
-	toInt(arg0: Object): int
-	toLong(arg0: Object): long
-	toShort(arg0: Object): short
-	toByte(arg0: Object): byte
-	floor(arg0: double): int
-	ceil(arg0: double): int
-	isFinite(arg0: float): boolean
-	isFinite(arg0: double): boolean
-	round(arg0: double): int
-}
-declare interface Lectern extends TileState, BlockInventoryHolder {
-	getSnapshotInventory(): Inventory
-	getInventory(): Inventory
-	getPage(): int
-	setPage(arg0: int): void
-}
-declare interface ConversationCanceller extends Cloneable {
-	setConversation(arg0: Conversation): void
-	cancelBasedOnInput(arg0: ConversationContext, arg1: String): boolean
-	clone(): Object
-	clone(): ConversationCanceller
-}
-declare class BoundingBox implements Cloneable, ConfigurationSerializable {
-	deserialize(arg0: Map): BoundingBox
-	expandDirectional(arg0: Vector): BoundingBox
-	expandDirectional(arg0: double, arg1: double, arg2: double): BoundingBox
-	intersection(arg0: BoundingBox): BoundingBox
-	serialize(): Map
-	getHeight(): double
-	getCenter(): Vector
-	getCenterX(): double
-	getCenterZ(): double
-	rayTrace(arg0: Vector, arg1: Vector, arg2: double): RayTraceResult
-	getVolume(): double
-	getMinX(): double
-	getMinY(): double
-	getMinZ(): double
-	getMin(): Vector
-	getMaxX(): double
-	getMaxY(): double
-	getMaxZ(): double
-	getMax(): Vector
-	getWidthX(): double
-	getWidthZ(): double
-	getCenterY(): double
-	overlaps(arg0: BoundingBox): boolean
-	overlaps(arg0: Vector, arg1: Vector): boolean
-	overlaps(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: double): boolean
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	clone(): BoundingBox
-	clone(): Object
-	of(arg0: Location, arg1: double, arg2: double, arg3: double): BoundingBox
-	of(arg0: Vector, arg1: double, arg2: double, arg3: double): BoundingBox
-	of(arg0: Block): BoundingBox
-	of(arg0: Vector, arg1: Vector): BoundingBox
-	of(arg0: Location, arg1: Location): BoundingBox
-	of(arg0: Block, arg1: Block): BoundingBox
-	contains(arg0: BoundingBox): boolean
-	contains(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: double): boolean
-	contains(arg0: Vector): boolean
-	contains(arg0: double, arg1: double, arg2: double): boolean
-	contains(arg0: Vector, arg1: Vector): boolean
-	copy(arg0: BoundingBox): BoundingBox
-	expand(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: double): BoundingBox
-	expand(arg0: double): BoundingBox
-	expand(arg0: Vector, arg1: double): BoundingBox
-	expand(arg0: double, arg1: double, arg2: double, arg3: double): BoundingBox
-	expand(arg0: BlockFace, arg1: double): BoundingBox
-	expand(arg0: Vector): BoundingBox
-	expand(arg0: double, arg1: double, arg2: double): BoundingBox
-	shift(arg0: Location): BoundingBox
-	shift(arg0: double, arg1: double, arg2: double): BoundingBox
-	shift(arg0: Vector): BoundingBox
-	resize(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: double): BoundingBox
-	union(arg0: Vector): BoundingBox
-	union(arg0: BoundingBox): BoundingBox
-	union(arg0: Location): BoundingBox
-	union(arg0: double, arg1: double, arg2: double): BoundingBox
-}
-namespace PortalCreateEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getBlocks(): List
-	function getReason(): CreateReason
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace AreaEffectCloudApplyEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getAffectedEntities(): List
-	function getEntity(): Entity
-	function getEntity(): AreaEffectCloud
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface EnchantingTable extends TileState, Nameable {
-}
-namespace SheepDyeWoolEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Sheep
-	function getEntity(): Entity
-	function getColor(): DyeColor
-	function getHandlers(): HandlerList
-	function setColor(arg0: DyeColor): void
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface LingeringPotion extends ThrownPotion {
-}
-declare interface AbstractVillager extends Breedable, NPC, InventoryHolder, Merchant {
-	getInventory(): Inventory
-}
-declare interface Destination {
-}
-namespace EntityEnterBlockEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlock(): Block
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ServiceUnregisterEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getProvider(): RegisteredServiceProvider
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BukkitScheduler {
-	scheduleSyncDelayedTask(arg0: Plugin, arg1: BukkitRunnable): int
-	scheduleSyncDelayedTask(arg0: Plugin, arg1: Runnable): int
-	scheduleSyncDelayedTask(arg0: Plugin, arg1: BukkitRunnable, arg2: long): int
-	scheduleSyncDelayedTask(arg0: Plugin, arg1: Runnable, arg2: long): int
-	scheduleSyncRepeatingTask(arg0: Plugin, arg1: BukkitRunnable, arg2: long, arg3: long): int
-	scheduleSyncRepeatingTask(arg0: Plugin, arg1: Runnable, arg2: long, arg3: long): int
-	scheduleAsyncDelayedTask(arg0: Plugin, arg1: Runnable): int
-	scheduleAsyncDelayedTask(arg0: Plugin, arg1: Runnable, arg2: long): int
-	scheduleAsyncRepeatingTask(arg0: Plugin, arg1: Runnable, arg2: long, arg3: long): int
-	callSyncMethod(arg0: Plugin, arg1: Callable): Future
-	cancelTasks(arg0: Plugin): void
-	isCurrentlyRunning(arg0: int): boolean
-	getActiveWorkers(): List
-	getPendingTasks(): List
-	runTaskAsynchronously(arg0: Plugin, arg1: BukkitRunnable): BukkitTask
-	runTaskAsynchronously(arg0: Plugin, arg1: Runnable): BukkitTask
-	runTaskAsynchronously(arg0: Plugin, arg1: Consumer): void
-	runTaskLater(arg0: Plugin, arg1: Runnable, arg2: long): BukkitTask
-	runTaskLater(arg0: Plugin, arg1: BukkitRunnable, arg2: long): BukkitTask
-	runTaskLater(arg0: Plugin, arg1: Consumer, arg2: long): void
-	runTaskLaterAsynchronously(arg0: Plugin, arg1: Consumer, arg2: long): void
-	runTaskLaterAsynchronously(arg0: Plugin, arg1: Runnable, arg2: long): BukkitTask
-	runTaskLaterAsynchronously(arg0: Plugin, arg1: BukkitRunnable, arg2: long): BukkitTask
-	runTaskTimer(arg0: Plugin, arg1: BukkitRunnable, arg2: long, arg3: long): BukkitTask
-	runTaskTimer(arg0: Plugin, arg1: Consumer, arg2: long, arg3: long): void
-	runTaskTimer(arg0: Plugin, arg1: Runnable, arg2: long, arg3: long): BukkitTask
-	runTaskTimerAsynchronously(arg0: Plugin, arg1: Consumer, arg2: long, arg3: long): void
-	runTaskTimerAsynchronously(arg0: Plugin, arg1: Runnable, arg2: long, arg3: long): BukkitTask
-	runTaskTimerAsynchronously(arg0: Plugin, arg1: BukkitRunnable, arg2: long, arg3: long): BukkitTask
-	cancelTask(arg0: int): void
-	runTask(arg0: Plugin, arg1: Consumer): void
-	runTask(arg0: Plugin, arg1: Runnable): BukkitTask
-	runTask(arg0: Plugin, arg1: BukkitRunnable): BukkitTask
-	isQueued(arg0: int): boolean
-}
-declare interface DoubleChestInventory extends Inventory {
-	getLeftSide(): Inventory
-	getRightSide(): Inventory
-	getHolder(): InventoryHolder
-	getHolder(): DoubleChest
-}
-namespace ItemMergeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): Item
-	function getTarget(): Item
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Criterias {
-}
-namespace EntityDamageByBlockEvent {
-	function getDamager(): Block
-	function isApplicable(arg0: DamageModifier): boolean
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getOriginalDamage(arg0: DamageModifier): double
-	function getFinalDamage(): double
-	function setDamage(arg0: double): void
-	function setDamage(arg0: DamageModifier, arg1: double): void
-	function getDamage(): double
-	function getDamage(arg0: DamageModifier): double
-	function getCause(): DamageCause
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface SkeletonHorse extends AbstractHorse {
-}
-namespace PlayerBucketEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getItemStack(): ItemStack
-	function getBlockFace(): BlockFace
-	function setItemStack(arg0: ItemStack): void
-	function getBlockClicked(): Block
-	function getBlock(): Block
-	function getBucket(): Material
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class ChatPage {
-	getPageNumber(): int
-	getTotalPages(): int
-	getLines(): String[]
-}
-declare class Lever extends SimpleAttachableMaterialData implements Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): SimpleAttachableMaterialData
-	clone(): MaterialData
-	clone(): Object
-	clone(): Lever
-}
-declare interface ThrownPotion extends Projectile {
-	setItem(arg0: ItemStack): void
-	getEffects(): Collection
-	getItem(): ItemStack
-}
-declare interface Zombie extends Monster, Ageable {
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-	setVillager(arg0: boolean): void
-	setVillagerProfession(arg0: Profession): void
-	getVillagerProfession(): Profession
-	isBaby(): boolean
-	setBaby(arg0: boolean): void
-	isVillager(): boolean
-}
-declare interface PersistentDataHolder {
-	getPersistentDataContainer(): PersistentDataContainer
-}
-declare interface Light extends Levelled, Waterlogged {
-}
-declare interface ConfigurationSerializable {
-	serialize(): Map
-}
-declare interface Merchant {
-	getRecipeCount(): int
-	getRecipes(): List
-	setRecipes(arg0: List): void
-	setRecipe(arg0: int, arg1: MerchantRecipe): void
-	isTrading(): boolean
-	getTrader(): HumanEntity
-	getRecipe(arg0: int): MerchantRecipe
-}
-declare interface Snowball extends ThrowableProjectile {
-}
-declare class SimplexOctaveGenerator extends OctaveGenerator {
-	createOctaves(arg0: Random, arg1: int): NoiseGenerator[]
-	noise(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: double): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: double, arg4: double, arg5: double, arg6: boolean): double
-	setScale(arg0: double): void
-	setWScale(arg0: double): void
-	getWScale(): double
-}
-namespace EntityEnterLoveModeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHumanEntity(): HumanEntity
-	function getTicksInLove(): int
-	function setTicksInLove(arg0: int): void
-	function getEntity(): Entity
-	function getEntity(): Animals
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Utility extends Annotation {
-}
-declare interface Attachable extends BlockData {
-	setAttached(arg0: boolean): void
-	isAttached(): boolean
-}
-declare interface Hoglin extends Animals {
-	isImmuneToZombification(): boolean
-	setImmuneToZombification(arg0: boolean): void
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-	isAbleToBeHunted(): boolean
-	setIsAbleToBeHunted(arg0: boolean): void
-}
-declare interface Boss extends Entity {
-	getBossBar(): BossBar
-}
-declare interface AbstractHorse extends Vehicle, InventoryHolder, Tameable {
-	getDomestication(): int
-	setDomestication(arg0: int): void
-	getMaxDomestication(): int
-	setMaxDomestication(arg0: int): void
-	getJumpStrength(): double
-	setJumpStrength(arg0: double): void
-	getInventory(): AbstractHorseInventory
-	getInventory(): Inventory
-	setVariant(arg0: Variant): void
-	getVariant(): Variant
-}
-namespace PlayerKickEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLeaveMessage(): String
-	function setLeaveMessage(arg0: String): void
-	function setReason(arg0: String): void
-	function getReason(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Rail extends Waterlogged {
-	getShape(): Shape
-	setShape(arg0: Shape): void
-	getShapes(): Set
-}
-namespace PlayerAdvancementDoneEvent {
-	function getHandlerList(): HandlerList
-	function getAdvancement(): Advancement
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ThunderChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function toThunderState(): boolean
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Damageable extends Entity {
-	setAbsorptionAmount(arg0: double): void
-	resetMaxHealth(): void
-	getAbsorptionAmount(): double
-	setMaxHealth(arg0: double): void
-	getMaxHealth(): double
-	damage(arg0: double): void
-	damage(arg0: double, arg1: Entity): void
-	getHealth(): double
-	setHealth(arg0: double): void
-}
-namespace EntityTargetLivingEntityEvent {
-	function getTarget(): Entity
-	function getTarget(): LivingEntity
-	function setTarget(arg0: Entity): void
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getReason(): TargetReason
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class DirectionalContainer extends MaterialData implements Directional {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): DirectionalContainer
-	clone(): Object
-	clone(): MaterialData
-}
-declare interface Item extends Entity {
-	getItemStack(): ItemStack
-	setItemStack(arg0: ItemStack): void
-	getPickupDelay(): int
-	setPickupDelay(arg0: int): void
-	setThrower(arg0: UUID): void
-	getThrower(): UUID
-	getOwner(): UUID
-	setOwner(arg0: UUID): void
-}
-declare interface AnimalTamer {
-	getUniqueId(): UUID
-	getName(): String
-}
-declare class MemoryConfiguration extends MemorySection implements Configuration {
-	getDefaults(): Configuration
-	addDefaults(arg0: Configuration): void
-	addDefaults(arg0: Map): void
-	setDefaults(arg0: Configuration): void
-	addDefault(arg0: String, arg1: Object): void
-	getParent(): ConfigurationSection
-	options(): ConfigurationOptions
-	options(): MemoryConfigurationOptions
-}
-declare interface Structure extends TileState {
-	setRotation(arg0: StructureRotation): void
-	getRotation(): StructureRotation
-	setMetadata(arg0: String): void
-	getMetadata(): String
-	getStructureName(): String
-	setStructureName(arg0: String): void
-	getRelativePosition(): BlockVector
-	setRelativePosition(arg0: BlockVector): void
-	getStructureSize(): BlockVector
-	setStructureSize(arg0: BlockVector): void
-	setUsageMode(arg0: UsageMode): void
-	getUsageMode(): UsageMode
-	setIgnoreEntities(arg0: boolean): void
-	isIgnoreEntities(): boolean
-	setBoundingBoxVisible(arg0: boolean): void
-	isBoundingBoxVisible(): boolean
-	setIntegrity(arg0: float): void
-	getIntegrity(): float
-	getSeed(): long
-	setSeed(arg0: long): void
-	getAuthor(): String
-	setAuthor(arg0: LivingEntity): void
-	setAuthor(arg0: String): void
-	setMirror(arg0: Mirror): void
-	getMirror(): Mirror
-	setShowAir(arg0: boolean): void
-	isShowAir(): boolean
-}
-namespace PlayerAnimationEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getAnimationType(): PlayerAnimationType
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class SimpleAttachableMaterialData extends MaterialData implements Attachable {
-	getFacing(): BlockFace
-	toString(): String
-	clone(): SimpleAttachableMaterialData
-	clone(): MaterialData
-	clone(): Object
-}
-namespace ItemDespawnEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): Item
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntitySpellCastEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): Spellcaster
-	function getSpell(): Spell
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace HangingBreakEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getCause(): RemoveCause
-	function getHandlers(): HandlerList
-	function getEntity(): Hanging
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PotionEffectTypeWrapper extends PotionEffectType {
-	getDurationModifier(): double
-	getColor(): Color
-	isInstant(): boolean
-	getName(): String
-	getType(): PotionEffectType
-}
-declare interface Openable {
-	setOpen(arg0: boolean): void
-	isOpen(): boolean
-}
-declare class Color implements ConfigurationSerializable {
-	deserialize(arg0: Map): Color
-	serialize(): Map
-	asInt(arg0: String, arg1: Map): int
-	getRed(): int
-	getGreen(): int
-	getBlue(): int
-	fromRGB(arg0: int, arg1: int, arg2: int): Color
-	fromRGB(arg0: int): Color
-	fromBGR(arg0: int, arg1: int, arg2: int): Color
-	fromBGR(arg0: int): Color
-	setRed(arg0: int): Color
-	setGreen(arg0: int): Color
-	setBlue(arg0: int): Color
-	asRGB(): int
-	asBGR(): int
-	mixDyes(arg0: DyeColor[]): Color
-	mixColors(arg0: Color[]): Color
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-}
-declare interface AbstractArrow extends Projectile {
-	getKnockbackStrength(): int
-	setKnockbackStrength(arg0: int): void
-	getPierceLevel(): int
-	setPierceLevel(arg0: int): void
-	setCritical(arg0: boolean): void
-	getAttachedBlock(): Block
-	getPickupStatus(): PickupStatus
-	setPickupStatus(arg0: PickupStatus): void
-	isShotFromCrossbow(): boolean
-	setShotFromCrossbow(arg0: boolean): void
-	setDamage(arg0: double): void
-	getDamage(): double
-	isCritical(): boolean
-	isInBlock(): boolean
-}
-namespace ServiceRegisterEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getProvider(): RegisteredServiceProvider
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Vindicator extends Illager {
-}
-declare interface ComplexRecipe extends Recipe, Keyed {
-}
-namespace HorseJumpEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): AbstractHorse
-	function getEntity(): Entity
-	function getPower(): float
-	function setPower(arg0: float): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace ServerLoadEvent {
-	function getHandlerList(): HandlerList
-	function getType(): LoadType
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Dye extends MaterialData implements Colorable {
-	getColor(): DyeColor
-	toString(): String
-	clone(): Dye
-	clone(): MaterialData
-	clone(): Object
-	setColor(arg0: DyeColor): void
-}
-namespace BlockPistonEvent {
-	function getDirection(): BlockFace
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function isSticky(): boolean
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockExpEvent {
-	function getHandlerList(): HandlerList
-	function getExpToDrop(): int
-	function setExpToDrop(arg0: int): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerTakeLecternBookEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLectern(): Lectern
-	function getBook(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PotionData {
-	isExtended(): boolean
-	isUpgraded(): boolean
-	equals(arg0: Object): boolean
-	hashCode(): int
-	getType(): PotionType
-}
-declare interface Farmland extends BlockData {
-	getMoisture(): int
-	setMoisture(arg0: int): void
-	getMaximumMoisture(): int
-}
-declare class RegisteredListener {
-	isIgnoringCancelled(): boolean
-	getListener(): Listener
-	getPlugin(): Plugin
-	callEvent(arg0: Event): void
-	getPriority(): EventPriority
-}
-declare class Permission {
-	recalculatePermissibles(): void
-	getDescription(): String
-	setDescription(arg0: String): void
-	getChildren(): Map
-	getPermissibles(): Set
-	loadPermission(arg0: String, arg1: Map, arg2: PermissionDefault, arg3: List): Permission
-	loadPermission(arg0: String, arg1: Map): Permission
-	extractChildren(arg0: Map, arg1: String, arg2: PermissionDefault, arg3: List): Map
-	loadPermissions(arg0: Map, arg1: String, arg2: PermissionDefault): List
-	addParent(arg0: String, arg1: boolean): Permission
-	addParent(arg0: Permission, arg1: boolean): void
-	getName(): String
-	getDefault(): PermissionDefault
-	setDefault(arg0: PermissionDefault): void
-}
-declare interface ThrowableProjectile extends Projectile {
-	setItem(arg0: ItemStack): void
-	getItem(): ItemStack
-}
-declare interface Sign extends Rotatable, Waterlogged {
-}
-declare interface Container extends TileState, BlockInventoryHolder, Lockable, Nameable {
-	getSnapshotInventory(): Inventory
-	getInventory(): Inventory
-}
-declare class Dispenser extends FurnaceAndDispenser {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	clone(): MaterialData
-	clone(): DirectionalContainer
-	clone(): Dispenser
-	clone(): Object
-	clone(): FurnaceAndDispenser
-}
-declare interface Grindstone extends Directional, FaceAttachable {
-}
-declare interface Witch extends Raider {
-}
-namespace BlockDispenseEvent {
-	function setVelocity(arg0: Vector): void
-	function getVelocity(): Vector
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setItem(arg0: ItemStack): void
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Observer extends Directional, Powerable {
-}
-declare interface Tripwire extends Attachable, MultipleFacing, Powerable {
-	setDisarmed(arg0: boolean): void
-	isDisarmed(): boolean
-}
-declare class Button extends SimpleAttachableMaterialData implements Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): SimpleAttachableMaterialData
-	clone(): MaterialData
-	clone(): Object
-	clone(): Button
-}
-declare interface Colorable {
-	getColor(): DyeColor
-	setColor(arg0: DyeColor): void
-}
-declare class DustOptions {
-	getColor(): Color
-	getSize(): float
-}
-declare class BlockIterator implements Iterator {
-	getXPosition(arg0: Vector, arg1: Vector, arg2: Block): double
-	getYPosition(arg0: Vector, arg1: Vector, arg2: Block): double
-	getZPosition(arg0: Vector, arg1: Vector, arg2: Block): double
-	blockEquals(arg0: Block, arg1: Block): boolean
-	getPosition(arg0: double, arg1: double, arg2: int): double
-	getXLength(arg0: Vector): double
-	getXFace(arg0: Vector): BlockFace
-	getYFace(arg0: Vector): BlockFace
-	getYLength(arg0: Vector): double
-	getZFace(arg0: Vector): BlockFace
-	getZLength(arg0: Vector): double
-	remove(): void
-	hasNext(): boolean
-	next(): Object
-	next(): Block
-	scan(): void
-}
-namespace AsyncPlayerPreLoginEvent {
-	function getUniqueId(): UUID
-	function getHandlerList(): HandlerList
-	function getLoginResult(): Result
-	function setLoginResult(arg0: Result): void
-	function getKickMessage(): String
-	function setKickMessage(arg0: String): void
-	function getName(): String
-	function disallow(arg0: Result, arg1: String): void
-	function disallow(arg0: Result, arg1: String): void
-	function allow(): void
-	function getAddress(): InetAddress
-	function setResult(arg0: Result): void
-	function getHandlers(): HandlerList
-	function getResult(): Result
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockPistonRetractEvent {
-	function getHandlerList(): HandlerList
-	function getRetractLocation(): Location
-	function getBlocks(): List
-	function getHandlers(): HandlerList
-	function getDirection(): BlockFace
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function isSticky(): boolean
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface StorageMinecart extends Minecart, InventoryHolder, Lootable {
-}
-namespace EntityCreatePortalEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getPortalType(): PortalType
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function getBlocks(): List
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PersistentDataContainer {
-	getAdapterContext(): PersistentDataAdapterContext
-	remove(arg0: NamespacedKey): void
-	get(arg0: NamespacedKey, arg1: PersistentDataType): Object
-	isEmpty(): boolean
-	set(arg0: NamespacedKey, arg1: PersistentDataType, arg2: Object): void
-	getOrDefault(arg0: NamespacedKey, arg1: PersistentDataType, arg2: Object): Object
-	getKeys(): Set
-	has(arg0: NamespacedKey, arg1: PersistentDataType): boolean
-}
-declare interface Ghast extends Flying {
-}
-declare class StringUtil {
-	startsWithIgnoreCase(arg0: String, arg1: String): boolean
-	copyPartialMatches(arg0: String, arg1: Iterable, arg2: Collection): Collection
-}
-declare interface DelegateDeserialization extends Annotation {
-	value(): Class
-}
-declare interface Campfire extends TileState {
-	getCookTime(arg0: int): int
-	setCookTime(arg0: int, arg1: int): void
-	getCookTimeTotal(arg0: int): int
-	setCookTimeTotal(arg0: int, arg1: int): void
-	setItem(arg0: int, arg1: ItemStack): void
-	getSize(): int
-	getItem(arg0: int): ItemStack
-}
-namespace ProjectileLaunchEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getEntity(): Projectile
-	function getEntity(): Entity
-	function getHandlerList(): HandlerList
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Conversable {
-	sendRawMessage(arg0: UUID, arg1: String): void
-	sendRawMessage(arg0: String): void
-	isConversing(): boolean
-	acceptConversationInput(arg0: String): void
-	beginConversation(arg0: Conversation): boolean
-	abandonConversation(arg0: Conversation, arg1: ConversationAbandonedEvent): void
-	abandonConversation(arg0: Conversation): void
-}
-declare interface LeatherArmorMeta extends ItemMeta {
-	getColor(): Color
-	clone(): Object
-	clone(): ItemMeta
-	clone(): LeatherArmorMeta
-	setColor(arg0: Color): void
-}
-namespace BlockMultiPlaceEvent {
-	function getReplacedBlockStates(): List
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlockPlaced(): Block
-	function getBlockReplacedState(): BlockState
-	function getBlockAgainst(): Block
-	function getItemInHand(): ItemStack
-	function getPlayer(): Player
-	function getHand(): EquipmentSlot
-	function canBuild(): boolean
-	function setBuild(arg0: boolean): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PotionEffectType {
-	registerPotionEffectType(arg0: PotionEffectType): void
-	stopAcceptingRegistrations(): void
-	createEffect(arg0: int, arg1: int): PotionEffect
-	getDurationModifier(): double
-	getColor(): Color
-	isInstant(): boolean
-	getById(arg0: int): PotionEffectType
-	getName(): String
-	equals(arg0: Object): boolean
-	toString(): String
-	values(): PotionEffectType[]
-	hashCode(): int
-	getId(): int
-	getByName(arg0: String): PotionEffectType
-}
-declare interface Painting extends Hanging {
-	getArt(): Art
-	setArt(arg0: Art): boolean
-	setArt(arg0: Art, arg1: boolean): boolean
-}
-namespace PlayerChangedMainHandEvent {
-	function getHandlerList(): HandlerList
-	function getMainHand(): MainHand
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface AbstractHorseInventory extends Inventory {
-	setSaddle(arg0: ItemStack): void
-	getSaddle(): ItemStack
-}
-declare interface ItemTagType {
-	getPrimitiveType(): Class
-	getComplexType(): Class
-	toPrimitive(arg0: Object, arg1: ItemTagAdapterContext): Object
-	fromPrimitive(arg0: Object, arg1: ItemTagAdapterContext): Object
-}
-declare interface Dispenser extends Directional {
-	isTriggered(): boolean
-	setTriggered(arg0: boolean): void
-}
-declare interface Powerable extends BlockData {
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-}
-declare class HelpTopic {
-	getShortText(): String
-	amendCanSee(arg0: String): void
-	applyAmendment(arg0: String, arg1: String): String
-	getFullText(arg0: CommandSender): String
-	canSee(arg0: CommandSender): boolean
-	amendTopic(arg0: String, arg1: String): void
-	getName(): String
-}
-declare interface Strider extends Steerable, Vehicle {
-	setShivering(arg0: boolean): void
-	isShivering(): boolean
-}
-namespace PlayerRegisterChannelEvent {
-	function getHandlerList(): HandlerList
-	function getChannel(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Endermite extends Monster {
-	isPlayerSpawned(): boolean
-	setPlayerSpawned(arg0: boolean): void
-}
-declare class Cake extends MaterialData {
-	getSlicesEaten(): int
-	getSlicesRemaining(): int
-	setSlicesEaten(arg0: int): void
-	setSlicesRemaining(arg0: int): void
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): Cake
-}
-declare class MemoryConfigurationOptions extends ConfigurationOptions {
-	copyDefaults(arg0: boolean): ConfigurationOptions
-	copyDefaults(arg0: boolean): MemoryConfigurationOptions
-	configuration(): MemoryConfiguration
-	configuration(): Configuration
-	pathSeparator(arg0: char): ConfigurationOptions
-	pathSeparator(arg0: char): MemoryConfigurationOptions
-}
-namespace PlayerInteractEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getMaterial(): Material
-	function useItemInHand(): Result
-	function useInteractedBlock(): Result
-	function setUseInteractedBlock(arg0: Result): void
-	function setUseItemInHand(arg0: Result): void
-	function isBlockInHand(): boolean
-	function getClickedBlock(): Block
-	function getBlockFace(): BlockFace
-	function getAction(): Action
-	function getHand(): EquipmentSlot
-	function hasItem(): boolean
-	function hasBlock(): boolean
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace RaidSpawnWaveEvent {
-	function getHandlerList(): HandlerList
-	function getPatrolLeader(): Raider
-	function getRaiders(): List
-	function getHandlers(): HandlerList
-	function getRaid(): Raid
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PotionSplashEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getIntensity(arg0: LivingEntity): double
-	function setIntensity(arg0: LivingEntity, arg1: double): void
-	function getAffectedEntities(): Collection
-	function getEntity(): Projectile
-	function getEntity(): ThrownPotion
-	function getEntity(): Entity
-	function getPotion(): ThrownPotion
-	function getHandlers(): HandlerList
-	function getHitBlock(): Block
-	function getHitBlockFace(): BlockFace
-	function getHitEntity(): Entity
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface LootTable extends Keyed {
-	populateLoot(arg0: Random, arg1: LootContext): Collection
-	fillInventory(arg0: Inventory, arg1: Random, arg2: LootContext): void
-}
-namespace BlockCookEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setResult(arg0: ItemStack): void
-	function getSource(): ItemStack
-	function getHandlers(): HandlerList
-	function getResult(): ItemStack
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Fire extends Ageable, MultipleFacing {
-}
-declare class Vector implements Cloneable, ConfigurationSerializable {
-	lengthSquared(): double
-	distanceSquared(arg0: Vector): double
-	checkFinite(): void
-	deserialize(arg0: Map): Vector
-	getMidpoint(arg0: Vector): Vector
-	crossProduct(arg0: Vector): Vector
-	getCrossProduct(arg0: Vector): Vector
-	normalizeZeros(): Vector
-	rotateAroundX(arg0: double): Vector
-	rotateAroundY(arg0: double): Vector
-	rotateAroundZ(arg0: double): Vector
-	rotateAroundAxis(arg0: Vector, arg1: double): Vector
-	rotateAroundNonUnitAxis(arg0: Vector, arg1: double): Vector
-	toBlockVector(): BlockVector
-	setX(arg0: float): Vector
-	setX(arg0: double): Vector
-	setX(arg0: int): Vector
-	getBlockX(): int
-	setY(arg0: float): Vector
-	setY(arg0: int): Vector
-	setY(arg0: double): Vector
-	getBlockY(): int
-	setZ(arg0: int): Vector
-	setZ(arg0: float): Vector
-	setZ(arg0: double): Vector
-	getBlockZ(): int
-	subtract(arg0: Vector): Vector
-	serialize(): Map
-	getX(): double
-	getY(): double
-	getZ(): double
-	divide(arg0: Vector): Vector
-	angle(arg0: Vector): float
-	midpoint(arg0: Vector): Vector
-	isInAABB(arg0: Vector, arg1: Vector): boolean
-	isInSphere(arg0: Vector, arg1: double): boolean
-	getEpsilon(): double
-	toLocation(arg0: World): Location
-	toLocation(arg0: World, arg1: float, arg2: float): Location
-	getMinimum(arg0: Vector, arg1: Vector): Vector
-	getMaximum(arg0: Vector, arg1: Vector): Vector
-	getRandom(): Vector
-	add(arg0: Vector): Vector
-	equals(arg0: Object): boolean
-	length(): double
-	toString(): String
-	hashCode(): int
-	clone(): Object
-	clone(): Vector
-	dot(arg0: Vector): double
-	copy(arg0: Vector): Vector
-	normalize(): Vector
-	zero(): Vector
-	distance(arg0: Vector): double
-	multiply(arg0: float): Vector
-	multiply(arg0: Vector): Vector
-	multiply(arg0: double): Vector
-	multiply(arg0: int): Vector
-	isNormalized(): boolean
-}
-namespace SpawnChangeEvent {
-	function getHandlerList(): HandlerList
-	function getPreviousLocation(): Location
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BlockCommandSender extends CommandSender {
-	getBlock(): Block
-}
-declare interface ArmorStand extends LivingEntity {
-	getLeggings(): ItemStack
-	setChestplate(arg0: ItemStack): void
-	setLeggings(arg0: ItemStack): void
-	getChestplate(): ItemStack
-	getBodyPose(): EulerAngle
-	setBodyPose(arg0: EulerAngle): void
-	getLeftArmPose(): EulerAngle
-	setLeftArmPose(arg0: EulerAngle): void
-	getRightArmPose(): EulerAngle
-	setRightArmPose(arg0: EulerAngle): void
-	getLeftLegPose(): EulerAngle
-	setLeftLegPose(arg0: EulerAngle): void
-	getRightLegPose(): EulerAngle
-	setRightLegPose(arg0: EulerAngle): void
-	getHeadPose(): EulerAngle
-	setHeadPose(arg0: EulerAngle): void
-	hasBasePlate(): boolean
-	setBasePlate(arg0: boolean): void
-	addEquipmentLock(arg0: EquipmentSlot, arg1: LockType): void
-	removeEquipmentLock(arg0: EquipmentSlot, arg1: LockType): void
-	hasEquipmentLock(arg0: EquipmentSlot, arg1: LockType): boolean
-	getItemInHand(): ItemStack
-	setItemInHand(arg0: ItemStack): void
-	setVisible(arg0: boolean): void
-	isVisible(): boolean
-	getHelmet(): ItemStack
-	setHelmet(arg0: ItemStack): void
-	getBoots(): ItemStack
-	setBoots(arg0: ItemStack): void
-	hasArms(): boolean
-	setArms(arg0: boolean): void
-	isSmall(): boolean
-	setSmall(arg0: boolean): void
-	isMarker(): boolean
-	setMarker(arg0: boolean): void
-}
-declare class Cauldron extends MaterialData {
-	isFull(): boolean
-	toString(): String
-	clone(): MaterialData
-	clone(): Cauldron
-	clone(): Object
-	isEmpty(): boolean
-}
-namespace EntityPortalEnterEvent {
-	function getHandlerList(): HandlerList
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BrewingStandFuelEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getFuelPower(): int
-	function setFuelPower(arg0: int): void
-	function isConsuming(): boolean
-	function setConsuming(arg0: boolean): void
-	function getFuel(): ItemStack
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class HelpTopicComparator implements Comparator {
-	topicNameComparatorInstance(): TopicNameComparator
-	helpTopicComparatorInstance(): HelpTopicComparator
-	compare(arg0: HelpTopic, arg1: HelpTopic): int
-	compare(arg0: Object, arg1: Object): int
-}
-declare interface Raider extends Monster {
-	getPatrolTarget(): Block
-	setPatrolTarget(arg0: Block): void
-	isPatrolLeader(): boolean
-	setPatrolLeader(arg0: boolean): void
-	isCanJoinRaid(): boolean
-	setCanJoinRaid(arg0: boolean): void
-}
-declare class Torch extends SimpleAttachableMaterialData {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	clone(): MaterialData
-	clone(): Torch
-	clone(): Object
-	clone(): SimpleAttachableMaterialData
-}
-declare interface AbstractSkeleton extends Monster {
-	getSkeletonType(): SkeletonType
-	setSkeletonType(arg0: SkeletonType): void
-}
-declare interface HelpMap {
-	getHelpTopic(arg0: String): HelpTopic
-	getHelpTopics(): Collection
-	registerHelpTopicFactory(arg0: Class, arg1: HelpTopicFactory): void
-	getIgnoredPlugins(): List
-	addTopic(arg0: HelpTopic): void
-	clear(): void
-}
-declare interface Jukebox extends TileState {
-	stopPlaying(): void
-	eject(): boolean
-	getPlaying(): Material
-	setPlaying(arg0: Material): void
-	getRecord(): ItemStack
-	setRecord(arg0: ItemStack): void
-	isPlaying(): boolean
-}
-namespace PlayerBedEnterEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBedEnterResult(): BedEnterResult
-	function getBed(): Block
-	function useBed(): Result
-	function setUseBed(arg0: Result): void
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Art extends Enum implements Keyed {
-	getBlockWidth(): int
-	getBlockHeight(): int
-	getById(arg0: int): Art
-	values(): Art[]
-	valueOf(arg0: String): Art
-	getKey(): NamespacedKey
-	getId(): int
-	getByName(arg0: String): Art
-}
-declare class Biome extends Enum implements Keyed {
-	values(): Biome[]
-	valueOf(arg0: String): Biome
-	getKey(): NamespacedKey
-}
-declare interface AreaEffectCloud extends Entity {
-	setBasePotionData(arg0: PotionData): void
-	getBasePotionData(): PotionData
-	hasCustomEffects(): boolean
-	getCustomEffects(): List
-	addCustomEffect(arg0: PotionEffect, arg1: boolean): boolean
-	removeCustomEffect(arg0: PotionEffectType): boolean
-	hasCustomEffect(arg0: PotionEffectType): boolean
-	clearCustomEffects(): void
-	getDuration(): int
-	setDuration(arg0: int): void
-	getWaitTime(): int
-	setWaitTime(arg0: int): void
-	getReapplicationDelay(): int
-	setReapplicationDelay(arg0: int): void
-	getDurationOnUse(): int
-	setDurationOnUse(arg0: int): void
-	getRadiusOnUse(): float
-	setRadiusOnUse(arg0: float): void
-	getRadiusPerTick(): float
-	setRadiusPerTick(arg0: float): void
-	getParticle(): Particle
-	setParticle(arg0: Particle, arg1: Object): void
-	setParticle(arg0: Particle): void
-	getColor(): Color
-	getRadius(): float
-	setRadius(arg0: float): void
-	setSource(arg0: ProjectileSource): void
-	getSource(): ProjectileSource
-	setColor(arg0: Color): void
-}
-declare interface WaterMob extends Creature {
-}
-declare class RemoveAttachmentRunnable implements Runnable {
-	run(): void
-}
-namespace WeatherEvent {
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Campfire extends Directional, Lightable, Waterlogged {
-	isSignalFire(): boolean
-	setSignalFire(arg0: boolean): void
-}
-declare interface Breedable extends Ageable {
-	setAgeLock(arg0: boolean): void
-	getAgeLock(): boolean
-	canBreed(): boolean
-	setBreed(arg0: boolean): void
-}
-declare interface AdvancementProgress {
-	awardCriteria(arg0: String): boolean
-	revokeCriteria(arg0: String): boolean
-	getDateAwarded(arg0: String): Date
-	getRemainingCriteria(): Collection
-	getAwardedCriteria(): Collection
-	getAdvancement(): Advancement
-	isDone(): boolean
-}
-declare class SpawnEgg extends MaterialData {
-	getSpawnedType(): EntityType
-	setSpawnedType(arg0: EntityType): void
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): SpawnEgg
-}
-declare interface TurtleEgg extends BlockData {
-	getMinimumEggs(): int
-	getMaximumEggs(): int
-	getMaximumHatch(): int
-	getEggs(): int
-	setEggs(arg0: int): void
-	getHatch(): int
-	setHatch(arg0: int): void
-}
-declare interface Squid extends WaterMob {
-}
-namespace InventoryClickEvent {
-	function getHandlerList(): HandlerList
-	function getSlotType(): SlotType
-	function getCurrentItem(): ItemStack
-	function isRightClick(): boolean
-	function isLeftClick(): boolean
-	function isShiftClick(): boolean
-	function setCurrentItem(arg0: ItemStack): void
-	function getClickedInventory(): Inventory
-	function getHotbarButton(): int
-	function getCursor(): ItemStack
-	function setCursor(arg0: ItemStack): void
-	function getRawSlot(): int
-	function getAction(): InventoryAction
-	function getClick(): ClickType
-	function getSlot(): int
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Sound extends Enum implements Keyed {
-	values(): Sound[]
-	valueOf(arg0: String): Sound
-	getKey(): NamespacedKey
-}
-declare interface Guardian extends Monster {
-	isElder(): boolean
-	setElder(arg0: boolean): void
-}
-declare class DetectorRail extends ExtendedRails implements PressureSensor {
-	isPressed(): boolean
-	setPressed(arg0: boolean): void
-	clone(): MaterialData
-	clone(): Object
-	clone(): Rails
-	clone(): ExtendedRails
-	clone(): DetectorRail
-}
-declare interface BukkitWorker {
-	getTaskId(): int
-	getThread(): Thread
-	getOwner(): Plugin
-}
-namespace PlayerGameModeChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getNewGameMode(): GameMode
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Spigot {
-	getConfig(): YamlConfiguration
-	restart(): void
-	broadcast(arg0: BaseComponent[]): void
-	broadcast(arg0: BaseComponent): void
-}
-declare class BooleanPrompt extends ValidatingPrompt {
-	isInputValid(arg0: ConversationContext, arg1: String): boolean
-	acceptValidatedInput(arg0: ConversationContext, arg1: boolean): Prompt
-	acceptValidatedInput(arg0: ConversationContext, arg1: String): Prompt
-}
-namespace PlayerItemConsumeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setItem(arg0: ItemStack): void
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface TropicalFish extends Fish {
-	getPatternColor(): DyeColor
-	setPatternColor(arg0: DyeColor): void
-	getBodyColor(): DyeColor
-	setBodyColor(arg0: DyeColor): void
-	getPattern(): Pattern
-	setPattern(arg0: Pattern): void
-}
-declare class PermissibleBase implements Permissible {
-	recalculatePermissions(): void
-	isPermissionSet(arg0: Permission): boolean
-	isPermissionSet(arg0: String): boolean
-	addAttachment(arg0: Plugin, arg1: String, arg2: boolean): PermissionAttachment
-	addAttachment(arg0: Plugin): PermissionAttachment
-	addAttachment(arg0: Plugin, arg1: String, arg2: boolean, arg3: int): PermissionAttachment
-	addAttachment(arg0: Plugin, arg1: int): PermissionAttachment
-	hasPermission(arg0: Permission): boolean
-	hasPermission(arg0: String): boolean
-	getEffectivePermissions(): Set
-	removeAttachment(arg0: PermissionAttachment): void
-	clearPermissions(): void
-	calculateChildPermissions(arg0: Map, arg1: boolean, arg2: PermissionAttachment): void
-	isOp(): boolean
-	setOp(arg0: boolean): void
-}
-namespace EntityTargetEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getTarget(): Entity
-	function setTarget(arg0: Entity): void
-	function getReason(): TargetReason
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityInteractEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlock(): Block
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BlockFadeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getNewState(): BlockState
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace VillagerAcquireTradeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setRecipe(arg0: MerchantRecipe): void
-	function getEntity(): AbstractVillager
-	function getEntity(): Entity
-	function getRecipe(): MerchantRecipe
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface NoteBlock extends Powerable {
-	getInstrument(): Instrument
-	setInstrument(arg0: Instrument): void
-	getNote(): Note
-	setNote(arg0: Note): void
-}
-namespace PlayerCommandPreprocessEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRecipients(): Set
-	function setMessage(arg0: String): void
-	function setPlayer(arg0: Player): void
-	function getMessage(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class MerchantRecipe implements Recipe {
-	getVillagerExperience(): int
-	setVillagerExperience(arg0: int): void
-	addIngredient(arg0: ItemStack): void
-	removeIngredient(arg0: int): void
-	setIngredients(arg0: List): void
-	getIngredients(): List
-	hasExperienceReward(): boolean
-	setExperienceReward(arg0: boolean): void
-	getPriceMultiplier(): float
-	setPriceMultiplier(arg0: float): void
-	getUses(): int
-	setUses(arg0: int): void
-	getMaxUses(): int
-	setMaxUses(arg0: int): void
-	getResult(): ItemStack
-}
-declare class Spigot {
-	getPages(): List
-	setPages(arg0: List): void
-	setPages(arg0: BaseComponent[][]): void
-	addPage(arg0: BaseComponent[][]): void
-	getPage(arg0: int): BaseComponent[]
-	setPage(arg0: int, arg1: BaseComponent[]): void
-}
-declare interface Listener {
-}
-declare interface ChunkData {
-	getBlockData(arg0: int, arg1: int, arg2: int): BlockData
-	getMaxHeight(): int
-	getMinHeight(): int
-	getTypeAndData(arg0: int, arg1: int, arg2: int): MaterialData
-	getData(arg0: int, arg1: int, arg2: int): byte
-	setBlock(arg0: int, arg1: int, arg2: int, arg3: MaterialData): void
-	setBlock(arg0: int, arg1: int, arg2: int, arg3: BlockData): void
-	setBlock(arg0: int, arg1: int, arg2: int, arg3: Material): void
-	setRegion(arg0: int, arg1: int, arg2: int, arg3: int, arg4: int, arg5: int, arg6: MaterialData): void
-	setRegion(arg0: int, arg1: int, arg2: int, arg3: int, arg4: int, arg5: int, arg6: BlockData): void
-	setRegion(arg0: int, arg1: int, arg2: int, arg3: int, arg4: int, arg5: int, arg6: Material): void
-	getType(arg0: int, arg1: int, arg2: int): Material
-}
-declare interface Snowable extends BlockData {
-	setSnowy(arg0: boolean): void
-	isSnowy(): boolean
-}
-namespace PlayerEditBookEvent {
-	function getPreviousBookMeta(): BookMeta
-	function getNewBookMeta(): BookMeta
-	function setNewBookMeta(arg0: BookMeta): void
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isSigning(): boolean
-	function setSigning(arg0: boolean): void
-	function getSlot(): int
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace BroadcastMessageEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRecipients(): Set
-	function setMessage(arg0: String): void
-	function getMessage(): String
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface ExperienceOrb extends Entity {
-	setExperience(arg0: int): void
-	getExperience(): int
-}
-declare class Note {
-	getToneByte(): byte
-	sharped(): Note
-	flat(arg0: int, arg1: Tone): Note
-	sharp(arg0: int, arg1: Tone): Note
-	natural(arg0: int, arg1: Tone): Note
-	flattened(): Note
-	getOctave(): int
-	getTone(): Tone
-	isSharped(): boolean
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	getId(): byte
-}
-declare class Comparator extends MaterialData implements Directional, Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	setSubtractionMode(arg0: boolean): void
-	isSubtractionMode(): boolean
-	isBeingPowered(): boolean
-	getFacing(): BlockFace
-	isPowered(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Comparator
-	clone(): MaterialData
-}
-namespace VehicleBlockCollisionEvent {
-	function getHandlerList(): HandlerList
-	function getBlock(): Block
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface RedstoneRail extends Powerable, Rail {
-}
-namespace VillagerReplenishTradeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function setRecipe(arg0: MerchantRecipe): void
-	function getBonus(): int
-	function setBonus(arg0: int): void
-	function getEntity(): AbstractVillager
-	function getEntity(): Entity
-	function getRecipe(): MerchantRecipe
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface SculkSensor extends AnaloguePowerable, Waterlogged {
-	getPhase(): Phase
-	setPhase(arg0: Phase): void
-}
-namespace BlockPistonExtendEvent {
-	function getHandlerList(): HandlerList
-	function getBlocks(): List
-	function getLength(): int
-	function getHandlers(): HandlerList
-	function getDirection(): BlockFace
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function isSticky(): boolean
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface DragonBattle {
-	resetCrystals(): void
-	getEnderDragon(): EnderDragon
-	getEndPortalLocation(): Location
-	generateEndPortal(arg0: boolean): boolean
-	hasBeenPreviouslyKilled(): boolean
-	initiateRespawn(): void
-	getRespawnPhase(): RespawnPhase
-	setRespawnPhase(arg0: RespawnPhase): boolean
-	getBossBar(): BossBar
-}
-declare interface CraftingInventory extends Inventory {
-	getMatrix(): ItemStack[]
-	setMatrix(arg0: ItemStack[]): void
-	getRecipe(): Recipe
-	setResult(arg0: ItemStack): void
-	getResult(): ItemStack
-}
-declare interface PointedDripstone extends Waterlogged {
-	getVerticalDirection(): BlockFace
-	setVerticalDirection(arg0: BlockFace): void
-	getVerticalDirections(): Set
-	getThickness(): Thickness
-	setThickness(arg0: Thickness): void
-}
-declare class Ladder extends SimpleAttachableMaterialData {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	clone(): MaterialData
-	clone(): Ladder
-	clone(): Object
-	clone(): SimpleAttachableMaterialData
-}
-declare interface EnderDragonPart extends ComplexEntityPart, Damageable {
-	getParent(): EnderDragon
-	getParent(): ComplexLivingEntity
-}
-declare class FileUtil {
-	copy(arg0: File, arg1: File): boolean
-}
-namespace ItemSpawnEvent {
-	function getEntity(): Entity
-	function getEntity(): Item
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerUnleashEntityEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getPlayer(): Player
-	function getHandlerList(): HandlerList
-	function getReason(): UnleashReason
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace MapInitializeEvent {
-	function getHandlerList(): HandlerList
-	function getMap(): MapView
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Piglin extends PiglinAbstract, InventoryHolder {
-	isAbleToHunt(): boolean
-	setIsAbleToHunt(arg0: boolean): void
-	addBarterMaterial(arg0: Material): boolean
-	removeBarterMaterial(arg0: Material): boolean
-	addMaterialOfInterest(arg0: Material): boolean
-	removeMaterialOfInterest(arg0: Material): boolean
-	getInterestList(): Set
-	getBarterList(): Set
-}
-declare class MaterialData implements Cloneable {
-	getItemType(): Material
-	toItemStack(): ItemStack
-	toItemStack(arg0: int): ItemStack
-	setData(arg0: byte): void
-	getData(): byte
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	clone(): Object
-	clone(): MaterialData
-}
-declare class CommandPermissions {
-	registerPermissions(arg0: Permission): Permission
-}
-declare interface Axolotl extends Animals {
-	isPlayingDead(): boolean
-	setPlayingDead(arg0: boolean): void
-	setVariant(arg0: Variant): void
-	getVariant(): Variant
-}
-declare interface MapCanvas {
-	getBasePixel(arg0: int, arg1: int): byte
-	getMapView(): MapView
-	getCursors(): MapCursorCollection
-	setCursors(arg0: MapCursorCollection): void
-	setPixel(arg0: int, arg1: int, arg2: byte): void
-	getPixel(arg0: int, arg1: int): byte
-	drawText(arg0: int, arg1: int, arg2: MapFont, arg3: String): void
-	drawImage(arg0: int, arg1: int, arg2: Image): void
-}
-namespace PrepareSmithingEvent {
-	function getHandlerList(): HandlerList
-	function getInventory(): SmithingInventory
-	function getInventory(): Inventory
-	function setResult(arg0: ItemStack): void
-	function getHandlers(): HandlerList
-	function getResult(): ItemStack
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface SpawnEggMeta extends ItemMeta {
-	getSpawnedType(): EntityType
-	setSpawnedType(arg0: EntityType): void
-	clone(): ItemMeta
-	clone(): Object
-	clone(): SpawnEggMeta
-}
-declare interface ProjectileSource {
-	launchProjectile(arg0: Class): Projectile
-	launchProjectile(arg0: Class, arg1: Vector): Projectile
-}
-declare class Observer extends MaterialData implements Directional, Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	isPowered(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Observer
-	clone(): MaterialData
-}
-declare class Mushroom extends MaterialData {
-	getBlockTexture(): MushroomBlockTexture
-	setBlockTexture(arg0: MushroomBlockTexture): void
-	isFacePainted(arg0: BlockFace): boolean
-	setFacePainted(arg0: BlockFace, arg1: boolean): void
-	getPaintedFaces(): Set
-	isStem(): boolean
-	setStem(): void
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Mushroom
-	clone(): MaterialData
-}
-declare interface PufferFish extends Fish {
-	getPuffState(): int
-	setPuffState(arg0: int): void
-}
-declare interface DragonFireball extends Fireball {
-}
-declare interface MapMeta extends ItemMeta {
-	hasLocationName(): boolean
-	getLocationName(): String
-	setLocationName(arg0: String): void
-	getColor(): Color
-	hasColor(): boolean
-	getMapView(): MapView
-	hasMapId(): boolean
-	getMapId(): int
-	setMapId(arg0: int): void
-	hasMapView(): boolean
-	setMapView(arg0: MapView): void
-	isScaling(): boolean
-	setScaling(arg0: boolean): void
-	clone(): Object
-	clone(): MapMeta
-	clone(): ItemMeta
-	setColor(arg0: Color): void
-}
-declare class StructureType {
-	getStructureTypes(): Map
-	getMapIcon(): Type
-	getName(): String
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	register(arg0: StructureType): StructureType
-}
-namespace InventoryDragEvent {
-	function getHandlerList(): HandlerList
-	function getNewItems(): Map
-	function getRawSlots(): Set
-	function getInventorySlots(): Set
-	function getOldCursor(): ItemStack
-	function getCursor(): ItemStack
-	function setCursor(arg0: ItemStack): void
-	function getType(): DragType
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getInventory(): Inventory
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Fluid extends Enum implements Keyed {
-	values(): Fluid[]
-	valueOf(arg0: String): Fluid
-	getKey(): NamespacedKey
-}
-declare interface ZombieVillager extends Zombie {
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-	getVillagerType(): Type
-	setVillagerType(arg0: Type): void
-	setVillagerProfession(arg0: Profession): void
-	getVillagerProfession(): Profession
-	getConversionPlayer(): OfflinePlayer
-	setConversionPlayer(arg0: OfflinePlayer): void
-}
-namespace PlayerBucketFillEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getItemStack(): ItemStack
-	function getBlockFace(): BlockFace
-	function setItemStack(arg0: ItemStack): void
-	function getBlockClicked(): Block
-	function getBlock(): Block
-	function getBucket(): Material
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Damageable {
-	setDamage(arg0: int): void
-	getDamage(): int
-	hasDamage(): boolean
-	clone(): Damageable
-	clone(): Object
-}
-namespace FireworkExplodeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getEntity(): Firework
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class LongGrass extends MaterialData {
-	setSpecies(arg0: GrassSpecies): void
-	getSpecies(): GrassSpecies
-	toString(): String
-	clone(): Object
-	clone(): MaterialData
-	clone(): LongGrass
-}
-declare class Banner extends MaterialData implements Attachable {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	isWallBanner(): boolean
-	getFacing(): BlockFace
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Banner
-	clone(): MaterialData
-}
-declare class TripwireHook extends SimpleAttachableMaterialData implements Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	getAttachedFace(): BlockFace
-	isActivated(): boolean
-	setActivated(arg0: boolean): void
-	isConnected(): boolean
-	setConnected(arg0: boolean): void
-	isPowered(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): MaterialData
-	clone(): SimpleAttachableMaterialData
-	clone(): Object
-	clone(): TripwireHook
-}
-declare class JavaPluginLoader implements PluginLoader {
-	getPluginDescription(arg0: File): PluginDescriptionFile
-	getPluginFileFilters(): Pattern[]
-	getClassByName(arg0: String, arg1: boolean, arg2: PluginDescriptionFile): Class
-	removeClass(arg0: Class): void
-	createRegisteredListeners(arg0: Listener, arg1: Plugin): Map
-	enablePlugin(arg0: Plugin): void
-	disablePlugin(arg0: Plugin): void
-	loadPlugin(arg0: File): Plugin
-	setClass(arg0: String, arg1: Class): void
-}
-namespace PlayerUnregisterChannelEvent {
-	function getHandlerList(): HandlerList
-	function getChannel(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Repairable {
-	getRepairCost(): int
-	setRepairCost(arg0: int): void
-	hasRepairCost(): boolean
-	clone(): Repairable
-	clone(): Object
-}
-declare interface PersistentDataType {
-	getPrimitiveType(): Class
-	getComplexType(): Class
-	toPrimitive(arg0: Object, arg1: PersistentDataAdapterContext): Object
-	fromPrimitive(arg0: Object, arg1: PersistentDataAdapterContext): Object
-}
-declare class PrimitivePersistentDataType implements PersistentDataType {
-	getPrimitiveType(): Class
-	getComplexType(): Class
-	toPrimitive(arg0: Object, arg1: PersistentDataAdapterContext): Object
-	fromPrimitive(arg0: Object, arg1: PersistentDataAdapterContext): Object
-}
-declare class Builder {
-	lootingModifier(arg0: int): Builder
-	lootedEntity(arg0: Entity): Builder
-	luck(arg0: float): Builder
-	killer(arg0: HumanEntity): Builder
-	build(): LootContext
-}
-declare interface ProxiedCommandSender extends CommandSender {
-	getCaller(): CommandSender
-	getCallee(): CommandSender
-}
-declare interface SmithingInventory extends Inventory {
-	getRecipe(): Recipe
-	setResult(arg0: ItemStack): void
-	getResult(): ItemStack
-}
-namespace PlayerHarvestBlockEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getHarvestedBlock(): Block
-	function getItemsHarvested(): List
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Steerable extends Animals {
-	getBoostTicks(): int
-	setBoostTicks(arg0: int): void
-	getCurrentBoostTicks(): int
-	setCurrentBoostTicks(arg0: int): void
-	getSteerMaterial(): Material
-	hasSaddle(): boolean
-	setSaddle(arg0: boolean): void
-}
-declare interface TropicalFishBucketMeta extends ItemMeta {
-	getPatternColor(): DyeColor
-	setPatternColor(arg0: DyeColor): void
-	getBodyColor(): DyeColor
-	setBodyColor(arg0: DyeColor): void
-	getPattern(): Pattern
-	setPattern(arg0: Pattern): void
-	hasVariant(): boolean
-	clone(): Object
-	clone(): ItemMeta
-	clone(): TropicalFishBucketMeta
-}
-declare interface VoxelShape {
-	getBoundingBoxes(): Collection
-	overlaps(arg0: BoundingBox): boolean
-}
-declare interface Jukebox extends BlockData {
-	hasRecord(): boolean
-}
-declare class SimpleServicesManager implements ServicesManager {
-	unregisterAll(arg0: Plugin): void
-	getRegistration(arg0: Class): RegisteredServiceProvider
-	getRegistrations(arg0: Class): List
-	getRegistrations(arg0: Plugin): List
-	getRegistrations(arg0: Class): Collection
-	getKnownServices(): Collection
-	getKnownServices(): Set
-	isProvidedFor(arg0: Class): boolean
-	load(arg0: Class): Object
-	register(arg0: Class, arg1: Object, arg2: Plugin, arg3: ServicePriority): void
-	unregister(arg0: Object): void
-	unregister(arg0: Class, arg1: Object): void
-}
-declare interface CommandBlock extends TileState {
-	getCommand(): String
-	setCommand(arg0: String): void
-	getName(): String
-	setName(arg0: String): void
-}
-declare class EnchantmentWrapper extends Enchantment {
-	getStartLevel(): int
-	getMaxLevel(): int
-	canEnchantItem(arg0: ItemStack): boolean
-	getEnchantment(): Enchantment
-	getItemTarget(): EnchantmentTarget
-	conflictsWith(arg0: Enchantment): boolean
-	isTreasure(): boolean
-	isCursed(): boolean
-	getName(): String
-}
-declare class BukkitRunnable implements Runnable {
-	isCancelled(): boolean
-	runTaskAsynchronously(arg0: Plugin): BukkitTask
-	runTaskLater(arg0: Plugin, arg1: long): BukkitTask
-	runTaskLaterAsynchronously(arg0: Plugin, arg1: long): BukkitTask
-	runTaskTimer(arg0: Plugin, arg1: long, arg2: long): BukkitTask
-	runTaskTimerAsynchronously(arg0: Plugin, arg1: long, arg2: long): BukkitTask
-	checkScheduled(): void
-	checkNotYetScheduled(): void
-	cancel(): void
-	getTaskId(): int
-	runTask(arg0: Plugin): BukkitTask
-	setupTask(arg0: BukkitTask): BukkitTask
-}
-namespace PlayerInteractEntityEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRightClicked(): Entity
-	function getHand(): EquipmentSlot
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Shulker extends Golem, Colorable {
-	getAttachedFace(): BlockFace
-	setAttachedFace(arg0: BlockFace): void
-	getPeek(): float
-	setPeek(arg0: float): void
-}
-declare class WoodenStep extends Wood {
-	setInverted(arg0: boolean): void
-	isInverted(): boolean
-	toString(): String
-	clone(): MaterialData
-	clone(): Object
-	clone(): Wood
-	clone(): WoodenStep
-}
-declare interface Levelled extends BlockData {
-	getMaximumLevel(): int
-	getLevel(): int
-	setLevel(arg0: int): void
-}
-declare interface Creeper extends Monster {
-	setMaxFuseTicks(arg0: int): void
-	getMaxFuseTicks(): int
-	setFuseTicks(arg0: int): void
-	getFuseTicks(): int
-	setExplosionRadius(arg0: int): void
-	getExplosionRadius(): int
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-	explode(): void
-	ignite(): void
-}
-namespace ArrowBodyCountChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getOldAmount(): int
-	function getNewAmount(): int
-	function setNewAmount(arg0: int): void
-	function getEntity(): Entity
-	function getEntity(): LivingEntity
-	function isReset(): boolean
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CompassMeta extends ItemMeta {
-	hasLodestone(): boolean
-	getLodestone(): Location
-	setLodestone(arg0: Location): void
-	isLodestoneTracked(): boolean
-	setLodestoneTracked(arg0: boolean): void
-	clone(): CompassMeta
-	clone(): ItemMeta
-	clone(): Object
-}
-declare class RegisteredServiceProvider implements Comparable {
-	getPlugin(): Plugin
-	getService(): Class
-	compareTo(arg0: RegisteredServiceProvider): int
-	compareTo(arg0: Object): int
-	getPriority(): ServicePriority
-	getProvider(): Object
-}
-namespace HangingPlaceEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlockFace(): BlockFace
-	function getBlock(): Block
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getEntity(): Hanging
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PluginManager {
-	getPermissionSubscriptions(arg0: String): Set
-	addPermission(arg0: Permission): void
-	getDefaultPermissions(arg0: boolean): Set
-	subscribeToDefaultPerms(arg0: boolean, arg1: Permissible): void
-	subscribeToPermission(arg0: String, arg1: Permissible): void
-	unsubscribeFromPermission(arg0: String, arg1: Permissible): void
-	enablePlugin(arg0: Plugin): void
-	disablePlugin(arg0: Plugin): void
-	registerInterface(arg0: Class): void
-	isPluginEnabled(arg0: String): boolean
-	isPluginEnabled(arg0: Plugin): boolean
-	loadPlugins(arg0: File): Plugin[]
-	disablePlugins(): void
-	clearPlugins(): void
-	registerEvents(arg0: Listener, arg1: Plugin): void
-	registerEvent(arg0: Class, arg1: Listener, arg2: EventPriority, arg3: EventExecutor, arg4: Plugin): void
-	registerEvent(arg0: Class, arg1: Listener, arg2: EventPriority, arg3: EventExecutor, arg4: Plugin, arg5: boolean): void
-	removePermission(arg0: String): void
-	removePermission(arg0: Permission): void
-	useTimings(): boolean
-	getPlugin(arg0: String): Plugin
-	getPlugins(): Plugin[]
-	callEvent(arg0: Event): void
-	loadPlugin(arg0: File): Plugin
-	unsubscribeFromDefaultPerms(arg0: boolean, arg1: Permissible): void
-	recalculatePermissionDefaults(arg0: Permission): void
-	getDefaultPermSubscriptions(arg0: boolean): Set
-	getPermissions(): Set
-	getPermission(arg0: String): Permission
-}
-declare interface LightningRod extends Directional, Powerable, Waterlogged {
-}
-declare interface GlassPane extends MultipleFacing, Waterlogged {
-}
-declare interface Evoker extends Spellcaster {
-	getCurrentSpell(): Spell
-	setCurrentSpell(arg0: Spell): void
-}
-declare interface ConsoleCommandSender extends CommandSender, Conversable {
-}
-declare interface SizedFireball extends Fireball {
-	getDisplayItem(): ItemStack
-	setDisplayItem(arg0: ItemStack): void
-}
-declare interface Beehive extends EntityBlockStorage {
-	getFlower(): Location
-	setFlower(arg0: Location): void
-	isSedated(): boolean
-}
-declare class MemorySection implements ConfigurationSection {
-	createSection(arg0: String): ConfigurationSection
-	createSection(arg0: String, arg1: Map): ConfigurationSection
-	getCurrentPath(): String
-	getStringList(arg0: String): List
-	getIntegerList(arg0: String): List
-	getBooleanList(arg0: String): List
-	getDoubleList(arg0: String): List
-	getFloatList(arg0: String): List
-	getLongList(arg0: String): List
-	getByteList(arg0: String): List
-	getCharacterList(arg0: String): List
-	getShortList(arg0: String): List
-	getSerializable(arg0: String, arg1: Class, arg2: ConfigurationSerializable): ConfigurationSerializable
-	getSerializable(arg0: String, arg1: Class): ConfigurationSerializable
-	getOfflinePlayer(arg0: String): OfflinePlayer
-	getOfflinePlayer(arg0: String, arg1: OfflinePlayer): OfflinePlayer
-	isOfflinePlayer(arg0: String): boolean
-	getItemStack(arg0: String): ItemStack
-	getItemStack(arg0: String, arg1: ItemStack): ItemStack
-	isItemStack(arg0: String): boolean
-	getConfigurationSection(arg0: String): ConfigurationSection
-	isConfigurationSection(arg0: String): boolean
-	getDefaultSection(): ConfigurationSection
-	mapChildrenKeys(arg0: Set, arg1: ConfigurationSection, arg2: boolean): void
-	mapChildrenValues(arg0: Map, arg1: ConfigurationSection, arg2: boolean): void
-	isPrimitiveWrapper(arg0: Object): boolean
-	getColor(arg0: String): Color
-	getColor(arg0: String, arg1: Color): Color
-	getValues(arg0: boolean): Map
-	addDefault(arg0: String, arg1: Object): void
-	isString(arg0: String): boolean
-	isInt(arg0: String): boolean
-	isBoolean(arg0: String): boolean
-	isDouble(arg0: String): boolean
-	isLong(arg0: String): boolean
-	getList(arg0: String, arg1: List): List
-	getList(arg0: String): List
-	isList(arg0: String): boolean
-	getMapList(arg0: String): List
-	getVector(arg0: String, arg1: Vector): Vector
-	getVector(arg0: String): Vector
-	isVector(arg0: String): boolean
-	isColor(arg0: String): boolean
-	isLocation(arg0: String): boolean
-	createPath(arg0: ConfigurationSection, arg1: String, arg2: ConfigurationSection): String
-	createPath(arg0: ConfigurationSection, arg1: String): String
-	getName(): String
-	get(arg0: String): Object
-	get(arg0: String, arg1: Object): Object
-	toString(): String
-	getBoolean(arg0: String, arg1: boolean): boolean
-	getBoolean(arg0: String): boolean
-	getInt(arg0: String): int
-	getInt(arg0: String, arg1: int): int
-	getLong(arg0: String, arg1: long): long
-	getLong(arg0: String): long
-	getDouble(arg0: String, arg1: double): double
-	getDouble(arg0: String): double
-	getDefault(arg0: String): Object
-	contains(arg0: String, arg1: boolean): boolean
-	contains(arg0: String): boolean
-	getLocation(arg0: String, arg1: Location): Location
-	getLocation(arg0: String): Location
-	getParent(): ConfigurationSection
-	set(arg0: String, arg1: Object): void
-	isSet(arg0: String): boolean
-	getRoot(): Configuration
-	getObject(arg0: String, arg1: Class): Object
-	getObject(arg0: String, arg1: Class, arg2: Object): Object
-	getString(arg0: String): String
-	getString(arg0: String, arg1: String): String
-	getKeys(arg0: boolean): Set
-}
-declare class ShapelessRecipe implements Recipe, Keyed {
-	addIngredient(arg0: Material, arg1: int): ShapelessRecipe
-	addIngredient(arg0: int, arg1: MaterialData): ShapelessRecipe
-	addIngredient(arg0: int, arg1: Material): ShapelessRecipe
-	addIngredient(arg0: int, arg1: Material, arg2: int): ShapelessRecipe
-	addIngredient(arg0: RecipeChoice): ShapelessRecipe
-	addIngredient(arg0: MaterialData): ShapelessRecipe
-	addIngredient(arg0: Material): ShapelessRecipe
-	removeIngredient(arg0: int, arg1: Material): ShapelessRecipe
-	removeIngredient(arg0: int, arg1: MaterialData): ShapelessRecipe
-	removeIngredient(arg0: Material, arg1: int): ShapelessRecipe
-	removeIngredient(arg0: int, arg1: Material, arg2: int): ShapelessRecipe
-	removeIngredient(arg0: RecipeChoice): ShapelessRecipe
-	removeIngredient(arg0: Material): ShapelessRecipe
-	removeIngredient(arg0: MaterialData): ShapelessRecipe
-	getIngredientList(): List
-	getChoiceList(): List
-	getGroup(): String
-	setGroup(arg0: String): void
-	getKey(): NamespacedKey
-	getResult(): ItemStack
-}
-declare class SimpleCommandMap implements CommandMap {
-	registerAll(arg0: String, arg1: List): void
-	clearCommands(): void
-	tabComplete(arg0: CommandSender, arg1: String, arg2: Location): List
-	tabComplete(arg0: CommandSender, arg1: String): List
-	getCommands(): Collection
-	setDefaultCommands(): void
-	setFallbackCommands(): void
-	registerServerAliases(): void
-	getCommand(arg0: String): Command
-	dispatch(arg0: CommandSender, arg1: String): boolean
-	register(arg0: String, arg1: Command, arg2: boolean, arg3: String): boolean
-	register(arg0: String, arg1: Command): boolean
-	register(arg0: String, arg1: String, arg2: Command): boolean
-}
-declare class TimedRegisteredListener extends RegisteredListener {
-	getCommonSuperclass(arg0: Class, arg1: Class): Class
-	getTotalTime(): long
-	getEventClass(): Class
-	hasMultiple(): boolean
-	callEvent(arg0: Event): void
-	reset(): void
-	getCount(): int
-}
-declare interface BiomeGrid {
-	getBiome(arg0: int, arg1: int): Biome
-	getBiome(arg0: int, arg1: int, arg2: int): Biome
-	setBiome(arg0: int, arg1: int, arg2: int, arg3: Biome): void
-	setBiome(arg0: int, arg1: int, arg2: Biome): void
-}
-namespace PluginEnableEvent {
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function getPlugin(): Plugin
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class ConversationFactory {
-	withModality(arg0: boolean): ConversationFactory
-	withLocalEcho(arg0: boolean): ConversationFactory
-	withTimeout(arg0: int): ConversationFactory
-	withConversationCanceller(arg0: ConversationCanceller): ConversationFactory
-	withFirstPrompt(arg0: Prompt): ConversationFactory
-	withInitialSessionData(arg0: Map): ConversationFactory
-	withEscapeSequence(arg0: String): ConversationFactory
-	buildConversation(arg0: Conversable): Conversation
-	withPrefix(arg0: ConversationPrefix): ConversationFactory
-	thatExcludesNonPlayersWithMessage(arg0: String): ConversationFactory
-	addConversationAbandonedListener(arg0: ConversationAbandonedListener): ConversationFactory
-}
-declare interface Recipe {
-	getResult(): ItemStack
-}
-declare class MinecraftFont extends MapFont {
-}
-declare interface PigZombie extends Zombie {
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-	isAngry(): boolean
-	setAngry(arg0: boolean): void
-	getAnger(): int
-	setAnger(arg0: int): void
-}
-namespace EntityToggleSwimEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isSwimming(): boolean
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CommandBlock extends Directional {
-	isConditional(): boolean
-	setConditional(arg0: boolean): void
-}
-declare class EntityDestination implements Destination {
-	getEntity(): Entity
-}
-declare interface Candle extends Lightable, Waterlogged {
-	getMaximumCandles(): int
-	getCandles(): int
-	setCandles(arg0: int): void
-}
-namespace PlayerLeashEntityEvent {
-	function getLeashHolder(): Entity
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Sapling extends Wood {
-	isInstantGrowable(): boolean
-	setIsInstantGrowable(arg0: boolean): void
-	toString(): String
-	clone(): MaterialData
-	clone(): Object
-	clone(): Wood
-	clone(): Sapling
-}
-declare class PluginsCommand extends BukkitCommand {
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	getPluginList(): String
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-declare interface LivingEntity extends Attributable, Damageable, ProjectileSource {
-	setMaximumAir(arg0: int): void
-	getArrowCooldown(): int
-	setSwimming(arg0: boolean): void
-	setInvisible(arg0: boolean): void
-	getMaximumNoDamageTicks(): int
-	addPotionEffects(arg0: Collection): boolean
-	getPotionEffect(arg0: PotionEffectType): PotionEffect
-	getNoDamageTicks(): int
-	isRiptiding(): boolean
-	setCollidable(arg0: boolean): void
-	hasLineOfSight(arg0: Entity): boolean
-	swingOffHand(): void
-	getActivePotionEffects(): Collection
-	setArrowCooldown(arg0: int): void
-	setMaximumNoDamageTicks(arg0: int): void
-	isInvisible(): boolean
-	setRemoveWhenFarAway(arg0: boolean): void
-	isCollidable(): boolean
-	setArrowsInBody(arg0: int): void
-	addPotionEffect(arg0: PotionEffect, arg1: boolean): boolean
-	addPotionEffect(arg0: PotionEffect): boolean
-	setLastDamage(arg0: double): void
-	hasPotionEffect(arg0: PotionEffectType): boolean
-	setLeashHolder(arg0: Entity): boolean
-	getEquipment(): EntityEquipment
-	getLeashHolder(): Entity
-	setNoDamageTicks(arg0: int): void
-	getRemoveWhenFarAway(): boolean
-	setCanPickupItems(arg0: boolean): void
-	swingMainHand(): void
-	getArrowsInBody(): int
-	getCollidableExemptions(): Set
-	getCanPickupItems(): boolean
-	getCategory(): EntityCategory
-	removePotionEffect(arg0: PotionEffectType): void
-	getLastDamage(): double
-	getEyeHeight(arg0: boolean): double
-	getEyeHeight(): double
-	getEyeLocation(): Location
-	getLineOfSight(arg0: Set, arg1: int): List
-	getTargetBlock(arg0: Set, arg1: int): Block
-	getLastTwoTargetBlocks(arg0: Set, arg1: int): List
-	getTargetBlockExact(arg0: int, arg1: FluidCollisionMode): Block
-	getTargetBlockExact(arg0: int): Block
-	rayTraceBlocks(arg0: double, arg1: FluidCollisionMode): RayTraceResult
-	rayTraceBlocks(arg0: double): RayTraceResult
-	getRemainingAir(): int
-	setRemainingAir(arg0: int): void
-	getMaximumAir(): int
-	getKiller(): Player
-	isLeashed(): boolean
-	isGliding(): boolean
-	setGliding(arg0: boolean): void
-	isSwimming(): boolean
-	isSleeping(): boolean
-	isClimbing(): boolean
-	setAI(arg0: boolean): void
-	hasAI(): boolean
-	attack(arg0: Entity): void
-	getMemory(arg0: MemoryKey): Object
-	setMemory(arg0: MemoryKey, arg1: Object): void
-}
-namespace EntityAirChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getAmount(): int
-	function setAmount(arg0: int): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface RideableMinecart extends Minecart {
-}
-declare interface AmethystCluster extends Directional, Waterlogged {
-}
-declare interface Ambient extends Mob {
-}
-declare class Spigot extends Spigot {
-	sendMessage(arg0: ChatMessageType, arg1: UUID, arg2: BaseComponent[]): void
-	sendMessage(arg0: BaseComponent[]): void
-	sendMessage(arg0: ChatMessageType, arg1: BaseComponent): void
-	sendMessage(arg0: ChatMessageType, arg1: BaseComponent[]): void
-	sendMessage(arg0: ChatMessageType, arg1: UUID, arg2: BaseComponent): void
-	sendMessage(arg0: BaseComponent): void
-	getRawAddress(): InetSocketAddress
-	getCollidesWithEntities(): boolean
-	setCollidesWithEntities(arg0: boolean): void
-	getHiddenPlayers(): Set
-	respawn(): void
-}
-namespace VehicleExitEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getExited(): LivingEntity
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace RaidEvent {
-	function getRaid(): Raid
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface EnchantmentStorageMeta extends ItemMeta {
-	hasStoredEnchants(): boolean
-	hasStoredEnchant(arg0: Enchantment): boolean
-	getStoredEnchantLevel(arg0: Enchantment): int
-	getStoredEnchants(): Map
-	addStoredEnchant(arg0: Enchantment, arg1: int, arg2: boolean): boolean
-	removeStoredEnchant(arg0: Enchantment): boolean
-	hasConflictingStoredEnchant(arg0: Enchantment): boolean
-	clone(): Object
-	clone(): ItemMeta
-	clone(): EnchantmentStorageMeta
-}
-declare interface BookMeta extends ItemMeta {
-	hasGeneration(): boolean
-	getGeneration(): Generation
-	setGeneration(arg0: Generation): void
-	getPageCount(): int
-	spigot(): Spigot
-	getTitle(): String
-	setTitle(arg0: String): boolean
-	getPages(): List
-	setPages(arg0: List): void
-	setPages(arg0: String[]): void
-	addPage(arg0: String[]): void
-	getPage(arg0: int): String
-	setPage(arg0: int, arg1: String): void
-	getAuthor(): String
-	setAuthor(arg0: String): void
-	hasTitle(): boolean
-	hasAuthor(): boolean
-	hasPages(): boolean
-	clone(): Object
-	clone(): ItemMeta
-	clone(): BookMeta
-}
-declare class Pattern implements ConfigurationSerializable {
-	serialize(): Map
-	getColor(): DyeColor
-	getPattern(): PatternType
-	equals(arg0: Object): boolean
-	hashCode(): int
-	getString(arg0: Map, arg1: Object): String
-}
-declare class ExactChoice implements RecipeChoice {
-	getItemStack(): ItemStack
-	getChoices(): List
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	clone(): RecipeChoice
-	clone(): ExactChoice
-	clone(): Object
-	test(arg0: Object): boolean
-	test(arg0: ItemStack): boolean
-}
-declare class ConversationContext {
-	getAllSessionData(): Map
-	getSessionData(arg0: Object): Object
-	setSessionData(arg0: Object, arg1: Object): void
-	getForWhom(): Conversable
-	getPlugin(): Plugin
-}
-declare interface Bed extends Directional {
-	getPart(): Part
-	setPart(arg0: Part): void
-	isOccupied(): boolean
-}
-namespace SpawnerSpawnEvent {
-	function getSpawner(): CreatureSpawner
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerSwapHandItemsEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getMainHandItem(): ItemStack
-	function setMainHandItem(arg0: ItemStack): void
-	function getOffHandItem(): ItemStack
-	function setOffHandItem(arg0: ItemStack): void
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Bed extends TileState, Colorable {
-}
-declare interface Furnace extends Container {
-	getSnapshotInventory(): Inventory
-	getSnapshotInventory(): FurnaceInventory
-	getBurnTime(): short
-	setBurnTime(arg0: short): void
-	getInventory(): FurnaceInventory
-	getInventory(): Inventory
-	getCookTime(): short
-	setCookTime(arg0: short): void
-	getCookTimeTotal(): int
-	setCookTimeTotal(arg0: int): void
-}
-declare interface LightningStrike extends Entity {
-	spigot(): Spigot
-	spigot(): Spigot
-	spigot(): Spigot
-	isEffect(): boolean
-}
-declare interface Dolphin extends WaterMob {
-}
-declare class ShapedRecipe implements Recipe, Keyed {
-	setIngredient(arg0: char, arg1: MaterialData): ShapedRecipe
-	setIngredient(arg0: char, arg1: Material, arg2: int): ShapedRecipe
-	setIngredient(arg0: char, arg1: RecipeChoice): ShapedRecipe
-	setIngredient(arg0: char, arg1: Material): ShapedRecipe
-	getIngredientMap(): Map
-	getChoiceMap(): Map
-	getShape(): String[]
-	getGroup(): String
-	setGroup(arg0: String): void
-	getKey(): NamespacedKey
-	getResult(): ItemStack
-	shape(arg0: String[]): ShapedRecipe
-}
-declare class GameEvent implements Keyed {
-	getEvent(arg0: String): GameEvent
-	getByKey(arg0: NamespacedKey): GameEvent
-	values(): Collection
-	getKey(): NamespacedKey
-}
-namespace AsyncPlayerChatEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRecipients(): Set
-	function setMessage(arg0: String): void
-	function getFormat(): String
-	function setFormat(arg0: String): void
-	function getMessage(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface UndefinedNullability extends Annotation {
-	value(): String
-}
-namespace GenericGameEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntity(): Entity
-	function getRadius(): int
-	function setRadius(arg0: int): void
-	function getEvent(): GameEvent
-	function getLocation(): Location
-	function getHandlers(): HandlerList
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class Attribute extends Enum implements Keyed {
-	values(): Attribute[]
-	valueOf(arg0: String): Attribute
-	getKey(): NamespacedKey
-}
-declare interface SpawnerMinecart extends Minecart {
-}
-declare interface DaylightDetector extends AnaloguePowerable {
-	setInverted(arg0: boolean): void
-	isInverted(): boolean
-}
-declare interface TraderLlama extends Llama {
-}
-declare class HelpCommand extends BukkitCommand {
-	tabComplete(arg0: CommandSender, arg1: String, arg2: String[]): List
-	findPossibleMatches(arg0: String): HelpTopic
-	damerauLevenshteinDistance(arg0: String, arg1: String): int
-	execute(arg0: CommandSender, arg1: String, arg2: String[]): boolean
-}
-namespace EntityBlockFormEvent {
-	function getEntity(): Entity
-	function getHandlerList(): HandlerList
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getNewState(): BlockState
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PermissionAttachmentInfo {
-	getPermissible(): Permissible
-	getAttachment(): PermissionAttachment
-	getValue(): boolean
-	getPermission(): String
-}
-declare interface ItemTagAdapterContext {
-	newTagContainer(): CustomItemTagContainer
-}
-declare class PotionEffect implements ConfigurationSerializable {
-	getDuration(): int
-	getEffectType(arg0: Map): PotionEffectType
-	getAmplifier(): int
-	hasParticles(): boolean
-	serialize(): Map
-	getColor(): Color
-	getBool(arg0: Map, arg1: Object, arg2: boolean): boolean
-	isAmbient(): boolean
-	hasIcon(): boolean
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	getInt(arg0: Map, arg1: Object): int
-	apply(arg0: LivingEntity): boolean
-	getType(): PotionEffectType
-}
-namespace PlayerChatEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRecipients(): Set
-	function setMessage(arg0: String): void
-	function setPlayer(arg0: Player): void
-	function getFormat(): String
-	function setFormat(arg0: String): void
-	function getMessage(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Fireball extends Projectile, Explosive {
-	getDirection(): Vector
-	setDirection(arg0: Vector): void
-}
-declare class FixedSetPrompt extends ValidatingPrompt {
-	isInputValid(arg0: ConversationContext, arg1: String): boolean
-	formatFixedSet(): String
-}
-declare interface AxolotlBucketMeta extends ItemMeta {
-	setVariant(arg0: Variant): void
-	hasVariant(): boolean
-	clone(): Object
-	clone(): ItemMeta
-	clone(): AxolotlBucketMeta
-	getVariant(): Variant
-}
-namespace BlockCanBuildEvent {
-	function getBlockData(): BlockData
-	function getHandlerList(): HandlerList
-	function getMaterial(): Material
-	function isBuildable(): boolean
-	function setBuildable(arg0: boolean): void
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface RedstoneWallTorch extends Directional, Lightable {
-}
-namespace BlockFromToEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getFace(): BlockFace
-	function getToBlock(): Block
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface TNT extends BlockData {
-	setUnstable(arg0: boolean): void
-	isUnstable(): boolean
-}
-namespace EntityPoseChangeEvent {
-	function getHandlerList(): HandlerList
-	function getPose(): Pose
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class LibraryLoader {
-	createLoader(arg0: PluginDescriptionFile): ClassLoader
-}
-declare interface Slime extends Mob {
-	getSize(): int
-	setSize(arg0: int): void
-}
-declare interface TabCompleter {
-	onTabComplete(arg0: CommandSender, arg1: Command, arg2: String, arg3: String[]): List
-}
-declare interface Animals extends Breedable {
-	getBreedCause(): UUID
-	setBreedCause(arg0: UUID): void
-	getLoveModeTicks(): int
-	setLoveModeTicks(arg0: int): void
-	isBreedItem(arg0: Material): boolean
-	isBreedItem(arg0: ItemStack): boolean
-	isLoveMode(): boolean
-}
-namespace EntityPortalExitEvent {
-	function getHandlerList(): HandlerList
-	function getBefore(): Vector
-	function getAfter(): Vector
-	function setAfter(arg0: Vector): void
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getFrom(): Location
-	function setFrom(arg0: Location): void
-	function getTo(): Location
-	function setTo(arg0: Location): void
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class TopicNameComparator implements Comparator {
-	compare(arg0: String, arg1: String): int
-	compare(arg0: Object, arg1: Object): int
-}
-declare interface CaveSpider extends Spider {
-}
-declare class ValidatingPrompt implements Prompt {
-	blocksForInput(arg0: ConversationContext): boolean
-	acceptInput(arg0: ConversationContext, arg1: String): Prompt
-	isInputValid(arg0: ConversationContext, arg1: String): boolean
-	acceptValidatedInput(arg0: ConversationContext, arg1: String): Prompt
-	getFailedValidationText(arg0: ConversationContext, arg1: String): String
-}
-declare interface MultipleFacing extends BlockData {
-	getAllowedFaces(): Set
-	getFaces(): Set
-	hasFace(arg0: BlockFace): boolean
-	setFace(arg0: BlockFace, arg1: boolean): void
-}
-declare interface EnderCrystal extends Entity {
-	isShowingBottom(): boolean
-	setShowingBottom(arg0: boolean): void
-	getBeamTarget(): Location
-	setBeamTarget(arg0: Location): void
-}
-declare interface EventExecutor {
-	execute(arg0: Listener, arg1: Event): void
-}
-declare class PluginMessageListenerRegistration {
-	getListener(): PluginMessageListener
-	isValid(): boolean
-	getPlugin(): Plugin
-	equals(arg0: Object): boolean
-	hashCode(): int
-	getChannel(): String
-}
-namespace PigZapEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLightning(): LightningStrike
-	function getPigZombie(): PigZombie
-	function getEntity(): Entity
-	function getEntity(): Pig
-	function getHandlers(): HandlerList
-	function getTransformedEntity(): Entity
-	function getTransformedEntities(): List
-	function getTransformReason(): TransformReason
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface BlockProjectileSource extends ProjectileSource {
-	getBlock(): Block
-}
-declare interface CommandSender extends Permissible {
-	sendMessage(arg0: UUID, arg1: String[]): void
-	sendMessage(arg0: UUID, arg1: String): void
-	sendMessage(arg0: String[]): void
-	sendMessage(arg0: String): void
-	getServer(): Server
-	spigot(): Spigot
-	getName(): String
-}
-declare class Pumpkin extends MaterialData implements Directional {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	isLit(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	toString(): String
-	clone(): Object
-	clone(): Pumpkin
-	clone(): MaterialData
-}
-namespace VillagerCareerChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getProfession(): Profession
-	function setProfession(arg0: Profession): void
-	function getEntity(): Villager
-	function getEntity(): Entity
-	function getReason(): ChangeReason
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface ChestedHorse extends AbstractHorse {
-	isCarryingChest(): boolean
-	setCarryingChest(arg0: boolean): void
-}
-declare class MapCursor {
-	getDirection(): byte
-	setDirection(arg0: byte): void
-	setVisible(arg0: boolean): void
-	isVisible(): boolean
-	setX(arg0: byte): void
-	setY(arg0: byte): void
-	getX(): byte
-	getY(): byte
-	setType(arg0: Type): void
-	setRawType(arg0: byte): void
-	getCaption(): String
-	setCaption(arg0: String): void
-	getType(): Type
-	getRawType(): byte
-}
-namespace PrepareAnvilEvent {
-	function getHandlerList(): HandlerList
-	function getInventory(): AnvilInventory
-	function getInventory(): Inventory
-	function setResult(arg0: ItemStack): void
-	function getHandlers(): HandlerList
-	function getResult(): ItemStack
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface KnowledgeBookMeta extends ItemMeta {
-	getRecipes(): List
-	setRecipes(arg0: List): void
-	addRecipe(arg0: NamespacedKey[]): void
-	hasRecipes(): boolean
-	clone(): KnowledgeBookMeta
-	clone(): ItemMeta
-	clone(): Object
-}
-namespace BatToggleSleepEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isAwake(): boolean
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface PluginLoader {
-	getPluginDescription(arg0: File): PluginDescriptionFile
-	getPluginFileFilters(): Pattern[]
-	createRegisteredListeners(arg0: Listener, arg1: Plugin): Map
-	enablePlugin(arg0: Plugin): void
-	disablePlugin(arg0: Plugin): void
-	loadPlugin(arg0: File): Plugin
-}
-declare class HandlerList {
-	registerAll(arg0: Collection): void
-	unregisterAll(arg0: Listener): void
-	unregisterAll(arg0: Plugin): void
-	unregisterAll(): void
-	getRegisteredListeners(): RegisteredListener[]
-	getRegisteredListeners(arg0: Plugin): ArrayList
-	getHandlerLists(): ArrayList
-	bakeAll(): void
-	bake(): void
-	register(arg0: RegisteredListener): void
-	unregister(arg0: Listener): void
-	unregister(arg0: RegisteredListener): void
-	unregister(arg0: Plugin): void
-}
-namespace VehicleEnterEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getEntered(): Entity
-	function getHandlers(): HandlerList
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Tag extends Keyed {
-	getValues(): Set
-	isTagged(arg0: Keyed): boolean
-}
-namespace EntityToggleGlideEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function isGliding(): boolean
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Lootable {
-	getLootTable(): LootTable
-	setLootTable(arg0: LootTable): void
-	getSeed(): long
-	setSeed(arg0: long): void
-}
-declare interface SplashPotion extends ThrownPotion {
-}
-declare interface SeaPickle extends Waterlogged {
-	getMinimumPickles(): int
-	getMaximumPickles(): int
-	getPickles(): int
-	setPickles(arg0: int): void
-}
-namespace SignChangeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getLines(): String[]
-	function getLine(arg0: int): String
-	function setLine(arg0: int, arg1: String): void
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Hopper extends Container, Lootable {
-}
-namespace EntityChangeBlockEvent {
-	function getBlockData(): BlockData
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlock(): Block
-	function getTo(): Material
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class NotPlayerMessagePrompt extends MessagePrompt {
-	getPromptText(arg0: ConversationContext): String
-	getNextPrompt(arg0: ConversationContext): Prompt
-}
-declare interface Keyed {
-	getKey(): NamespacedKey
-}
-declare interface Banner extends TileState {
-	getBaseColor(): DyeColor
-	setBaseColor(arg0: DyeColor): void
-	getPatterns(): List
-	setPatterns(arg0: List): void
-	removePattern(arg0: int): Pattern
-	numberOfPatterns(): int
-	addPattern(arg0: Pattern): void
-	getPattern(arg0: int): Pattern
-	setPattern(arg0: int, arg1: Pattern): void
-}
-namespace ChunkLoadEvent {
-	function getHandlerList(): HandlerList
-	function isNewChunk(): boolean
-	function getHandlers(): HandlerList
-	function getChunk(): Chunk
-	function getWorld(): World
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Attachable extends Directional {
-	getAttachedFace(): BlockFace
-}
-declare interface Ladder extends Directional, Waterlogged {
-}
-declare class InactivityConversationCanceller implements ConversationCanceller {
-	setConversation(arg0: Conversation): void
-	cancelBasedOnInput(arg0: ConversationContext, arg1: String): boolean
-	access$1(arg0: InactivityConversationCanceller): void
-	cancelling(arg0: Conversation): void
-	startTimer(): void
-	stopTimer(): void
-	clone(): ConversationCanceller
-	clone(): Object
-}
-declare class CookingRecipe implements Recipe, Keyed {
-	setExperience(arg0: float): void
-	getExperience(): float
-	setInputChoice(arg0: RecipeChoice): CookingRecipe
-	getInputChoice(): RecipeChoice
-	setCookingTime(arg0: int): void
-	getCookingTime(): int
-	getGroup(): String
-	setGroup(arg0: String): void
-	getKey(): NamespacedKey
-	setInput(arg0: Material): CookingRecipe
-	getInput(): ItemStack
-	getResult(): ItemStack
-}
-declare interface Skeleton extends AbstractSkeleton {
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-}
-namespace EntityTeleportEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getFrom(): Location
-	function setFrom(arg0: Location): void
-	function getTo(): Location
-	function setTo(arg0: Location): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityRegainHealthEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getRegainReason(): RegainReason
-	function getAmount(): double
-	function setAmount(arg0: double): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class NetherWarts extends MaterialData {
-	$SWITCH_TABLE$org$bukkit$NetherWartsState(): int[]
-	toString(): String
-	clone(): MaterialData
-	clone(): Object
-	clone(): NetherWarts
-	getState(): NetherWartsState
-	setState(arg0: NetherWartsState): void
-}
-declare interface Bat extends Ambient {
-	setAwake(arg0: boolean): void
-	isAwake(): boolean
-}
-declare interface Ravager extends Raider {
-}
-declare interface Slab extends Waterlogged {
-	setType(arg0: Type): void
-	getType(): Type
-}
-declare interface EntityBlockStorage extends TileState {
-	getEntityCount(): int
-	getMaxEntities(): int
-	setMaxEntities(arg0: int): void
-	releaseEntities(): List
-	isFull(): boolean
-	addEntity(arg0: Entity): void
-}
-declare interface Repeater extends Directional, Powerable {
-	getMinimumDelay(): int
-	getMaximumDelay(): int
-	setDelay(arg0: int): void
-	getDelay(): int
-	setLocked(arg0: boolean): void
-	isLocked(): boolean
-}
-declare interface Firework extends Projectile {
-	getFireworkMeta(): FireworkMeta
-	setFireworkMeta(arg0: FireworkMeta): void
-	isShotAtAngle(): boolean
-	setShotAtAngle(arg0: boolean): void
-	detonate(): void
-}
-declare class AttributeModifier implements ConfigurationSerializable {
-	getUniqueId(): UUID
-	deserialize(arg0: Map): AttributeModifier
-	getOperation(): Operation
-	serialize(): Map
-	getAmount(): double
-	getName(): String
-	equals(arg0: Object): boolean
-	toString(): String
-	hashCode(): int
-	getSlot(): EquipmentSlot
-}
-declare interface KeyedBossBar extends BossBar, Keyed {
-}
-declare class PistonBaseMaterial extends MaterialData implements Directional, Redstone {
-	setFacingDirection(arg0: BlockFace): void
-	getFacing(): BlockFace
-	isPowered(): boolean
-	setPowered(arg0: boolean): void
-	isSticky(): boolean
-	$SWITCH_TABLE$org$bukkit$block$BlockFace(): int[]
-	clone(): MaterialData
-	clone(): Object
-	clone(): PistonBaseMaterial
-}
-declare interface Marker extends Entity {
-}
-namespace TradeSelectEvent {
-	function getHandlerList(): HandlerList
-	function getInventory(): MerchantInventory
-	function getInventory(): Inventory
-	function getMerchant(): Merchant
-	function getIndex(): int
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface AttributeInstance {
-	getBaseValue(): double
-	setBaseValue(arg0: double): void
-	addModifier(arg0: AttributeModifier): void
-	removeModifier(arg0: AttributeModifier): void
-	getModifiers(): Collection
-	getValue(): double
-	getDefaultValue(): double
-	getAttribute(): Attribute
-}
-declare interface Projectile extends Entity {
-	getShooter(): ProjectileSource
-	setShooter(arg0: ProjectileSource): void
-	doesBounce(): boolean
-	setBounce(arg0: boolean): void
-}
-declare interface Score {
-	getScoreboard(): Scoreboard
-	getObjective(): Objective
-	getPlayer(): OfflinePlayer
-	getScore(): int
-	setScore(arg0: int): void
-	isScoreSet(): boolean
-	getEntry(): String
-}
-declare interface Inventory extends Iterable {
-	containsAtLeast(arg0: ItemStack, arg1: int): boolean
-	getContents(): ItemStack[]
-	setContents(arg0: ItemStack[]): void
-	setMaxStackSize(arg0: int): void
-	getMaxStackSize(): int
-	getStorageContents(): ItemStack[]
-	setStorageContents(arg0: ItemStack[]): void
-	addItem(arg0: ItemStack[]): HashMap
-	removeItem(arg0: ItemStack[]): HashMap
-	getHolder(): InventoryHolder
-	firstEmpty(): int
-	getViewers(): List
-	setItem(arg0: int, arg1: ItemStack): void
-	remove(arg0: Material): void
-	remove(arg0: ItemStack): void
-	clear(): void
-	clear(arg0: int): void
-	isEmpty(): boolean
-	iterator(): Iterator
-	iterator(): ListIterator
-	iterator(arg0: int): ListIterator
-	contains(arg0: ItemStack, arg1: int): boolean
-	contains(arg0: Material): boolean
-	contains(arg0: ItemStack): boolean
-	contains(arg0: Material, arg1: int): boolean
-	first(arg0: Material): int
-	first(arg0: ItemStack): int
-	getLocation(): Location
-	getType(): InventoryType
-	getSize(): int
-	all(arg0: Material): HashMap
-	all(arg0: ItemStack): HashMap
-	getItem(arg0: int): ItemStack
-}
-namespace PlayerRiptideEvent {
-	function getHandlerList(): HandlerList
-	function getItem(): ItemStack
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Bell extends TileState {
-}
-declare interface PlayerInventory extends Inventory {
-	getArmorContents(): ItemStack[]
-	setItemInOffHand(arg0: ItemStack): void
-	setArmorContents(arg0: ItemStack[]): void
-	getLeggings(): ItemStack
-	setChestplate(arg0: ItemStack): void
-	getItemInOffHand(): ItemStack
-	setLeggings(arg0: ItemStack): void
-	setItemInMainHand(arg0: ItemStack): void
-	getItemInMainHand(): ItemStack
-	getChestplate(): ItemStack
-	getItemInHand(): ItemStack
-	setItemInHand(arg0: ItemStack): void
-	getExtraContents(): ItemStack[]
-	setExtraContents(arg0: ItemStack[]): void
-	getHeldItemSlot(): int
-	setHeldItemSlot(arg0: int): void
-	getHolder(): HumanEntity
-	getHolder(): InventoryHolder
-	getHelmet(): ItemStack
-	setHelmet(arg0: ItemStack): void
-	getBoots(): ItemStack
-	setBoots(arg0: ItemStack): void
-	setItem(arg0: int, arg1: ItemStack): void
-	setItem(arg0: EquipmentSlot, arg1: ItemStack): void
-	getItem(arg0: EquipmentSlot): ItemStack
-}
-declare interface Creature extends Mob {
-}
-declare class SimplexNoiseGenerator extends PerlinNoiseGenerator {
-	getNoise(arg0: double, arg1: double): double
-	getNoise(arg0: double, arg1: double, arg2: double, arg3: double): double
-	getNoise(arg0: double, arg1: double, arg2: double): double
-	getNoise(arg0: double): double
-	noise(arg0: double, arg1: double, arg2: double, arg3: double): double
-	noise(arg0: double, arg1: double): double
-	noise(arg0: double, arg1: double, arg2: double): double
-	getInstance(): SimplexNoiseGenerator
-	dot(arg0: int[], arg1: double, arg2: double, arg3: double, arg4: double): double
-	dot(arg0: int[], arg1: double, arg2: double): double
-	dot(arg0: int[], arg1: double, arg2: double, arg3: double): double
-}
-declare interface Ocelot extends Animals {
-	setTrusting(arg0: boolean): void
-	getCatType(): Type
-	setCatType(arg0: Type): void
-	isTrusting(): boolean
-}
-declare interface Comparator extends TileState {
-}
-namespace BlockEvent {
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class PrimitiveTagType implements ItemTagType {
-	getPrimitiveType(): Class
-	getComplexType(): Class
-	toPrimitive(arg0: Object, arg1: ItemTagAdapterContext): Object
-	fromPrimitive(arg0: Object, arg1: ItemTagAdapterContext): Object
-}
-declare class RedstoneTorch extends Torch implements Redstone {
-	isPowered(): boolean
-	toString(): String
-	clone(): SimpleAttachableMaterialData
-	clone(): MaterialData
-	clone(): Object
-	clone(): Torch
-	clone(): RedstoneTorch
-}
-namespace SmithItemEvent {
-	function getInventory(): Inventory
-	function getInventory(): SmithingInventory
-	function getHandlerList(): HandlerList
-	function getSlotType(): SlotType
-	function getCurrentItem(): ItemStack
-	function isRightClick(): boolean
-	function isLeftClick(): boolean
-	function isShiftClick(): boolean
-	function setCurrentItem(arg0: ItemStack): void
-	function getClickedInventory(): Inventory
-	function getHotbarButton(): int
-	function getCursor(): ItemStack
-	function setCursor(arg0: ItemStack): void
-	function getRawSlot(): int
-	function getAction(): InventoryAction
-	function getClick(): ClickType
-	function getSlot(): int
-	function getHandlers(): HandlerList
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getWhoClicked(): HumanEntity
-	function setResult(arg0: Result): void
-	function getResult(): Result
-	function getViewers(): List
-	function getView(): InventoryView
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface CoralWallFan extends Directional, Waterlogged {
-}
-declare class JavaPlugin extends PluginBase {
-	onTabComplete(arg0: CommandSender, arg1: Command, arg2: String, arg3: String[]): List
-	getDescription(): PluginDescriptionFile
-	getDataFolder(): File
-	saveDefaultConfig(): void
-	saveResource(arg0: String, arg1: boolean): void
-	reloadConfig(): void
-	getPluginLoader(): PluginLoader
-	setNaggable(arg0: boolean): void
-	getDefaultWorldGenerator(arg0: String, arg1: String): ChunkGenerator
-	getTextResource(arg0: String): Reader
-	getProvidingPlugin(arg0: Class): JavaPlugin
-	getConfig(): FileConfiguration
-	getCommand(arg0: String): PluginCommand
-	getServer(): Server
-	onCommand(arg0: CommandSender, arg1: Command, arg2: String, arg3: String[]): boolean
-	getPlugin(arg0: Class): JavaPlugin
-	saveConfig(): void
-	onDisable(): void
-	onLoad(): void
-	onEnable(): void
-	isNaggable(): boolean
-	isEnabled(): boolean
-	setEnabled(arg0: boolean): void
-	toString(): String
-	getClassLoader(): ClassLoader
-	getResource(arg0: String): InputStream
-	init(arg0: PluginLoader, arg1: Server, arg2: PluginDescriptionFile, arg3: File, arg4: File, arg5: ClassLoader): void
-	getLogger(): Logger
-	getFile(): File
-}
-declare interface Snowman extends Golem {
-	isDerp(): boolean
-	setDerp(arg0: boolean): void
-}
-namespace SpongeAbsorbEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getBlocks(): List
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace NotePlayEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getInstrument(): Instrument
-	function setInstrument(arg0: Instrument): void
-	function getNote(): Note
-	function setNote(arg0: Note): void
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface HorseInventory extends AbstractHorseInventory {
-	getArmor(): ItemStack
-	setArmor(arg0: ItemStack): void
-}
-namespace EntityCombustByEntityEvent {
-	function getCombuster(): Entity
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getDuration(): int
-	function setDuration(arg0: int): void
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace VehicleCollisionEvent {
-	function getVehicle(): Vehicle
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace PlayerChannelEvent {
-	function getHandlerList(): HandlerList
-	function getChannel(): String
-	function getHandlers(): HandlerList
-	function getPlayer(): Player
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Bee extends Animals {
-	setHasNectar(arg0: boolean): void
-	setHasStung(arg0: boolean): void
-	getCannotEnterHiveTicks(): int
-	setCannotEnterHiveTicks(arg0: int): void
-	getHive(): Location
-	setHive(arg0: Location): void
-	hasNectar(): boolean
-	hasStung(): boolean
-	getFlower(): Location
-	setFlower(arg0: Location): void
-	getAnger(): int
-	setAnger(arg0: int): void
-}
-declare interface Configuration extends ConfigurationSection {
-	getDefaults(): Configuration
-	addDefaults(arg0: Configuration): void
-	addDefaults(arg0: Map): void
-	setDefaults(arg0: Configuration): void
-	addDefault(arg0: String, arg1: Object): void
-	options(): ConfigurationOptions
-}
-declare interface Cancellable {
-	isCancelled(): boolean
-	setCancelled(arg0: boolean): void
-}
-declare interface Barrel extends Container, Lootable, Lidded {
-}
-declare interface Switch extends Directional, FaceAttachable, Powerable {
-	getFace(): Face
-	setFace(arg0: Face): void
-}
-namespace ServerEvent {
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function getHandlers(): HandlerList
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class SimplePluginManager implements PluginManager {
-	getPermissionSubscriptions(arg0: String): Set
-	addPermission(arg0: Permission, arg1: boolean): void
-	addPermission(arg0: Permission): void
-	getDefaultPermissions(arg0: boolean): Set
-	subscribeToDefaultPerms(arg0: boolean, arg1: Permissible): void
-	subscribeToPermission(arg0: String, arg1: Permissible): void
-	unsubscribeFromPermission(arg0: String, arg1: Permissible): void
-	isTransitiveDepend(arg0: PluginDescriptionFile, arg1: PluginDescriptionFile): boolean
-	enablePlugin(arg0: Plugin): void
-	disablePlugin(arg0: Plugin): void
-	registerInterface(arg0: Class): void
-	isPluginEnabled(arg0: Plugin): boolean
-	isPluginEnabled(arg0: String): boolean
-	loadPlugins(arg0: File): Plugin[]
-	disablePlugins(): void
-	clearPlugins(): void
-	registerEvents(arg0: Listener, arg1: Plugin): void
-	registerEvent(arg0: Class, arg1: Listener, arg2: EventPriority, arg3: EventExecutor, arg4: Plugin, arg5: boolean): void
-	registerEvent(arg0: Class, arg1: Listener, arg2: EventPriority, arg3: EventExecutor, arg4: Plugin): void
-	removePermission(arg0: String): void
-	removePermission(arg0: Permission): void
-	checkUpdate(arg0: File): void
-	getRegistrationClass(arg0: Class): Class
-	getEventListeners(arg0: Class): HandlerList
-	calculatePermissionDefault(arg0: Permission, arg1: boolean): void
-	dirtyPermissibles(): void
-	dirtyPermissibles(arg0: boolean): void
-	useTimings(arg0: boolean): void
-	useTimings(): boolean
-	getPlugin(arg0: String): Plugin
-	getPlugins(): Plugin[]
-	callEvent(arg0: Event): void
-	fireEvent(arg0: Event): void
-	loadPlugin(arg0: File): Plugin
-	unsubscribeFromDefaultPerms(arg0: boolean, arg1: Permissible): void
-	recalculatePermissionDefaults(arg0: Permission): void
-	getDefaultPermSubscriptions(arg0: boolean): Set
-	getPermissions(): Set
-	getPermission(arg0: String): Permission
-}
-declare interface ComplexLivingEntity extends LivingEntity {
-	getParts(): Set
-}
-declare interface Openable extends BlockData {
-	setOpen(arg0: boolean): void
-	isOpen(): boolean
-}
-namespace EntityTransformEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getTransformedEntity(): Entity
-	function getTransformedEntities(): List
-	function getTransformReason(): TransformReason
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class FileConfiguration extends MemoryConfiguration {
-	saveToString(): String
-	buildHeader(): String
-	loadFromString(arg0: String): void
-	load(arg0: String): void
-	load(arg0: Reader): void
-	load(arg0: File): void
-	save(arg0: File): void
-	save(arg0: String): void
-	options(): ConfigurationOptions
-	options(): MemoryConfigurationOptions
-	options(): FileConfigurationOptions
-}
-namespace InventoryMoveItemEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getDestination(): Inventory
-	function getInitiator(): Inventory
-	function setItem(arg0: ItemStack): void
-	function getItem(): ItemStack
-	function getSource(): Inventory
-	function getHandlers(): HandlerList
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare class CharacterSprite {
-	getHeight(): int
-	getWidth(): int
-	get(arg0: int, arg1: int): boolean
-}
-declare interface Comparator extends Directional, Powerable {
-	getMode(): Mode
-	setMode(arg0: Mode): void
-}
-declare interface Chest extends Container, Lootable, Lidded {
-	getBlockInventory(): Inventory
-}
-namespace BlockDamageEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getItemInHand(): ItemStack
-	function getInstaBreak(): boolean
-	function setInstaBreak(arg0: boolean): void
-	function getPlayer(): Player
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-namespace EntityDamageEvent {
-	function isApplicable(arg0: DamageModifier): boolean
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getOriginalDamage(arg0: DamageModifier): double
-	function getFinalDamage(): double
-	function setDamage(arg0: double): void
-	function setDamage(arg0: DamageModifier, arg1: double): void
-	function getDamage(): double
-	function getDamage(arg0: DamageModifier): double
-	function getCause(): DamageCause
-	function getHandlers(): HandlerList
-	function getEntityType(): EntityType
-	function getEntity(): Entity
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Permissible extends ServerOperator {
-	recalculatePermissions(): void
-	isPermissionSet(arg0: String): boolean
-	isPermissionSet(arg0: Permission): boolean
-	addAttachment(arg0: Plugin): PermissionAttachment
-	addAttachment(arg0: Plugin, arg1: String, arg2: boolean, arg3: int): PermissionAttachment
-	addAttachment(arg0: Plugin, arg1: int): PermissionAttachment
-	addAttachment(arg0: Plugin, arg1: String, arg2: boolean): PermissionAttachment
-	hasPermission(arg0: Permission): boolean
-	hasPermission(arg0: String): boolean
-	getEffectivePermissions(): Set
-	removeAttachment(arg0: PermissionAttachment): void
-}
-namespace BlockFertilizeEvent {
-	function isCancelled(): boolean
-	function setCancelled(arg0: boolean): void
-	function getHandlerList(): HandlerList
-	function getPlayer(): Player
-	function getBlocks(): List
-	function getHandlers(): HandlerList
-	function getBlock(): Block
-	function getEventName(): String
-	function isAsynchronous(): boolean
-	function wait(arg0: long, arg1: int): void
-	function wait(): void
-	function wait(arg0: long): void
-	function equals(arg0: Object): boolean
-	function toString(): String
-	function hashCode(): int
-	function getClass(): Class
-	function notify(): void
-	function notifyAll(): void
-}
-declare interface Husk extends Zombie {
-	getConversionTime(): int
-	setConversionTime(arg0: int): void
-	isConverting(): boolean
-}
-declare interface Scaffolding extends Waterlogged {
-	getDistance(): int
-	setDistance(arg0: int): void
-	getMaximumDistance(): int
-	isBottom(): boolean
-	setBottom(arg0: boolean): void
-}
-declare interface Fence extends MultipleFacing, Waterlogged {
-}
-declare interface TNTPrimed extends Explosive {
-	setFuseTicks(arg0: int): void
-	getFuseTicks(): int
-	setSource(arg0: Entity): void
-	getSource(): Entity
-}
-declare interface ThrownExpBottle extends ThrowableProjectile {
-}
-
 type ListenerFunction<Type> = (event: Type) => void
 type CommandFunction = (player: Player, args: any) => void
+
+declare enum Color {
+	BLACK,
+	DARK_BLUE,
+	DARK_GREEN,
+	DARK_AQUA,
+	DARK_RED,
+	DARK_PURPLE,
+	GOLD,
+	GRAY,
+	DARK_GRAY,
+	BLUE,
+	GREEN,
+	AQUA,
+	RED,
+	LIGHT_PURPLE,
+	YELLOW,
+	WHITE,
+	MAGIC,
+	BOLD,
+	STRIKETHROUGH,
+	UNDERLINE,
+	ITALIC,
+	RESET,
+}
 
 declare namespace blaze {
     function onEvent<Type>(event: Type, listener: ListenerFunction<Type>): void

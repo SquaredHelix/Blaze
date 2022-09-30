@@ -1,8 +1,9 @@
 package me.kristoffer.blaze.api;
 
+import me.kristoffer.blaze.TSDefined;
 import net.md_5.bungee.api.ChatColor;
 
-public class Color {
+public class Color implements TSDefined {
 
 	public final ChatColor AQUA = ChatColor.AQUA;
 	public final ChatColor BLACK = ChatColor.BLACK;
@@ -43,6 +44,10 @@ public class Color {
 		return ChatColor.of(name);
 	}
 
+	public Color() {
+		
+	}
+	
 	public String gradient(String text, String... additionalHex) {
 		String endText = "";
 		int length = text.length();
@@ -68,18 +73,18 @@ public class Color {
 		boolean italic = false;
 		boolean underline = false;
 		boolean strikethrough = false;
-		if (text.startsWith("§l")) {
+		if (text.startsWith("Â§l")) {
 			bold = true;
-			text = text.replace("§l", "");
-		} else if (text.startsWith("§o")) {
+			text = text.replace("Â§l", "");
+		} else if (text.startsWith("Â§o")) {
 			italic = true;
-			text = text.replace("§o", "");
-		} else if (text.startsWith("§n")) {
+			text = text.replace("Â§o", "");
+		} else if (text.startsWith("Â§n")) {
 			underline = true;
-			text = text.replace("§n", "");
-		} else if (text.startsWith("§m")) {
+			text = text.replace("Â§n", "");
+		} else if (text.startsWith("Â§m")) {
 			strikethrough = true;
-			text = text.replace("§m", "");
+			text = text.replace("Â§m", "");
 		}
 		String endText = "";
 		int textLength = text.length();
@@ -156,6 +161,36 @@ public class Color {
 
 	private java.awt.Color hexToColor(String color) {
 		return java.awt.Color.decode(color);
+	}
+
+	@Override
+	public String defineTypescript() {
+		return """
+				declare enum Color {
+					BLACK,
+					DARK_BLUE,
+					DARK_GREEN,
+					DARK_AQUA,
+					DARK_RED,
+					DARK_PURPLE,
+					GOLD,
+					GRAY,
+					DARK_GRAY,
+					BLUE,
+					GREEN,
+					AQUA,
+					RED,
+					LIGHT_PURPLE,
+					YELLOW,
+					WHITE,
+					MAGIC,
+					BOLD,
+					STRIKETHROUGH,
+					UNDERLINE,
+					ITALIC,
+					RESET,
+				}
+				""";
 	}
 
 }

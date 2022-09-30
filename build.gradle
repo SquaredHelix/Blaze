@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
-    implementation 'org.reflections:reflections:0.9.12'
+    implementation 'org.reflections:reflections:0.10.2'
     
   	implementation "org.graalvm.js:js:22.0.0"
   	implementation "org.graalvm.sdk:graal-sdk:22.0.0"
@@ -33,6 +33,6 @@ version = '${project.vesion}'
 description = 'Blaze'
 
 application {
-	mainClassName = "me.kristoffer.blaze.Blaze"
+	mainClassName = "me.kristoffer.blaze.TSGenerator"
 }
 

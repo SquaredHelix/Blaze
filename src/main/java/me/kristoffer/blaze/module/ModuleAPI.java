@@ -4,10 +4,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.graalvm.polyglot.Value;
 
-public class ModuleAPI {
+import me.kristoffer.blaze.TSDefined;
+
+public class ModuleAPI implements TSDefined {
 
 	private Module module;
 
+	public ModuleAPI() {
+		
+	}
+	
 	public ModuleAPI(Module module) {
 		this.module = module;
 	}
@@ -64,6 +70,15 @@ public class ModuleAPI {
 		Command cmd = new Command(module.plugin, command, (player, args) -> function.execute(player, args));
 		module.manager.registerObject(cmd);
 		return cmd;
+	}
+
+	@Override
+	public String defineTypescript() {
+		return """
+				declare namespace blaze {
+				    function onEvent<Type>(event: Type, listener: ListenerFunction<Type>): void
+				    function onCommand(commandName: string, listener: CommandFunction): void
+				}""";
 	}
 
 }
