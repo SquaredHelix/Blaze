@@ -4,6 +4,7 @@
 [![](https://img.shields.io/github/issues/SquaredHelix/Blaze)](https://github.com/SquaredHelix/Blaze/issues)
 [![](https://img.shields.io/github/downloads/SquaredHelix/Blaze/total)](https://github.com/SquaredHelix/Blaze/releases)
 [![](https://img.shields.io/github/downloads/SquaredHelix/Blaze/latest/total)](https://github.com/SquaredHelix/Blaze/releases)
+[![](https://img.shields.io/badge/documentation-purple)](https://github.com/SquaredHelix/Blaze/wiki)
 -----
 Blaze is a loader for JavaScript (via GraalJS) with bindings to Bukkit. It has the ability to dynamically add and remove commands and listeners at runtime. As well as a code reloading system. Write JavaScript and have it instantly take effect in-game.
 
